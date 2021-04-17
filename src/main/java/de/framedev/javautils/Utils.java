@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -24,11 +25,26 @@ public class Utils {
 
     private static final Logger logger = Logger.getLogger(Utils.class.getName());
 
+    /**
+     * Init of this Class run this as First
+     */
+    public Utils() {
+        getLogger().log(Level.INFO, getClass().getSimpleName() + " Loaded");
+    }
+
+    /**
+     *
+     * @return the Logger for this Class (Project)
+     */
     public static Logger getLogger() {
         return logger;
     }
 
+    /**
+     * Generator Class for a Custom Key
+     */
     public static class PasswordGenerator {
+
         private final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
         private final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
         private final String NUMBER = "0123456789";
@@ -42,6 +58,12 @@ public class Utils {
 
         private static final SecureRandom random = new SecureRandom();
 
+        /**
+         * Generate a Custom key with all letters!
+         *
+         * @param length Key Length
+         * @return returns the Key
+         */
         public String generatorKey(int length) {
             if (length < 1)
                 throw new IllegalArgumentException();
@@ -64,6 +86,12 @@ public class Utils {
         }
     }
 
+    /**
+     * @param file the Location File where it need to be saved
+     * @param o    the Object do you want to save
+     * @return if it was success or not
+     * @throws IOException error when File cannot be created
+     */
     public boolean saveJsonToFile(File file, Object o) throws IOException {
         if (!file.exists()) {
             if (file.getParentFile() == null || !file.getParentFile().mkdir()) {
@@ -88,7 +116,61 @@ public class Utils {
         }
     }
 
+    /**
+     * @param file      the File where al is Located
+     * @param class_ the Class form the Class Objectg
+     * @param <T>       the Class
+     * @return the Class Object from File
+     */
+    public <T> T getClassFromJsonFile(File file, Class<T> class_) {
+        try {
+            FileReader reader = new FileReader(file);
+            return new Gson().fromJson(reader, class_);
+        } catch (Exception ignored) {
+
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param file the Located File where al is saved
+     * @return returns the Object from the Json File
+     */
+    public Object getClassFromJsonFile(File file) {
+        try {
+            FileReader reader = new FileReader(file);
+            return new Gson().fromJson(reader, Object.class);
+        } catch (Exception ignored) {
+
+        }
+        return null;
+    }
+
+    /**
+     * Class for Custom Generators with other Classes
+     */
     public static class CustomGenerators {
+
+        /**
+         *
+         * @param min the Min Value inclusive
+         * @param max the Max Value inclusive
+         * @return a Random Integer
+         */
+        public int randomInt(int min, int max) {
+            return new IntRandomNumberGenerator(min, max).nextInt();
+        }
+
+        /**
+         *
+         * @param min the Min Value inclusive
+         * @param max the Max Value inclusive
+         * @return a Random Double
+         */
+        public double randomDouble(double min, double max) {
+            return new DoubleRandomNumberGenerator(min, max).nextDouble();
+        }
 
         public static final class IntRandomNumberGenerator {
 
@@ -139,15 +221,5 @@ public class Utils {
                 return randomIterator.nextDouble();
             }
         }
-    }
-
-    public <T> T getClassFromJsonFile(File file, Class<T> class_) {
-        try {
-            FileReader reader = new FileReader(file);
-            return new Gson().fromJson(reader, class_);
-        } catch (Exception ignored) {
-
-        }
-        return null;
     }
 }
