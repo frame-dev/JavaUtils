@@ -31,7 +31,6 @@ public class Utils {
     public Utils() {
         getLogger().log(Level.INFO, getClass().getSimpleName() + " Loaded");
     }
-
     /**
      *
      * @return the Logger for this Class (Project)
@@ -90,7 +89,7 @@ public class Utils {
      * @param file the Location File where it need to be saved
      * @param o    the Object do you want to save
      * @return if it was success or not
-     * @throws IOException error when File cannot be created
+     * @throws IOException throws an error(IOException) when File cannot be created
      */
     public boolean saveJsonToFile(File file, Object o) throws IOException {
         if (!file.exists()) {
