@@ -1,5 +1,7 @@
 package de.framedev.javautils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -86,6 +88,67 @@ public class Utils {
     }
 
     /**
+     * @param file the Located File
+     * @param o    The Object to save in the File
+     * @return if it was Success or not
+     * @throws IOException error when no permissions or other error
+     */
+    public boolean saveYamlToFile(File file, Object o) throws IOException {
+        if (!file.exists()) {
+            if (file.getParentFile() != null)
+                if (!file.getParentFile().mkdir())
+                    return false;
+            try {
+                if (!file.createNewFile())
+                    return false;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        ObjectMapper mapper = new YAMLMapper();
+        try {
+            mapper.writeValue(new FileWriter(file), o);
+            return true;
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
+    }
+
+    /**
+     * @param file the Located File
+     * @return the Object from File
+     */
+    public Object getObjectFromYamlFile(File file) {
+        if (file.exists()) {
+            YAMLMapper mapper = new YAMLMapper();
+            try {
+                return mapper.readValue(file, Object.class);
+            } catch (IOException ignored) {
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @param file   the Located File
+     * @param class_ the Object Class
+     * @param <T>    The Object class
+     * @return the Object Class from File
+     */
+    public <T> T getClassFromYamlFile(File file, Class<T> class_) {
+        if (file.exists()) {
+            YAMLMapper mapper = new YAMLMapper();
+            try {
+                return mapper.readValue(file, class_);
+            } catch (IOException ignored) {
+
+            }
+        }
+        return null;
+    }
+
+    /**
      * @param file the Location File where it need to be saved
      * @param o    the Object do you want to save
      * @return if it was success or not
@@ -94,7 +157,7 @@ public class Utils {
     public boolean saveJsonToFile(File file, Object o) throws IOException {
         if (!file.exists()) {
             if (file.getParentFile() != null)
-                if(!file.getParentFile().mkdir())
+                if (!file.getParentFile().mkdir())
                     return false;
             try {
                 if (!file.createNewFile())
