@@ -31,8 +31,8 @@ public class Utils {
     public Utils() {
         getLogger().log(Level.INFO, getClass().getSimpleName() + " Loaded");
     }
+
     /**
-     *
      * @return the Logger for this Class (Project)
      */
     public static Logger getLogger() {
@@ -93,9 +93,9 @@ public class Utils {
      */
     public boolean saveJsonToFile(File file, Object o) throws IOException {
         if (!file.exists()) {
-            if (file.getParentFile() == null || !file.getParentFile().mkdir()) {
-                return false;
-            }
+            if (file.getParentFile() != null)
+                if(!file.getParentFile().mkdir())
+                    return false;
             try {
                 if (!file.createNewFile())
                     return false;
@@ -116,9 +116,9 @@ public class Utils {
     }
 
     /**
-     * @param file      the File where al is Located
+     * @param file   the File where al is Located
      * @param class_ the Class form the Class Objectg
-     * @param <T>       the Class
+     * @param <T>    the Class
      * @return the Class Object from File
      */
     public <T> T getClassFromJsonFile(File file, Class<T> class_) {
@@ -132,7 +132,6 @@ public class Utils {
     }
 
     /**
-     *
      * @param file the Located File where al is saved
      * @return returns the Object from the Json File
      */
@@ -152,7 +151,6 @@ public class Utils {
     public static class CustomGenerators {
 
         /**
-         *
          * @param min the Min Value inclusive
          * @param max the Max Value inclusive
          * @return a Random Integer
@@ -162,7 +160,6 @@ public class Utils {
         }
 
         /**
-         *
          * @param min the Min Value inclusive
          * @param max the Max Value inclusive
          * @return a Random Double
