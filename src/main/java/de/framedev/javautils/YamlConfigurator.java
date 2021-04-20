@@ -16,6 +16,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * This Plugin was Created by FrameDev
@@ -83,6 +84,20 @@ public class YamlConfigurator {
         data = getConfig(file);
         if (data.containsKey(path))
             return data.get(path);
+        return null;
+    }
+
+    public List<String> getStringList(String path) {
+        data = getConfig(file);
+        if(data.containsKey(path))
+            return (List<String>) data.get(path);
+        return null;
+    }
+
+    public List<Object> getList(String path) {
+        data = getConfig(file);
+        if(data.containsKey(path))
+            return (List<Object>) data.get(path);
         return null;
     }
 

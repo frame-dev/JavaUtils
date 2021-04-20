@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * This Plugin was Created by FrameDev
@@ -20,6 +20,7 @@ public class CreateFileTest implements APIs {
 
     @Test
     public void start() {
+        assertEquals(10, 10);
         assertEquals("Data", "Data");
 
     }

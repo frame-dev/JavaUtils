@@ -1,14 +1,12 @@
 package de.framedev.javautils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.logging.Level;
@@ -25,6 +23,9 @@ import java.util.logging.Logger;
 
 public class Utils {
 
+    /**
+     * The Logger for this Class
+     */
     private static final Logger logger = Logger.getLogger(Utils.class.getName());
 
     /**
@@ -88,9 +89,11 @@ public class Utils {
     }
 
     /**
+     * Please add to the File the extension .yml
+     *
      * @param file the Located File
      * @param o    The Object to save in the File
-     * @return if it was Success or not
+     * @return a boolean if it was Success or not
      * @throws IOException error when no permissions or other error
      */
     public boolean saveYamlToFile(File file, Object o) throws IOException {
@@ -116,6 +119,8 @@ public class Utils {
     }
 
     /**
+     * Please add to the File the extension .yml
+     *
      * @param file the Located File
      * @return the Object from File
      */
@@ -131,6 +136,8 @@ public class Utils {
     }
 
     /**
+     * Please add to the File the extension .yml
+     *
      * @param file   the Located File
      * @param class_ the Object Class
      * @param <T>    The Object class
@@ -148,7 +155,48 @@ public class Utils {
         return null;
     }
 
+    public boolean saveXmlToFile(File file, Object object) throws IOException {
+        if(!file.exists()) {
+            if(file.getParentFile() != null) {
+                if(!file.getParentFile().mkdir())
+                    return false;
+            }
+            if(!file.createNewFile())
+                return false;
+        }
+
+        XmlMapper mapper = new XmlMapper();
+        mapper.writeValue(file, object);
+        return true;
+    }
+
+    public Object getObjectFromXml(File file) {
+        if (file.exists()) {
+            YAMLMapper mapper = new YAMLMapper();
+            try {
+                return mapper.readValue(file, Object.class);
+            } catch (IOException ignored) {
+
+            }
+        }
+        return null;
+    }
+
+    public <T> T getObjectFromClassXml(File file, Class<T> class_) {
+        if (file.exists()) {
+            YAMLMapper mapper = new YAMLMapper();
+            try {
+                return mapper.readValue(file, class_);
+            } catch (IOException ignored) {
+
+            }
+        }
+        return null;
+    }
+
     /**
+     * Please add to the File the extension .json
+     *
      * @param file the Location File where it need to be saved
      * @param o    the Object do you want to save
      * @return if it was success or not
@@ -179,6 +227,8 @@ public class Utils {
     }
 
     /**
+     * Please add to the File the extension .json
+     *
      * @param file   the File where al is Located
      * @param class_ the Class form the Class Objectg
      * @param <T>    the Class
@@ -195,6 +245,8 @@ public class Utils {
     }
 
     /**
+     * Please add to the File the extension .json
+     *
      * @param file the Located File where al is saved
      * @return returns the Object from the Json File
      */
@@ -280,5 +332,34 @@ public class Utils {
                 return randomIterator.nextDouble();
             }
         }
+    }
+
+    public String objectToBase64(Object object) {
+        try {
+            ByteArrayOutputStream is = new ByteArrayOutputStream();
+            ObjectOutputStream os = new ObjectOutputStream(is);
+            os.writeObject(object);
+            os.flush();
+            os.close();
+            return Base64.getEncoder().encodeToString(is.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Object objectFromBase64(String base) {
+        try {
+            ByteArrayInputStream is = new ByteArrayInputStream(Base64.getDecoder().decode(base));
+            ObjectInputStream os = new ObjectInputStream(is);
+            return os.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void debug(Object object) {
+        System.out.println(object);
     }
 }
