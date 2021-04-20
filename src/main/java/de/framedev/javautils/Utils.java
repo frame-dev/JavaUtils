@@ -172,7 +172,7 @@ public class Utils {
 
     public Object getObjectFromXml(File file) {
         if (file.exists()) {
-            YAMLMapper mapper = new YAMLMapper();
+            XmlMapper mapper = new XmlMapper();
             try {
                 return mapper.readValue(file, Object.class);
             } catch (IOException ignored) {
@@ -184,7 +184,7 @@ public class Utils {
 
     public <T> T getObjectFromClassXml(File file, Class<T> class_) {
         if (file.exists()) {
-            YAMLMapper mapper = new YAMLMapper();
+            XmlMapper mapper = new XmlMapper();
             try {
                 return mapper.readValue(file, class_);
             } catch (IOException ignored) {
