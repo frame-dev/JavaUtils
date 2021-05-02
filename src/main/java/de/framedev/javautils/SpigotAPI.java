@@ -25,7 +25,13 @@ public class SpigotAPI {
         Logger.getLogger(SpigotAPI.class.getName()).log(Level.INFO, "Loaded");
     }
 
-    public String objectToBase64(Object object) {
+    public String objectToBase64(Object object) throws Exception {
+        for (Class<?> anInterface : object.getClass().getInterfaces()) {
+            if(!anInterface.getName().equalsIgnoreCase("Serializable")) {
+                throw new Exception("Need to Serializable");
+            }
+        }
+
         try {
             ByteArrayOutputStream is = new ByteArrayOutputStream();
             BukkitObjectOutputStream os = new BukkitObjectOutputStream(is);

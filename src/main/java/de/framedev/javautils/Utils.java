@@ -1,10 +1,11 @@
 package de.framedev.javautils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
 
 import java.io.*;
 import java.security.SecureRandom;
@@ -98,9 +99,9 @@ public class Utils {
      */
     public boolean saveYamlToFile(File file, Object o) throws IOException {
         if (!file.exists()) {
-            if (file.getParentFile() != null)
-                if (!file.getParentFile().mkdir())
-                    return false;
+            if (file.getParentFile() != null) {
+                file.getParentFile().mkdirs();
+            }
             try {
                 if (!file.createNewFile())
                     return false;
@@ -155,27 +156,35 @@ public class Utils {
         return null;
     }
 
-    public boolean saveXmlToFile(File file, Object object) throws IOException {
-        if(!file.exists()) {
-            if(file.getParentFile() != null) {
-                if(!file.getParentFile().mkdir())
-                    return false;
+    public boolean saveXmlToFile(File file, Object object) {
+        if (!file.exists()) {
+            if (file.getParentFile() != null) {
+                file.getParentFile().mkdirs();
             }
-            if(!file.createNewFile())
+            try {
+                if (!file.createNewFile())
+                    return false;
+            } catch (IOException e) {
+                e.printStackTrace();
                 return false;
+            }
         }
-
-        XmlMapper mapper = new XmlMapper();
-        mapper.writeValue(file, object);
-        return true;
+        try {
+            Serializer mapper = new Persister();
+            mapper.write(object, file);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public Object getObjectFromXml(File file) {
         if (file.exists()) {
-            XmlMapper mapper = new XmlMapper();
+            Serializer mapper = new Persister();
             try {
-                return mapper.readValue(file, Object.class);
-            } catch (IOException ignored) {
+                return mapper.read(Object.class, file);
+            } catch (Exception ignored) {
 
             }
         }
@@ -184,10 +193,10 @@ public class Utils {
 
     public <T> T getObjectFromClassXml(File file, Class<T> class_) {
         if (file.exists()) {
-            XmlMapper mapper = new XmlMapper();
+            Serializer mapper = new Persister();
             try {
-                return mapper.readValue(file, class_);
-            } catch (IOException ignored) {
+                return mapper.read(class_, file);
+            } catch (Exception ignored) {
 
             }
         }
@@ -204,9 +213,9 @@ public class Utils {
      */
     public boolean saveJsonToFile(File file, Object o) throws IOException {
         if (!file.exists()) {
-            if (file.getParentFile() != null)
-                if (!file.getParentFile().mkdir())
-                    return false;
+            if (file.getParentFile() != null) {
+                file.getParentFile().mkdirs();
+            }
             try {
                 if (!file.createNewFile())
                     return false;
@@ -361,5 +370,9 @@ public class Utils {
 
     public void debug(Object object) {
         System.out.println(object);
+    }
+
+    public Logger createLogger(String name) {
+        return Logger.getLogger(name);
     }
 }
