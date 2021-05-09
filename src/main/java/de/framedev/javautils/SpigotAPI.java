@@ -1,5 +1,7 @@
 package de.framedev.javautils;
 
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
@@ -7,6 +9,7 @@ import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,5 +57,14 @@ public class SpigotAPI {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public ItemStack materialToItemStack(Material material) {
+        return new ItemStack(material);
+    }
+
+    public ItemStack stringToItemStack(String item) {
+        if(Material.getMaterial(item.toUpperCase()) == null) return null;
+        return new ItemStack(Material.getMaterial(item.toUpperCase()));
     }
 }
