@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.jetbrains.annotations.NotNull;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
@@ -81,7 +82,7 @@ public class Utils {
             return shuffleString(sb.toString());
         }
 
-        // shuffle
+        // shuffle the String
         private String shuffleString(String string) {
             List<String> letters = Arrays.asList(string.split(""));
             Collections.shuffle(letters);
@@ -343,6 +344,11 @@ public class Utils {
         }
     }
 
+    /**
+     *
+     * @param object the Object to ecncode to Base64
+     * @return returns the encoded Base64 Byte Array
+     */
     public String objectToBase64(Object object) {
         try {
             ByteArrayOutputStream is = new ByteArrayOutputStream();
@@ -357,6 +363,11 @@ public class Utils {
         return null;
     }
 
+    /**
+     *
+     * @param base the encoded Base64
+     * @return returns the decoded Object
+     */
     public Object objectFromBase64(String base) {
         try {
             ByteArrayInputStream is = new ByteArrayInputStream(Base64.getDecoder().decode(base));
@@ -368,11 +379,26 @@ public class Utils {
         return null;
     }
 
+    /**
+     * Debug an Object
+     * @param object the Object for debugging
+     */
     public void debug(Object object) {
         System.out.println(object);
     }
 
+    /**
+     *
+     * @param name the Name of the new Logger
+     * @return returns the new Created Logger
+     */
     public Logger createLogger(String name) {
         return Logger.getLogger(name);
+    }
+
+    public String[] stringSplitter(String text, @NotNull String regex) {
+        if (text == null) return null;
+        if (!text.contains(regex)) return null;
+        return text.split(regex);
     }
 }

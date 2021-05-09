@@ -30,7 +30,7 @@ public class YamlConfigurator {
 
     private HashMap<String, Object> data;
 
-    File file;
+    private File file;
 
     public YamlConfigurator(File file) {
         this.file = file;
@@ -51,21 +51,40 @@ public class YamlConfigurator {
         return hash;
     }
 
+    /**
+     * Create all Defaults for the Config
+     * @param defaults the Defaults to set
+     */
     public void setDefaults(HashMap<String, Object> defaults) {
         data = getConfig(file);
         data.putAll(defaults);
     }
 
+    /**
+     *
+     * @param path the Path for defaults
+     * @param value the Value for defaults
+     */
     public void addDefault(String path, Object value) {
         data = getConfig(file);
         data.put(path, value);
     }
 
+    /**
+     *
+     * @param path the Path to set Value
+     * @param value the Value to set
+     */
     public void set(String path, Object value) {
         data = getConfig(file);
         data.put(path, value);
     }
 
+    /**
+     *
+     * @param path the Path where the Int is located
+     * @return returns the Int
+     */
     public int getInt(String path) {
         data = getConfig(file);
         if (data.containsKey(path))
