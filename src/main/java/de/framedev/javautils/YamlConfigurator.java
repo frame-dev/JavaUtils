@@ -164,8 +164,8 @@ public class YamlConfigurator {
         return data.containsKey(path);
     }
 
-    public void saveDefaultConfig(String resource) {
-        InputStream is = getClass().getClassLoader().getResourceAsStream(resource + ".yml");
+    public void saveDefaultConfig(Class<?> clazz, String resource) {
+        InputStream is = clazz.getResourceAsStream(resource + ".yml");
         ObjectMapper mapper = new YAMLMapper();
         HashMap<String, Object> hash = new HashMap<>();
         try {
@@ -184,7 +184,7 @@ public class YamlConfigurator {
                 e.printStackTrace();
             }
         }
-        if (!data.isEmpty())
+        if (data != null && !data.isEmpty())
             hash.putAll(data);
         data = hash;
     }
