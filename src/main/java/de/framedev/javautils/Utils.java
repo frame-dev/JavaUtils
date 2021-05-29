@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.jetbrains.annotations.NotNull;
+import com.sun.istack.internal.NotNull;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
@@ -345,7 +345,6 @@ public class Utils {
     }
 
     /**
-     *
      * @param object the Object to ecncode to Base64
      * @return returns the encoded Base64 Byte Array
      */
@@ -364,7 +363,6 @@ public class Utils {
     }
 
     /**
-     *
      * @param base the encoded Base64
      * @return returns the decoded Object
      */
@@ -381,14 +379,18 @@ public class Utils {
 
     /**
      * Debug an Object
+     *
      * @param object the Object for debugging
      */
     public void debug(Object object) {
         System.out.println(object);
     }
 
+    public void error(Object object) {
+        System.err.println(object);
+    }
+
     /**
-     *
      * @param name the Name of the new Logger
      * @return returns the new Created Logger
      */
@@ -400,5 +402,9 @@ public class Utils {
         if (text == null) return null;
         if (!text.contains(regex)) return null;
         return text.split(regex);
+    }
+
+    public Logger createEmptyLogger(String name) {
+        return new MyFormatter().createEmptyLogger(name);
     }
 }
