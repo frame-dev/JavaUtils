@@ -1,0 +1,56 @@
+/Library/Java/JavaVirtualMachines/jdk1.8.0_271.jdk/Contents/Home/bin/javadoc
+@options
+@packages
+-classpath
+'/Users/darrylhuber/.m2/repository/org/spigotmc/spigot-api/1.16.5-R0.1-SNAPSHOT/spigot-api-1.16.5-R0.1-SNAPSHOT.jar:/Users/darrylhuber/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar:/Users/darrylhuber/.m2/repository/com/google/guava/guava/21.0/guava-21.0.jar:/Users/darrylhuber/.m2/repository/net/md-5/bungeecord-chat/1.16-R0.4/bungeecord-chat-1.16-R0.4.jar:/Users/darrylhuber/.m2/repository/org/yaml/snakeyaml/1.27/snakeyaml-1.27.jar:/Users/darrylhuber/.m2/repository/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar:/Users/darrylhuber/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.12.2/jackson-databind-2.12.2.jar:/Users/darrylhuber/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.12.2/jackson-annotations-2.12.2.jar:/Users/darrylhuber/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.12.2/jackson-core-2.12.2.jar:/Users/darrylhuber/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.12.2/jackson-dataformat-yaml-2.12.2.jar:/Users/darrylhuber/.m2/repository/stax/stax/1.2.0/stax-1.2.0.jar:/Users/darrylhuber/.m2/repository/stax/stax-api/1.0.1/stax-api-1.0.1.jar:/Users/darrylhuber/.m2/repository/xpp3/xpp3/1.1.3.3/xpp3-1.1.3.3.jar:/Users/darrylhuber/.m2/repository/org/simpleframework/simple-xml/2.7.1/simple-xml-2.7.1.jar:/Users/darrylhuber/.m2/repository/org/jetbrains/annotations/21.0.1/annotations-21.0.1.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/Users/darrylhuber/Documents/GitHub/JavaUtils/src/main/java:/Users/darrylhuber/Documents/GitHub/JavaUtils/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2021. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/darrylhuber/Documents/GitHub/JavaUtils/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'JavaUtils 1.5.5-RELEASE API'
+-linkoffline
+'https://docs.oracle.com/javase/8/docs/api' '/Users/darrylhuber/Documents/GitHub/JavaUtils/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'JavaUtils 1.5.5-RELEASE API'
+de.framedev.javautils
+/Users/darrylhuber/.m2/repository/org/spigotmc/spigot-api/1.16.5-R0.1-SNAPSHOT/spigot-api-1.16.5-R0.1-SNAPSHOT.jar = 1622307852064
+/Users/darrylhuber/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar = 1620839034124
+/Users/darrylhuber/.m2/repository/com/google/guava/guava/21.0/guava-21.0.jar = 1621115451012
+/Users/darrylhuber/.m2/repository/net/md-5/bungeecord-chat/1.16-R0.4/bungeecord-chat-1.16-R0.4.jar = 1621115450659
+/Users/darrylhuber/.m2/repository/org/yaml/snakeyaml/1.27/snakeyaml-1.27.jar = 1621115909424
+/Users/darrylhuber/.m2/repository/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar = 1621188710942
+/Users/darrylhuber/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.12.2/jackson-databind-2.12.2.jar = 1621191795420
+/Users/darrylhuber/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.12.2/jackson-annotations-2.12.2.jar = 1621191794731
+/Users/darrylhuber/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.12.2/jackson-core-2.12.2.jar = 1621188710995
+/Users/darrylhuber/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.12.2/jackson-dataformat-yaml-2.12.2.jar = 1621191794819
+/Users/darrylhuber/.m2/repository/stax/stax/1.2.0/stax-1.2.0.jar = 1620838395997
+/Users/darrylhuber/.m2/repository/stax/stax-api/1.0.1/stax-api-1.0.1.jar = 1620838395961
+/Users/darrylhuber/.m2/repository/xpp3/xpp3/1.1.3.3/xpp3-1.1.3.3.jar = 1620838395986
+/Users/darrylhuber/.m2/repository/org/simpleframework/simple-xml/2.7.1/simple-xml-2.7.1.jar = 1621191795538
+/Users/darrylhuber/.m2/repository/org/jetbrains/annotations/21.0.1/annotations-21.0.1.jar = 1621976350760
+/Users/darrylhuber/Documents/GitHub/JavaUtils/src/main/java = 1622308148000
+/Users/darrylhuber/Documents/GitHub/JavaUtils/target/generated-sources/annotations = 1622133017000
+/Users/darrylhuber/Documents/GitHub/JavaUtils/target/apidocs/constant-values.html = 1622308166739
+/Users/darrylhuber/Documents/GitHub/JavaUtils/target/apidocs/overview-tree.html = 1622308166851
+/Users/darrylhuber/Documents/GitHub/JavaUtils/target/apidocs/index.html = 1622308167009
+/Users/darrylhuber/Documents/GitHub/JavaUtils/target/apidocs/allclasses-noframe.html = 1622308167003
+/Users/darrylhuber/Documents/GitHub/JavaUtils/target/apidocs/index-all.html = 1622308166967
+/Users/darrylhuber/Documents/GitHub/JavaUtils/target/apidocs/deprecated-list.html = 1622308166995
+/Users/darrylhuber/Documents/GitHub/JavaUtils/target/apidocs/script.js = 1622308167013
+/Users/darrylhuber/Documents/GitHub/JavaUtils/target/apidocs/stylesheet.css = 1620839638269
+/Users/darrylhuber/Documents/GitHub/JavaUtils/target/apidocs/help-doc.html = 1622308167011
+/Users/darrylhuber/Documents/GitHub/JavaUtils/target/apidocs/allclasses-frame.html = 1622308167001
+/Users/darrylhuber/Documents/GitHub/JavaUtils/target/apidocs/package-list = 1622308166690
