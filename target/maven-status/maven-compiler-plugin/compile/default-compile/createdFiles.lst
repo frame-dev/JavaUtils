@@ -1,7 +1,9 @@
+de/framedev/javautils/APIs.class
 de/framedev/javautils/SpigotAPI.class
 de/framedev/javautils/Utils$CustomGenerators$DoubleRandomNumberGenerator.class
-de/framedev/javautils/ItemBuilder.class
 de/framedev/javautils/Utils.class
+de/framedev/javautils/TextUtils.class
+de/framedev/javautils/ItemBuilder.class
 de/framedev/javautils/Utils$PasswordGenerator.class
 de/framedev/javautils/Utils$CustomGenerators$IntRandomNumberGenerator.class
 de/framedev/javautils/Utils$CustomGenerators.class
