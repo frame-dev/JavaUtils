@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Utils Class for the JavaUtils Jar
+ * This Class contains much Methods
  * This Plugin was Created by FrameDev
  * Package : de.framedev.javautils
  * ClassName Utils
@@ -28,7 +30,7 @@ public class Utils {
     /**
      * The Logger for this Class
      */
-    private static final Logger logger = Logger.getLogger(Utils.class.getName());
+    private final Logger logger = createEmptyLogger("Utils", true);
 
     /**
      * Init of this Class run this as First
@@ -40,7 +42,7 @@ public class Utils {
     /**
      * @return the Logger for this Class (Project)
      */
-    public static Logger getLogger() {
+    public Logger getLogger() {
         return logger;
     }
 
@@ -386,6 +388,11 @@ public class Utils {
         System.out.println(object);
     }
 
+    /**
+     * Print an Error with the Object
+     *
+     * @param object the selected Object for printing an error
+     */
     public void error(Object object) {
         System.err.println(object);
     }
@@ -398,13 +405,38 @@ public class Utils {
         return Logger.getLogger(name);
     }
 
+    /**
+     * @param text  the Text for Splitting
+     * @param regex the char for splitting
+     * @return return an Array of splitted Strings
+     */
     public String[] stringSplitter(String text, @NotNull String regex) {
         if (text == null) return null;
         if (!text.contains(regex)) return null;
         return text.split(regex);
     }
 
-    public Logger createEmptyLogger(String name) {
-        return new MyFormatter().createEmptyLogger(name);
+    /**
+     * This Method Creates an Logger from scratch
+     *
+     * @param name       the Name of the new Logger
+     * @param timeFormat if you would like an TimeStamp in logger
+     * @return return the new Logger
+     */
+    public Logger createEmptyLogger(String name, boolean timeFormat) {
+        return new MyFormatter(timeFormat).createEmptyLogger(name);
+    }
+
+    /**
+     * return if the first object is the same as the second object
+     *
+     * @param obj_1 the First Object
+     * @param obj_2 the Second Object
+     * @return return if the first object is the same as the second object
+     */
+    public boolean equals(Object obj_1, Object obj_2) {
+        if (obj_1 == null) return false;
+        if (obj_2 == null) return false;
+        return obj_1.equals(obj_2);
     }
 }

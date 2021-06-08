@@ -6,7 +6,7 @@
 
     <groupId>de.framedev</groupId>
     <artifactId>JavaUtils</artifactId>
-    <version>1.5.5-SNAPSHOT</version>
+    <version>1.5.6.1-RELEASE</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -76,12 +76,18 @@
             <version>2.7.1</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <distributionManagement>
         <repository>
             <id>repository</id>
-            <url>http://framedev.stream:82/snapshots</url>
+            <url>http://framedev.stream:82/releases/</url>
         </repository>
     </distributionManagement>
 
