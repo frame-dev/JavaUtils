@@ -401,4 +401,8 @@ public class Utils {
         if (!text.contains(regex)) return null;
         return text.split(regex);
     }
+
+    public Logger createEmptyLogger(String name) {
+        return new MyFormatter().createEmptyLogger(name);
+    }
 }
