@@ -3,6 +3,7 @@ package de.framedev.javautils;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.NotSerializableException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -32,10 +33,10 @@ public class SpigotAPI {
 		Logger.getLogger(SpigotAPI.class.getName()).log(Level.INFO, "Loaded");
 	}
 
-	public String objectToBase64(Object object) throws Exception {
+	public String objectToBase64(Object object) throws NotSerializableException {
 		for (Class<?> anInterface : object.getClass().getInterfaces()) {
 			if (!anInterface.getName().equalsIgnoreCase("Serializable")) {
-				throw new Exception("Need to Serializable");
+				throw new NotSerializableException("Need to Serializable");
 			}
 		}
 

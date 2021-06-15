@@ -349,8 +349,14 @@ public class Utils {
     /**
      * @param object the Object to ecncode to Base64
      * @return returns the encoded Base64 Byte Array
+     * @throws NotSerializableException 
      */
-    public String objectToBase64(Object object) {
+    public String objectToBase64(Object object) throws NotSerializableException {
+    	for (Class<?> anInterface : object.getClass().getInterfaces()) {
+			if (!anInterface.getName().equalsIgnoreCase("Serializable")) {
+				throw new NotSerializableException("Need to Serializable");
+			}
+		}
         try {
             ByteArrayOutputStream is = new ByteArrayOutputStream();
             ObjectOutputStream os = new ObjectOutputStream(is);
