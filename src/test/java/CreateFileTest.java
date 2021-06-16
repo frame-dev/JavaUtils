@@ -1,11 +1,8 @@
-import de.framedev.javautils.APIs;
-import de.framedev.javautils.Utils;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-import java.io.File;
-import java.io.IOException;
-
-import static org.junit.Assert.*;
+import de.framedev.javautils.APIs;
 
 /**
  * This Plugin was Created by FrameDev
@@ -22,6 +19,12 @@ public class CreateFileTest implements APIs {
     public void start() {
         assertEquals(10, 10);
         assertEquals("Data", "Data");
+        String os = System.getProperty("os.name").toLowerCase();
+        String version = System.getProperty("os.version");
+        String javaVersion = System.getProperty("java.version");
+        System.out.println(javaVersion);
+        System.out.println(os + " : " + version);
+        if(os.startsWith("mac"));
 
     }
 }

@@ -132,6 +132,11 @@ public class SpigotAPI {
 			this.barFlags = barFlags;
 		}
 
+		/**
+		 * Need the Title the Color and the BarStyle (Optional BarFlags)
+		 * 
+		 * @return return the Created BossBar
+		 */
 		public BossBar createBossBar() {
 			BossBar bossBar = null;
 			if (barFlags == null)
@@ -142,18 +147,33 @@ public class SpigotAPI {
 			return bossBar;
 		}
 
+		/**
+		 * Add a Player to the Created BossBar / Selected BossBar
+		 * 
+		 * @param player the selected Player
+		 * @return return this BossBarManager
+		 */
 		public BossBarManager addPlayer(Player player) {
 			if (bossBar != null)
 				bossBar.addPlayer(player);
 			return this;
 		}
 
+		/**
+		 * Remove a Player from the BossBar
+		 * 
+		 * @param player the selected Player
+		 * @return return this BossBarManager
+		 */
 		public BossBarManager removePlayer(Player player) {
 			if (bossBar != null)
 				bossBar.removePlayer(player);
 			return this;
 		}
 
+		/**
+		 * Remove all BossBars
+		 */
 		public static void removeBossBars() {
 			bossBars.forEach(bossBar -> {
 				bossBar.setVisible(false);
@@ -169,6 +189,11 @@ public class SpigotAPI {
 			return bossBar;
 		}
 
+		/**
+		 * Return all BossBars in a List
+		 * 
+		 * @return return all BossBars
+		 */
 		public static List<BossBar> getBossBars() {
 			return bossBars;
 		}
