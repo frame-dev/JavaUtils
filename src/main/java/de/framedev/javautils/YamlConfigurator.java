@@ -109,6 +109,7 @@ public class YamlConfigurator {
     public List<String> getStringList(String path) {
         data = getConfig(file);
         if(data.containsKey(path))
+            //noinspection unchecked
             return (List<String>) data.get(path);
         return null;
     }
@@ -116,6 +117,7 @@ public class YamlConfigurator {
     public List<Object> getList(String path) {
         data = getConfig(file);
         if(data.containsKey(path))
+            //noinspection unchecked
             return (List<Object>) data.get(path);
         return null;
     }

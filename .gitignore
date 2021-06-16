@@ -1,2 +1,9 @@
 /Plugins/
 /target/
+/.idea/
+.idea
+.git
+.settings
+.classpath
+.project
+/.vscode/

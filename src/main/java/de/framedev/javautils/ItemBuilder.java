@@ -152,6 +152,7 @@ public class ItemBuilder {
 
     public static class TestEnchantment extends Enchantment implements Listener {
 
+        @Deprecated
         public TestEnchantment(String namespace) {
             super(new NamespacedKey(namespace, namespace));
         }
