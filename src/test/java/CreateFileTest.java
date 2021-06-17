@@ -56,6 +56,7 @@ public class CreateFileTest implements APIs {
         } else {
             userDir = System.getProperty("user.home") + "/";
         }
+        System.out.println(userDir);
 
         File file = new File(userDir + "JavaUtils","test.json");
         if(file.getParentFile() != null && !file.getParentFile().exists())
