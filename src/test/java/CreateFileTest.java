@@ -52,7 +52,7 @@ public class CreateFileTest implements APIs {
         if(os.contains("mac")) {
             userDir = System.getProperty("user.home") + "/Library/Application Support/";
         } else if(os.contains("win")) {
-            userDir = System.getProperty("APPDATA") + "/";
+            userDir = System.getProperty("%APPDATA%") + "/";
         } else {
             userDir = System.getProperty("user.home") + "/";
         }
