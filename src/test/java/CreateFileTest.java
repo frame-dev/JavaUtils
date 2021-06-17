@@ -59,7 +59,7 @@ public class CreateFileTest implements APIs {
         System.out.println(userDir);
 
         File file = new File(userDir + "JavaUtils","test.json");
-        if(file.getParentFile() != null && !file.getParentFile().exists())
+        if(file.getParentFile().isDirectory() && !file.getParentFile().exists())
             file.getParentFile().mkdirs();
         try {
             file.createNewFile();
