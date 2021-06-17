@@ -57,7 +57,7 @@ public class CreateFileTest implements APIs {
             userDir = System.getProperty("user.home") + "/";
         }
 
-        File file = new File(userDir + "JavaUtils","test.json");
+        File file = new File(userDir + "JavaUtils","test.yaml");
         if(file.getParentFile() != null && !file.getParentFile().exists())
             file.getParentFile().mkdirs();
         try {
@@ -66,7 +66,7 @@ public class CreateFileTest implements APIs {
             e.printStackTrace();
         }
         try {
-            utils.saveJsonToFile(file, list);
+            utils.saveYamlToFile(file, list);
         } catch (IOException e) {
             e.printStackTrace();
         }
