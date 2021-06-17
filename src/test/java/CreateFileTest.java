@@ -70,5 +70,7 @@ public class CreateFileTest implements APIs {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        @SuppressWarnings("unchecked") CustomList<Object> data = (CustomList<Object>) utils.getClassFromYamlFile(file,CustomList.class);
+        System.out.println(data);
     }
 }
