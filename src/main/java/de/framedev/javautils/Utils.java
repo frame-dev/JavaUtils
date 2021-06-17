@@ -9,6 +9,7 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.logging.Level;
@@ -139,6 +140,16 @@ public class Utils {
         return null;
     }
 
+    public Object getObjectFromJsonFile(File file) {
+        if (file.exists()) {
+            try {
+                return new Gson().fromJson(new FileReader(file), Object.class);
+            } catch (IOException ignored) {
+            }
+        }
+        return null;
+    }
+
     /**
      * Please add to the File the extension .yml
      *
@@ -206,6 +217,8 @@ public class Utils {
         return null;
     }
 
+
+
     /**
      * Please add to the File the extension .json
      *
@@ -247,6 +260,16 @@ public class Utils {
      * @return the Class Object from File
      */
     public <T> T getClassFromJsonFile(File file, Class<T> class_) {
+        try {
+            FileReader reader = new FileReader(file);
+            return new Gson().fromJson(reader, class_);
+        } catch (Exception ignored) {
+
+        }
+        return null;
+    }
+
+    public <T> T getTypeFromJsonFile(File file, Type class_) {
         try {
             FileReader reader = new FileReader(file);
             return new Gson().fromJson(reader, class_);
