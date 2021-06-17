@@ -2,7 +2,6 @@ package de.framedev.javautils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  * / This Plugin was Created by FrameDev
@@ -30,4 +29,5 @@ public class CustomList<E> extends ArrayList<E> implements Serializable {
         }
         return false;
     }
+
 }

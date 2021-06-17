@@ -1,7 +1,10 @@
+package de.framedev.javautils;
+
 import static org.junit.Assert.assertEquals;
 
 import com.google.common.reflect.TypeToken;
 import de.framedev.javautils.CustomList;
+import de.framedev.javautils.CustomListTest;
 import de.framedev.javautils.Utils;
 import org.junit.Test;
 
@@ -26,6 +29,9 @@ import java.util.LinkedList;
 
 public class CreateFileTest implements APIs {
 
+    public void setUp() {
+        start();
+    }
     @Test
     public void start() {
         assertEquals(10, 10);
@@ -72,5 +78,6 @@ public class CreateFileTest implements APIs {
         }
         @SuppressWarnings("unchecked") CustomList<Object> data = (CustomList<Object>) utils.getClassFromYamlFile(file,CustomList.class);
         System.out.println(data);
+        CustomListTest.list.addAll(data);
     }
 }
