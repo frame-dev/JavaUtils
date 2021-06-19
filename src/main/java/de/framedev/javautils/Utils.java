@@ -372,7 +372,7 @@ public class Utils {
     /**
      * @param object the Object to ecncode to Base64
      * @return returns the encoded Base64 Byte Array
-     * @throws NotSerializableException 
+     * @throws NotSerializableException error
      */
     public String objectToBase64(Object object) throws NotSerializableException {
     	for (Class<?> anInterface : object.getClass().getInterfaces()) {

@@ -7,11 +7,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -194,6 +197,52 @@ public class SpigotAPI {
 		 */
 		public static List<BossBar> getBossBars() {
 			return bossBars;
+		}
+	}
+
+	public static class ChunkLoader {
+
+		private final Chunk chunk;
+
+		private final File file;
+		private final FileConfiguration cfg;
+
+		public ChunkLoader(File file, Chunk chunk) {
+			this.chunk = chunk;
+			this.file = file;
+			this.cfg = YamlConfiguration.loadConfiguration(file);
+		}
+
+		public void saveChunk(String name) {
+			cfg.set("chunk." + name + ".world", chunk.getWorld().getName());
+			cfg.set("chunk." + name + ".x", chunk.getX());
+			cfg.set("chunk." + name + ".z", chunk.getZ());
+			chunk.setForceLoaded(true);
+			try {
+				cfg.save(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		public static Chunk getChunk(File file, String name) {
+			FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+			if(!cfg.contains("chunk." + name)) return null;
+			World world = Bukkit.getWorld(cfg.getString("chunk." + name + ".world"));
+			int x = cfg.getInt("chunk." + name + ".x");
+			int z = cfg.getInt("chunk." + name + ".z");
+			return world.getChunkAt(x, z);
+		}
+
+		public static void forceLoad(File file) {
+			FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+			if(cfg.getConfigurationSection("chunk") == null) return;
+			for(String s : cfg.getConfigurationSection("chunk").getKeys(false)) {
+				if(getChunk(file, s) == null) continue;
+				Chunk chunk = getChunk(file, s);
+				if(chunk == null) continue;
+				chunk.setForceLoaded(true);
+			}
 		}
 	}
 }
