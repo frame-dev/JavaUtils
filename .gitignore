@@ -9,3 +9,5 @@
 /.vscode/
 /bin
 target
+/JavaUtils
+JavaUtils
