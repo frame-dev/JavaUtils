@@ -1,0 +1,4 @@
+Mac OS X : 10.16
+Used-Memory: 6Mb
+Available Processors : 8
+1.658203125

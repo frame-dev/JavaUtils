@@ -218,7 +218,6 @@ public class Utils {
     }
 
 
-
     /**
      * Please add to the File the extension .json
      *
