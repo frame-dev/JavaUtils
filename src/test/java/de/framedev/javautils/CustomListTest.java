@@ -58,8 +58,16 @@ public class CustomListTest extends TestCase {
 
         System.out.println(list);
 
-        String tmpDir = System.getProperty("user.dir") + "/";
-        File file = new File(tmpDir + "JavaUtils/" + "log-" + new SimpleDateFormat("HH|mm|ss-dd.MM.yyyy").format(new Date()) + ".txt");
+        String os = System.getProperty("os.name").toLowerCase();
+        String userDir = "";
+        if(os.contains("mac")) {
+            userDir = System.getProperty("user.dir") + "/Library/Application Support/";
+        } else if(os.contains("windows")) {
+            userDir = System.getProperty("java.io.tmpdir") + "/";
+        } else {
+            userDir = System.getProperty("user.dir") + "/";
+        }
+        File file = new File(userDir + "JavaUtils/" + "log-" + new SimpleDateFormat("HH_mm_ss-dd.MM.yyyy").format(new Date()) + ".txt");
         if(file.getParentFile() != null && !file.getParentFile().exists())
             file.getParentFile().mkdirs();
         if(!file.exists()) {

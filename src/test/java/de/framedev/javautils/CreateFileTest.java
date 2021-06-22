@@ -57,8 +57,8 @@ public class CreateFileTest implements APIs {
         String userDir = "";
         if(os.contains("mac")) {
             userDir = System.getProperty("user.home") + "/Library/Application Support/";
-        } else if(os.contains("win")) {
-            userDir = System.getProperty("%APPDATA%") + "/";
+        } else if(os.contains("windows")) {
+            userDir = System.getenv("%APPDATA%") + "/";
         } else {
             userDir = System.getProperty("user.home") + "/";
         }
@@ -76,8 +76,5 @@ public class CreateFileTest implements APIs {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        @SuppressWarnings("unchecked") CustomList<Object> data = (CustomList<Object>) utils.getClassFromYamlFile(file,CustomList.class);
-        System.out.println(data);
-        CustomListTest.list.addAll(data);
     }
 }
