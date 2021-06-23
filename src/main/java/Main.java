@@ -1,4 +1,8 @@
+import de.framedev.javautils.Utils;
+
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * / This Plugin was Created by FrameDev
@@ -13,6 +17,8 @@ public class Main {
 
     public static boolean run;
 
+    private static Logger logger = new Utils().createEmptyLogger("MainTest", true);
+
     public static void main(String[] args) {
         run = true;
 
@@ -22,5 +28,6 @@ public class Main {
         run = scanner.nextBoolean();
         if (run)
             System.out.println("hello");
+        logger.log(Level.INFO, "Loaded");
     }
 }

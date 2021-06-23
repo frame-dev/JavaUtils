@@ -16,7 +16,7 @@ import java.util.logging.*;
 
 public class MyFormatter extends Formatter {
     // Create a DateFormat to format the logger timestamp.
-    private static final DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+    private static final DateFormat df = new SimpleDateFormat("dd/MM/yyyy | hh:mm:ss");
     private final boolean timeFormat;
 
     public MyFormatter(boolean timeFormat) {
@@ -28,7 +28,7 @@ public class MyFormatter extends Formatter {
         if (timeFormat)
             builder.append(df.format(new Date(record.getMillis()))).append(" - ");
         builder.append("[").append(record.getLoggerName()).append("] - ");
-        builder.append("[").append(record.getLevel()).append("] - ");
+        builder.append("[").append(record.getLevel()).append("] : ");
         builder.append(formatMessage(record));
         builder.append("\n");
         return builder.toString();
