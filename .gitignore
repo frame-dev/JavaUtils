@@ -1,14 +1,12 @@
 /Plugins/
 /target/
-/.idea/
 .idea
 .git
-.settings
-.classpath
-.project
 /bin
 target
 /JavaUtils
 JavaUtils
 *.class
 /.vscode/
+/.settings/
+/.idea/
