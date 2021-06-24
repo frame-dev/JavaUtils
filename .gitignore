@@ -11,3 +11,4 @@
 target
 /JavaUtils
 JavaUtils
+*.class
