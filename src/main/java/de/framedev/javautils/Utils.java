@@ -10,6 +10,8 @@ import org.simpleframework.xml.core.Persister;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.logging.Level;
@@ -319,7 +321,23 @@ public class Utils {
 
         public static final class IntRandomNumberGenerator {
 
-            private final PrimitiveIterator.OfInt randomIterator;
+            private PrimitiveIterator.OfInt randomIterator;
+
+            int min;
+            int max;
+
+            public IntRandomNumberGenerator() {
+            }
+
+            public IntRandomNumberGenerator setMin(int min) {
+                this.min = min;
+                return this;
+            }
+
+            public IntRandomNumberGenerator setMax(int max) {
+                this.max = max;
+                return this;
+            }
 
             /**
              * Initialize a new random number generator that generates as Integer
@@ -338,13 +356,31 @@ public class Utils {
              * @return a random number in the range (min, max)
              */
             public int nextInt() {
+                if (randomIterator == null)
+                    randomIterator = new Random().ints(min, max + 1).iterator();
                 return randomIterator.nextInt();
             }
         }
 
         public static final class DoubleRandomNumberGenerator {
 
-            private final PrimitiveIterator.OfDouble randomIterator;
+            private PrimitiveIterator.OfDouble randomIterator;
+
+            double min;
+            double max;
+
+            public DoubleRandomNumberGenerator() {
+            }
+
+            public DoubleRandomNumberGenerator setMin(double min) {
+                this.min = min;
+                return this;
+            }
+
+            public DoubleRandomNumberGenerator setMax(double max) {
+                this.max = max;
+                return this;
+            }
 
             /**
              * Initialize a new random number generator that generates as Double
@@ -363,6 +399,8 @@ public class Utils {
              * @return a random number in the range (min, max)
              */
             public double nextDouble() {
+                if (randomIterator == null)
+                    randomIterator = new Random().doubles(min, max + 1).iterator();
                 return randomIterator.nextDouble();
             }
         }
@@ -374,11 +412,11 @@ public class Utils {
      * @throws NotSerializableException error
      */
     public String objectToBase64(Object object) throws NotSerializableException {
-    	for (Class<?> anInterface : object.getClass().getInterfaces()) {
-			if (!anInterface.getName().equalsIgnoreCase("Serializable")) {
-				throw new NotSerializableException("Need to Serializable");
-			}
-		}
+        for (Class<?> anInterface : object.getClass().getInterfaces()) {
+            if (!anInterface.getName().equalsIgnoreCase("Serializable")) {
+                throw new NotSerializableException("Need to Serializable");
+            }
+        }
         try {
             ByteArrayOutputStream is = new ByteArrayOutputStream();
             ObjectOutputStream os = new ObjectOutputStream(is);
@@ -466,5 +504,13 @@ public class Utils {
         if (obj_1 == null) return false;
         if (obj_2 == null) return false;
         return obj_1.equals(obj_2);
+    }
+
+    public double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }

@@ -12,4 +12,6 @@ public interface APIs {
 
     Utils utils = new Utils();
     Utils.PasswordGenerator passwordGenerator = new Utils.PasswordGenerator();
+    Utils.CustomGenerators.IntRandomNumberGenerator intRandomGenerator = new Utils.CustomGenerators.IntRandomNumberGenerator();
+    Utils.CustomGenerators.DoubleRandomNumberGenerator doubleRandomGenerator = new Utils.CustomGenerators.DoubleRandomNumberGenerator();
 }
