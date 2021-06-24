@@ -6,9 +6,9 @@
 .settings
 .classpath
 .project
-/.vscode/
 /bin
 target
 /JavaUtils
 JavaUtils
 *.class
+/.vscode/
