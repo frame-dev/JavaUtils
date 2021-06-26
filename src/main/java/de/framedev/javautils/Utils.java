@@ -550,7 +550,9 @@ public class Utils {
         }
         if (new File(newLocation, fileNameWithExtensions).getParentFile() == null && !new File(newLocation, fileNameWithExtensions).getParentFile().exists())
             new File(newLocation, fileNameWithExtensions).getParentFile().mkdirs();
-        file.renameTo(new File(newLocation, fileNameWithExtensions));
+        if (!file.renameTo(new File(newLocation, fileNameWithExtensions))) {
+            getLogger().log(Level.SEVERE, "File cannot be Renamed");
+        }
     }
 
     public void download(String fileUrl, String location, String fileNameWithExtensions) {
