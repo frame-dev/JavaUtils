@@ -2,21 +2,10 @@ package de.framedev.javautils;
 
 import static org.junit.Assert.assertEquals;
 
-import com.google.common.reflect.TypeToken;
-import de.framedev.javautils.CustomList;
-import de.framedev.javautils.CustomListTest;
-import de.framedev.javautils.Utils;
 import org.junit.Test;
 
-import de.framedev.javautils.APIs;
-
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  * This Plugin was Created by FrameDev
@@ -45,7 +34,7 @@ public class CreateFileTest implements APIs {
 
     @Test
     public void listTest() {
-        CustomList<Object> list = new CustomList<>();
+        ReplaceList<Object> list = new ReplaceList<>();
         list.add("data");
         list.add("§atest");
         String passwd = new Utils.PasswordGenerator().generatorKey(200);

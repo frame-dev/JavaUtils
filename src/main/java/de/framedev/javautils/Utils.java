@@ -12,6 +12,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.URL;
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.logging.Level;
@@ -512,5 +513,78 @@ public class Utils {
         BigDecimal bd = BigDecimal.valueOf(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
+    }
+
+    public void download(String fileUrl, String location, String fileNameWithExtensions, String newLocation) {
+        File file = new File(location, fileNameWithExtensions);
+        if (!file.exists())
+            file.getParentFile().mkdirs();
+        BufferedInputStream in = null;
+        FileOutputStream fout = null;
+        try {
+            URL url = new URL(fileUrl);
+            in = new BufferedInputStream(url.openStream());
+            fout = new FileOutputStream(new File(location, fileNameWithExtensions));
+            final byte[] data = new byte[4096];
+            int count;
+            while ((count = in.read(data, 0, 4096)) != -1) {
+                fout.write(data, 0, count);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (fout != null) {
+                    fout.close();
+                }
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (new File(newLocation, fileNameWithExtensions).getParentFile() == null && !new File(newLocation, fileNameWithExtensions).getParentFile().exists())
+            new File(newLocation, fileNameWithExtensions).getParentFile().mkdirs();
+        file.renameTo(new File(newLocation, fileNameWithExtensions));
+    }
+
+    public void download(String fileUrl, String location, String fileNameWithExtensions) {
+        File file = new File(location, fileNameWithExtensions);
+        if (!file.exists())
+            file.getParentFile().mkdirs();
+        BufferedInputStream in = null;
+        FileOutputStream fout = null;
+        try {
+            URL url = new URL(fileUrl);
+            in = new BufferedInputStream(url.openStream());
+            fout = new FileOutputStream(new File(location, fileNameWithExtensions));
+            final byte[] data = new byte[4096];
+            int count;
+            while ((count = in.read(data, 0, 4096)) != -1) {
+                fout.write(data, 0, count);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (fout != null) {
+                    fout.close();
+                }
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
