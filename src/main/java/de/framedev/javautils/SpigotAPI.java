@@ -1,9 +1,7 @@
 package de.framedev.javautils;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,8 +16,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
@@ -76,6 +73,24 @@ public class SpigotAPI {
 		if (Material.getMaterial(item.toUpperCase()) == null)
 			return null;
 		return new ItemStack(Material.getMaterial(item.toUpperCase()));
+	}
+
+	public void removeRecipe(ItemStack itemStack) {
+		Iterator<Recipe> iterator = Bukkit.recipeIterator();
+		while (iterator.hasNext()) {
+			Recipe recipe = iterator.next();
+			if(recipe.getResult() == itemStack) {
+				iterator.remove();
+			}
+		}
+	}
+
+	public ShapedRecipe createShapedRecipe(ItemStack result) {
+		return new ShapedRecipe(NamespacedKey.minecraft(result.getType().name().toLowerCase()), result);
+	}
+
+	public ShapelessRecipe createShapelessRecipe(ItemStack result) {
+		return new ShapelessRecipe(NamespacedKey.minecraft(result.getType().name().toLowerCase()), result);
 	}
 
 	public static class BossBarManager {
