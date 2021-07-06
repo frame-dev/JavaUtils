@@ -21,6 +21,7 @@ import java.util.Date;
 public class CustomListTest extends TestCase {
 
     public static ReplaceList<Object> list = new ReplaceList<>();
+
     public void setUp() {
         System.out.println("register");
     }
@@ -60,36 +61,53 @@ public class CustomListTest extends TestCase {
 
         String os = System.getProperty("os.name").toLowerCase();
         String userDir = "";
-        if(os.contains("mac")) {
+        if (os.contains("mac")) {
             userDir = System.getProperty("user.dir") + "/Library/Application Support/";
-        } else if(os.contains("windows")) {
+        } else if (os.contains("windows")) {
             userDir = System.getProperty("java.io.tmpdir") + "/";
         } else {
             userDir = System.getProperty("user.dir") + "/";
         }
 
         String tempDir = "";
-        if(os.contains("mac")) {
+        if (os.contains("mac")) {
             tempDir = System.getProperty("java.io.tmpdir") + "/";
-        } else if(os.contains("windows")) {
+        } else if (os.contains("windows")) {
             tempDir = System.getProperty("java.io.tmpdir") + "/";
         } else {
             tempDir = System.getProperty("java.io.tmpdir") + "/";
         }
 
+        File fileS = new File(tempDir + "/JavaUtils", "data.yml");
+        if (fileS.getParentFile() != null && !fileS.getParentFile().exists())
+            fileS.getParentFile().mkdirs();
+        if (!fileS.exists()) {
+            try {
+                fileS.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            new Utils().saveYamlToFile(fileS, list);
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+
         File file = new File(userDir + "JavaUtils/" + "log-" + new SimpleDateFormat("HH_mm_ss-dd.MM.yyyy").format(new Date()) + ".txt");
-        if(file.getParentFile() != null && !file.getParentFile().exists())
+        if (file.getParentFile() != null && !file.getParentFile().exists())
             file.getParentFile().mkdirs();
-        if(!file.exists()) {
+        if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        fileS.deleteOnExit();
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-            for(Object o : list) {
+            for (Object o : list) {
                 writer.write(o.toString() + "\n");
             }
             writer.flush();

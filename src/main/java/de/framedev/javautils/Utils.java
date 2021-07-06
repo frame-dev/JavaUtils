@@ -553,7 +553,7 @@ public class Utils {
         if (new File(newLocation, fileNameWithExtensions).getParentFile() == null && !new File(newLocation, fileNameWithExtensions).getParentFile().exists())
             new File(newLocation, fileNameWithExtensions).getParentFile().mkdirs();
         if (!file.renameTo(new File(newLocation, fileNameWithExtensions))) {
-            getLogger().log(Level.SEVERE, "File cannot be Renamed");
+            getLogger().log(Level.SEVERE, "File cannot be Renamed/Moved");
         }
     }
 
@@ -624,6 +624,23 @@ public class Utils {
             userDir = System.getProperty("user.home") + "/";
         } else {
             userDir = System.getProperty("user.home") + "/";
+        }
+        return userDir;
+    }
+
+    /**
+     * Get the User's Directory
+     * @return return the User Directory
+     */
+    public String getUserDir() {
+        String os = System.getProperty("os.name").toLowerCase();
+        String userDir = "";
+        if (os.contains("mac")) {
+            userDir = System.getProperty("user.dir") + "/Library/Application Support/";
+        } else if (os.contains("windows")) {
+            userDir = System.getProperty("java.io.tmpdir") + "/";
+        } else {
+            userDir = System.getProperty("user.dir") + "/";
         }
         return userDir;
     }
