@@ -19,10 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,10 +28,10 @@ import java.util.logging.Logger;
  * SpigotAPI Date: 17.04.21 Project: JavaUtils Copyrighted by FrameDev
  */
 
-public class SpigotAPI {
+public class SpigotAPI implements APIs {
 
     public SpigotAPI() {
-        Logger.getLogger(SpigotAPI.class.getName()).log(Level.INFO, "Loaded");
+        utils.createEmptyLogger(SpigotAPI.class.getName(), false).log(Level.INFO, "Loaded");
     }
 
     public String objectToBase64(Object object) throws NotSerializableException {
@@ -252,10 +249,10 @@ public class SpigotAPI {
         public static Chunk getChunk(File file, String name) {
             FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
             if (!cfg.contains("chunk." + name)) return null;
-            World world = Bukkit.getWorld(cfg.getString("chunk." + name + ".world"));
+            World world = Bukkit.getWorld(Objects.requireNonNull(cfg.getString("chunk." + name + ".world")));
             int x = cfg.getInt("chunk." + name + ".x");
             int z = cfg.getInt("chunk." + name + ".z");
-            return world.getChunkAt(x, z);
+            return world != null ? world.getChunkAt(x, z) : null;
         }
 
         public static void forceLoad(File file) {

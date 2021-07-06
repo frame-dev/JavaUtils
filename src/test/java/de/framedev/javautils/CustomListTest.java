@@ -67,6 +67,16 @@ public class CustomListTest extends TestCase {
         } else {
             userDir = System.getProperty("user.dir") + "/";
         }
+
+        String tempDir = "";
+        if(os.contains("mac")) {
+            tempDir = System.getProperty("java.io.tmpdir") + "/";
+        } else if(os.contains("windows")) {
+            tempDir = System.getProperty("java.io.tmpdir") + "/";
+        } else {
+            tempDir = System.getProperty("java.io.tmpdir") + "/";
+        }
+
         File file = new File(userDir + "JavaUtils/" + "log-" + new SimpleDateFormat("HH_mm_ss-dd.MM.yyyy").format(new Date()) + ".txt");
         if(file.getParentFile() != null && !file.getParentFile().exists())
             file.getParentFile().mkdirs();

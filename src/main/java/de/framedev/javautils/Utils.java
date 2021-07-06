@@ -166,9 +166,11 @@ public class Utils {
             YAMLMapper mapper = new YAMLMapper();
             try {
                 return mapper.readValue(file, class_);
-            } catch (IOException ignored) {
-
+            } catch (IOException exception) {
+                exception.printStackTrace();
             }
+        } else {
+            System.err.println("File doesn't exists!");
         }
         return null;
     }
@@ -588,5 +590,41 @@ public class Utils {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Get The Temp Directory
+     *
+     * @return return the Temp Directory
+     */
+    public String getTempDir() {
+        String os = System.getProperty("os.name").toLowerCase();
+        String tempDir = "";
+        if (os.contains("mac")) {
+            tempDir = System.getProperty("java.io.tmpdir") + "/";
+        } else if (os.contains("windows")) {
+            tempDir = System.getProperty("java.io.tmpdir") + "/";
+        } else {
+            tempDir = System.getProperty("java.io.tmpdir") + "/";
+        }
+        return tempDir;
+    }
+
+    /**
+     * Get The User Home Directory
+     *
+     * @return return the User Home Directory
+     */
+    public String getUserHome() {
+        String os = System.getProperty("os.name").toLowerCase();
+        String userDir = "";
+        if (os.contains("mac")) {
+            userDir = System.getProperty("user.home");
+        } else if (os.contains("windows")) {
+            userDir = System.getProperty("user.home") + "/";
+        } else {
+            userDir = System.getProperty("user.home") + "/";
+        }
+        return userDir;
     }
 }
