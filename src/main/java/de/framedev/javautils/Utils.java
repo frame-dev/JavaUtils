@@ -326,8 +326,8 @@ public class Utils {
 
             private PrimitiveIterator.OfInt randomIterator;
 
-            int min;
-            int max;
+            private int min;
+            private int max;
 
             public IntRandomNumberGenerator() {
             }
@@ -340,6 +340,14 @@ public class Utils {
             public IntRandomNumberGenerator setMax(int max) {
                 this.max = max;
                 return this;
+            }
+
+            public int getMin() {
+                return min;
+            }
+
+            public int getMax() {
+                return max;
             }
 
             /**
@@ -369,8 +377,8 @@ public class Utils {
 
             private PrimitiveIterator.OfDouble randomIterator;
 
-            double min;
-            double max;
+            private double min;
+            private double max;
 
             public DoubleRandomNumberGenerator() {
             }
@@ -383,6 +391,14 @@ public class Utils {
             public DoubleRandomNumberGenerator setMax(double max) {
                 this.max = max;
                 return this;
+            }
+
+            public double getMax() {
+                return max;
+            }
+
+            public double getMin() {
+                return min;
             }
 
             /**
@@ -410,6 +426,8 @@ public class Utils {
     }
 
     /**
+     * Create an String of an Base64 (encode)
+     *
      * @param object the Object to ecncode to Base64
      * @return returns the encoded Base64 Byte Array
      * @throws NotSerializableException error
@@ -434,6 +452,8 @@ public class Utils {
     }
 
     /**
+     * Decode a Base64 String
+     *
      * @param base the encoded Base64
      * @return returns the decoded Object
      */

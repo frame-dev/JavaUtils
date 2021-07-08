@@ -21,7 +21,6 @@ import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This Plugin was Created by FrameDev Package : de.framedev.javautils ClassName
@@ -65,16 +64,33 @@ public class SpigotAPI implements APIs {
         return null;
     }
 
+    /**
+     * Convert an Material to an ItemStack
+     *
+     * @param material the Material for converting to an ItemStack
+     * @return returns the Converted ItemStack
+     */
     public ItemStack materialToItemStack(Material material) {
         return new ItemStack(material);
     }
 
+    /**
+     * Get an ItemStack from an String
+     *
+     * @param item the String Item
+     * @return return the ItemStack if not Null
+     */
     public ItemStack stringToItemStack(@NotNull String item) {
         if (Material.getMaterial(item.toUpperCase()) == null)
             return null;
-        return new ItemStack(Material.getMaterial(item.toUpperCase()));
+        return new ItemStack(Objects.requireNonNull(Material.getMaterial(item.toUpperCase())));
     }
 
+    /**
+     * Remove form an ItemStack the Recipe
+     *
+     * @param itemStack the ItemStack to remove there Recipe
+     */
     public void removeRecipe(ItemStack itemStack) {
         Iterator<Recipe> iterator = Bukkit.recipeIterator();
         while (iterator.hasNext()) {
