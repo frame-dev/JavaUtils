@@ -23,6 +23,10 @@ public class MyFormatter extends Formatter {
         this.timeFormat = timeFormat;
     }
 
+    public MyFormatter() {
+        this.timeFormat = false;
+    }
+
     public String format(LogRecord record) {
         StringBuilder builder = new StringBuilder(1000);
         if (timeFormat)
