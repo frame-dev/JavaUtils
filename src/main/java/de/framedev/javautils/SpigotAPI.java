@@ -23,8 +23,12 @@ import java.util.*;
 import java.util.logging.Level;
 
 /**
- * This Plugin was Created by FrameDev Package : de.framedev.javautils ClassName
- * SpigotAPI Date: 17.04.21 Project: JavaUtils Copyrighted by FrameDev
+ * This Plugin was Created by FrameDev
+ * Package : de.framedev.javautils
+ * ClassName SpigotAPI
+ * Date: 17.04.21
+ * Project: JavaUtils
+ * Copyrighted by FrameDev
  */
 
 public class SpigotAPI implements APIs {
