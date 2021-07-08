@@ -659,7 +659,7 @@ public class Utils {
         if (os.contains("mac")) {
             userDir = System.getProperty("user.dir") + "/Library/Application Support/";
         } else if (os.contains("windows")) {
-            userDir = System.getProperty("java.io.tmpdir") + "/";
+            userDir = System.getProperty("user.dir") + "/";
         } else {
             userDir = System.getProperty("user.dir") + "/";
         }
