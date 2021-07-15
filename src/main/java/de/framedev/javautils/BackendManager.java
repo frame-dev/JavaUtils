@@ -2,10 +2,10 @@ package de.framedev.javautils;
 
 /**
  * / This Plugin was Created by FrameDev
- * / Package : de.framedev.mongodbjava.main
+ * / Package : de.framedev.javautils
  * / ClassName BackendManager
  * / Date: 06.06.21
- * / Project: MongoDBConnection
+ * / Project: JavaUtils
  * / Copyrighted by FrameDev
  */
 
@@ -19,14 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
-/**
- * This Plugin was Created by FrameDev
- * Package : de.framedev.javagradle.managers
- * Date: 07.03.21
- * Project: JavaGradle
- * Copyrighted by FrameDev
- */
 
 public class BackendManager {
 

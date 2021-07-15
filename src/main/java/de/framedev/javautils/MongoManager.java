@@ -1,8 +1,4 @@
-/*
- * #Copyright (c) by FrameDev#
- * #Dies ist ein Project von FrameDev Bitte verändere nichts!#
- *
- */
+
 package de.framedev.javautils;
 
 import com.mongodb.MongoClientSettings;
@@ -13,7 +9,17 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.logging.Level;
 
+/**
+ * / This Plugin was Created by FrameDev
+ * / Package : de.framedev.javautils
+ * / ClassName MongoManager
+ * / Date: 06.06.21
+ * / Project: JavaUtils
+ * / Copyrighted by FrameDev
+ */
 public class MongoManager {
 
     private final String hostname;
@@ -24,14 +30,36 @@ public class MongoManager {
     private MongoClient client;
     private MongoDatabase database;
 
-    public MongoManager(String hostname, String username, String password, int port, String dataBaseString, MongoClient client, MongoDatabase database) {
+    public MongoManager(String hostname, String username, String password, int port, String dataBaseString) {
         this.hostname = hostname;
         this.username = username;
         this.password = password;
         this.port = port;
         this.dataBaseString = dataBaseString;
-        this.client = client;
-        this.database = database;
+    }
+
+    public MongoManager(String hostname, String username, String password, String dataBaseString) {
+        this.hostname = hostname;
+        this.username = username;
+        this.password = password;
+        this.port = 27017;
+        this.dataBaseString = dataBaseString;
+    }
+
+    public MongoManager(String hostname, String dataBaseString) {
+        this.hostname = hostname;
+        this.port = 27017;
+        this.dataBaseString = dataBaseString;
+        this.username = "";
+        this.password = "";
+    }
+
+    public MongoManager(String hostname, int port, String dataBaseString) {
+        this.hostname = hostname;
+        this.port = port;
+        this.username = "";
+        this.password = "";
+        this.dataBaseString = dataBaseString;
     }
 
     public String getHostname() {
@@ -58,9 +86,10 @@ public class MongoManager {
         this.client = MongoClients.create(
                 MongoClientSettings.builder()
                         .applyToClusterSettings(builder ->
-                                builder.hosts(Arrays.asList(new ServerAddress(hostname, port))))
+                                builder.hosts(Collections.singletonList(new ServerAddress(hostname, port))))
                         .build());
         this.database = this.client.getDatabase(dataBaseString);
+        APIs.utils.getLogger().log(Level.INFO,"Connected via LocalHost");
     }
 
     public void connect() {
@@ -69,9 +98,10 @@ public class MongoManager {
                 MongoClientSettings.builder()
                         .credential(credential)
                         .applyToClusterSettings(builder ->
-                                builder.hosts(Arrays.asList(new ServerAddress(hostname, port))))
+                                builder.hosts(Collections.singletonList(new ServerAddress(hostname, port))))
                         .build());
         this.database = this.client.getDatabase(dataBaseString);
+        APIs.utils.getLogger().log(Level.INFO,"Connected");
     }
 
 
