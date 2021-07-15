@@ -82,7 +82,7 @@ public class BackendManager {
         return null;
     }
 
-    public void updataData(String where, Object data, String selected, Object dataSelected, String collection) {
+    public void updateData(String where, Object data, String selected, Object dataSelected, String collection) {
         if (existsCollection(collection)) {
             MongoCollection<Document> collections = mongoManager.getDatabase().getCollection(collection);
             Document document = collections.find(new Document(where, data)).first();
