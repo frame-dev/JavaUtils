@@ -665,4 +665,12 @@ public class Utils {
         }
         return userDir;
     }
+
+    /**
+     * Return the Operation System Name
+     * @return return the Os Name
+     **/
+    public String getOs() {
+        return System.getProperty("os.name").toLowerCase();
+    }
 }
