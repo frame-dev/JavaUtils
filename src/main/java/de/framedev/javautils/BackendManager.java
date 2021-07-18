@@ -9,6 +9,7 @@ package de.framedev.javautils;
  * / Copyrighted by FrameDev
  */
 
+import com.google.gson.Gson;
 import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -26,6 +27,10 @@ public class BackendManager {
 
     public BackendManager(MongoManager mongoManager) {
         this.mongoManager = mongoManager;
+    }
+
+    public MongoManager getMongoManager() {
+        return mongoManager;
     }
 
     /**
@@ -96,6 +101,19 @@ public class BackendManager {
                 Document document1 = new Document(selected, dataSelected);
                 Document document2 = new Document("$set", document1);
                 collections.updateOne(document, document2);
+            }
+        }
+    }
+
+    public void updateAll(String where, Object data, HashMap<String, Object> newData, String collection) {
+        if (existsCollection(collection)) {
+            MongoCollection<Document> collections = mongoManager.getDatabase().getCollection(collection);
+            Document document = collections.find(new Document(where, data)).first();
+            if (document != null) {
+                if(document.get(where) != null) {
+                    Document doc = Document.parse(new Gson().toJson(newData));
+                    collections.replaceOne(document, doc);
+                }
             }
         }
     }
