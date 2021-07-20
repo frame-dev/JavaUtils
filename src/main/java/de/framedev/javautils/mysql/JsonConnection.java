@@ -12,6 +12,7 @@ public class JsonConnection {
     private String fileName;
     private boolean sql;
     private boolean mysql;
+
     public JsonConnection(String host, String user, String password, String database, int port,boolean remember) {
         this.host = host;
         this.user = user;

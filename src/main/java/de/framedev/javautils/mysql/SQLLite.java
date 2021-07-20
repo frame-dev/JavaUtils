@@ -21,6 +21,11 @@ public class SQLLite {
         SQLLite.path = path;
     }
 
+    public SQLLite(JsonConnection connection) {
+        SQLLite.fileName = connection.getFileName();
+        SQLLite.path = connection.getPath();
+    }
+
     public static Connection connect() {
         Connection conn = null;
         try {
@@ -125,7 +130,7 @@ public class SQLLite {
             }
         }
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("INSERT INTO " + table);
+        stringBuilder.append("INSERT INTO ").append(table);
         stringBuilder.append(" (").append(newStringBuilder.toString()).append(")").append(" VALUES ").append("(").append(data).append(")");
         String builder2 = stringBuilder.toString();
         try {
@@ -149,7 +154,7 @@ public class SQLLite {
 
     public static void updateData(String table, String selected, String data, String where) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("UPDATE " + table + " SET ").append(selected + " = " + data).append(" WHERE " + where);
+        stringBuilder.append("UPDATE ").append(table).append(" SET ").append(selected).append(" = ").append(data).append(" WHERE ").append(where);
         String sql = stringBuilder.toString();
         try {
             Statement stmt = SQLLite.connect().createStatement();
@@ -172,8 +177,7 @@ public class SQLLite {
 
     public static void deleteDataInTable(String table, String where) {
         StringBuilder sb = new StringBuilder();
-        sb.append("DELETE FROM " + table)
-                .append(" WHERE " + where);
+        sb.append("DELETE FROM ").append(table).append(" WHERE ").append(where);
         String sql = sb.toString();
         try {
             Statement stmt = SQLLite.connect().createStatement();
