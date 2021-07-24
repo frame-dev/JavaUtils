@@ -21,16 +21,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-public class BackendManager {
+public class BackendMongoDBManager {
 
-    private final MongoManager mongoManager;
+    private final MongoDBManager mongoDBManager;
 
-    public BackendManager(MongoManager mongoManager) {
-        this.mongoManager = mongoManager;
+    public BackendMongoDBManager(MongoDBManager mongoDBManager) {
+        this.mongoDBManager = mongoDBManager;
     }
 
-    public MongoManager getMongoManager() {
-        return mongoManager;
+    public MongoDBManager getMongoManager() {
+        return mongoDBManager;
     }
 
     /**
@@ -41,7 +41,7 @@ public class BackendManager {
      */
     public void createData(String where, Object dataWhere, HashMap<String, Object> data, String collection) {
         if (existsCollection(collection)) {
-            MongoCollection<Document> collections = this.mongoManager.getDatabase().getCollection(collection);
+            MongoCollection<Document> collections = this.mongoDBManager.getDatabase().getCollection(collection);
             Document result = collections.find(new Document(where, dataWhere)).first();
             if (result == null) {
                 Document dc = (new Document(where, dataWhere));
@@ -49,8 +49,8 @@ public class BackendManager {
                 collections.insertOne(dc, (new InsertOneOptions()).bypassDocumentValidation(false));
             }
         } else {
-            mongoManager.getDatabase().createCollection(collection);
-            MongoCollection<Document> collections = mongoManager.getDatabase().getCollection(collection);
+            mongoDBManager.getDatabase().createCollection(collection);
+            MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
             Document result = collections.find(new Document(where, dataWhere)).first();
             if (result == null) {
                 Document dc = (new Document(where, dataWhere));
@@ -70,7 +70,7 @@ public class BackendManager {
      */
     public Object getObject(String where, Object data, String selected, String collection) {
         if (existsCollection(collection)) {
-            MongoCollection<Document> collections = mongoManager.getDatabase().getCollection(collection);
+            MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
             Document document = collections.find(new Document(where,data)).first();
             if(document != null) {
                 return document.get(selected);
@@ -81,7 +81,7 @@ public class BackendManager {
 
     public void updateData(String where, Object data, String selected, Object dataSelected, String collection) {
         if (existsCollection(collection)) {
-            MongoCollection<Document> collections = mongoManager.getDatabase().getCollection(collection);
+            MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
             Document document = collections.find(new Document(where, data)).first();
             if (document != null) {
                 Document document1 = new Document(selected, dataSelected);
@@ -94,8 +94,8 @@ public class BackendManager {
                 }
             }
         } else {
-            mongoManager.getDatabase().createCollection(collection);
-            MongoCollection<Document> collections = mongoManager.getDatabase().getCollection(collection);
+            mongoDBManager.getDatabase().createCollection(collection);
+            MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
             Document document = collections.find(new Document(where, data)).first();
             if (document != null) {
                 Document document1 = new Document(selected, dataSelected);
@@ -107,7 +107,7 @@ public class BackendManager {
 
     public void updateAll(String where, Object data, HashMap<String, Object> newData, String collection) {
         if (existsCollection(collection)) {
-            MongoCollection<Document> collections = mongoManager.getDatabase().getCollection(collection);
+            MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
             Document document = collections.find(new Document(where, data)).first();
             if (document != null) {
                 if(document.get(where) != null) {
@@ -120,7 +120,7 @@ public class BackendManager {
 
     public boolean exists(String where, Object data, String whereSelected, String collection) {
         if (existsCollection(collection)) {
-            MongoCollection<Document> collections = mongoManager.getDatabase().getCollection(collection);
+            MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
             Document document = collections.find(new Document(where, data)).first();
             if (document != null) {
                 return document.get(whereSelected) != null;
@@ -131,7 +131,7 @@ public class BackendManager {
 
     public void insertData(String where, Object data, String newKey, Object newValue, String collection) {
         if (existsCollection(collection)) {
-            MongoCollection<Document> collections = mongoManager.getDatabase().getCollection(collection);
+            MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
             Document document = collections.find(new Document(where, data)).first();
             if (document != null) {
                 collections.updateOne(new Document(where, data),
@@ -141,14 +141,14 @@ public class BackendManager {
     }
 
     public boolean existsCollection(String collection) {
-        MongoCollection<Document> collections = mongoManager.getDatabase().getCollection(collection);
+        MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
         return collections != null;
     }
 
     public List<Object> getList(String where, Object data, String selected, String collection) {
         ArrayList<Object> players = new ArrayList<>();
         if (existsCollection(collection)) {
-            MongoCollection<Document> collections = mongoManager.getDatabase().getCollection(collection);
+            MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
             collections.find(new Document(where,data)).forEach((Block<? super Document>) document -> {
                 if (document != null) {
                     players.add(document.get(selected));
@@ -162,7 +162,7 @@ public class BackendManager {
     public List<Document> getAllDocuments(String collection) {
         List<Document> list = new ArrayList<>();
         if (existsCollection(collection)) {
-            MongoCollection<Document> collections = this.mongoManager.getDatabase().getCollection(collection);
+            MongoCollection<Document> collections = this.mongoDBManager.getDatabase().getCollection(collection);
             FindIterable<Document> find = collections.find();
             Iterator it = find.iterator();
             while (it.hasNext()) {

@@ -20,7 +20,7 @@ import java.util.logging.Level;
  * / Project: JavaUtils
  * / Copyrighted by FrameDev
  */
-public class MongoManager {
+public class MongoDBManager {
 
     private final String hostname;
     private final String username;
@@ -30,7 +30,7 @@ public class MongoManager {
     private MongoClient client;
     private MongoDatabase database;
 
-    public MongoManager(String hostname, String username, String password, int port, String dataBaseString) {
+    public MongoDBManager(String hostname, String username, String password, int port, String dataBaseString) {
         this.hostname = hostname;
         this.username = username;
         this.password = password;
@@ -38,7 +38,7 @@ public class MongoManager {
         this.dataBaseString = dataBaseString;
     }
 
-    public MongoManager(String hostname, String username, String password, String dataBaseString) {
+    public MongoDBManager(String hostname, String username, String password, String dataBaseString) {
         this.hostname = hostname;
         this.username = username;
         this.password = password;
@@ -46,7 +46,7 @@ public class MongoManager {
         this.dataBaseString = dataBaseString;
     }
 
-    public MongoManager(String hostname, String dataBaseString) {
+    public MongoDBManager(String hostname, String dataBaseString) {
         this.hostname = hostname;
         this.port = 27017;
         this.dataBaseString = dataBaseString;
@@ -54,7 +54,7 @@ public class MongoManager {
         this.password = "";
     }
 
-    public MongoManager(String hostname, int port, String dataBaseString) {
+    public MongoDBManager(String hostname, int port, String dataBaseString) {
         this.hostname = hostname;
         this.port = port;
         this.username = "";

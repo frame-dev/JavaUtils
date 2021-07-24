@@ -34,7 +34,7 @@ public class CreateFileTest implements APIs {
 
     @Test
     public void listTest() {
-        ReplaceList<Object> list = new ReplaceList<>();
+        FrameList<Object> list = new FrameList<>();
         list.add("data");
         list.add("§atest");
         String passwd = new Utils.PasswordGenerator().generatorKey(200);

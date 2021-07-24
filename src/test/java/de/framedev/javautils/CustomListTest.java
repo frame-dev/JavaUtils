@@ -20,7 +20,7 @@ import java.util.Date;
  */
 public class CustomListTest extends TestCase {
 
-    public static ReplaceList<Object> list = new ReplaceList<>();
+    public static FrameList<Object> list = new FrameList<>();
 
     public void setUp() {
         System.out.println("register");

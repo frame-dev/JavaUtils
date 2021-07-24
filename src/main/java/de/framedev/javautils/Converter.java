@@ -56,6 +56,15 @@ public class Converter {
         }
     }
 
+    public boolean isBoolean(String bool) {
+        try {
+            Boolean.parseBoolean(bool);
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
     public int stringToInteger(String number) {
         if (isInteger(number))
             return Integer.parseInt(number);
@@ -109,7 +118,7 @@ public class Converter {
     }
 
     public short stringToShort(String number) {
-        if(isShort(number))
+        if (isShort(number))
             return Short.parseShort(number);
         return 0;
     }
@@ -135,7 +144,7 @@ public class Converter {
     }
 
     public float stringToFloat(String number) {
-        if(isFloat(number))
+        if (isFloat(number))
             return Float.parseFloat(number);
         return 0f;
     }
@@ -161,7 +170,7 @@ public class Converter {
     }
 
     public long stringToLong(String number) {
-        if(isLong(number))
+        if (isLong(number))
             return Long.parseLong(number);
         return 0L;
     }
@@ -184,5 +193,64 @@ public class Converter {
 
     public long floatToLong(float number) {
         return (long) number;
+    }
+
+    public String byteToString(byte number) {
+        return String.valueOf(number);
+    }
+
+    public String shortToString(short number) {
+        return String.valueOf(number);
+    }
+
+    public String intToString(int number) {
+        return String.valueOf(number);
+    }
+
+    public String longToString(long number) {
+        return String.valueOf(number);
+    }
+
+    public String floatToString(float number) {
+        return String.valueOf(number);
+    }
+
+    public String doubleToString(double number) {
+        return String.valueOf(number);
+    }
+
+    public String objectToString(Object object) {
+        return String.valueOf(object);
+    }
+
+    public short objectToShort(Object object) {
+        return Short.parseShort(String.valueOf(object));
+    }
+
+    public int objectToInt(Object object) {
+        return Integer.parseInt(String.valueOf(object));
+    }
+
+    public long objectToLong(Object object) {
+        return Long.parseLong(String.valueOf(object));
+    }
+
+    public float objectToFloat(Object object) {
+        return Float.parseFloat(String.valueOf(object));
+    }
+
+    public double objectToDouble(Object object) {
+        return Double.parseDouble(String.valueOf(object));
+    }
+
+    public boolean objectToBoolean(Object object) {
+        return Boolean.parseBoolean(String.valueOf(object));
+    }
+
+    public boolean stringToBoolean(String bool) {
+        if (isBoolean(bool)) {
+            return Boolean.parseBoolean(bool);
+        }
+        return false;
     }
 }
