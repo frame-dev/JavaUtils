@@ -53,6 +53,7 @@ public class YamlConfigurator {
 
     /**
      * Create all Defaults for the Config
+     *
      * @param defaults the Defaults to set
      */
     public void setDefaults(HashMap<String, Object> defaults) {
@@ -61,27 +62,29 @@ public class YamlConfigurator {
     }
 
     /**
-     *
-     * @param path the Path for defaults
+     * @param path  the Path for defaults
      * @param value the Value for defaults
      */
     public void addDefault(String path, Object value) {
         data = getConfig(file);
-        data.put(path, value);
+        if (!isSet(path))
+            data.put(path, value);
     }
 
     /**
-     *
-     * @param path the Path to set Value
+     * @param path  the Path to set Value
      * @param value the Value to set
      */
     public void set(String path, Object value) {
         data = getConfig(file);
-        data.put(path, value);
+        if (value == null) {
+            data.remove(path);
+        } else {
+            data.put(path, value);
+        }
     }
 
     /**
-     *
      * @param path the Path where the Int is located
      * @return returns the Int
      */
@@ -108,7 +111,7 @@ public class YamlConfigurator {
 
     public List<String> getStringList(String path) {
         data = getConfig(file);
-        if(data.containsKey(path))
+        if (data.containsKey(path))
             //noinspection unchecked
             return (List<String>) data.get(path);
         return null;
@@ -116,7 +119,7 @@ public class YamlConfigurator {
 
     public List<Object> getList(String path) {
         data = getConfig(file);
-        if(data.containsKey(path))
+        if (data.containsKey(path))
             //noinspection unchecked
             return (List<Object>) data.get(path);
         return null;
@@ -164,6 +167,13 @@ public class YamlConfigurator {
     public boolean contains(String path) {
         data = getConfig(file);
         return data.containsKey(path);
+    }
+
+    public boolean isSet(String path) {
+        data = getConfig(file);
+        if (data.get(path) != null)
+            return data.containsKey(path);
+        return false;
     }
 
     public void saveDefaultConfig(Class<?> clazz, String resource) {

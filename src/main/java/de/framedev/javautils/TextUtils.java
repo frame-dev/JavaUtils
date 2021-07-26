@@ -62,19 +62,19 @@ public class TextUtils {
     }
 
 
-    public static int longToInt(long l) {
-        return (int) l;
+    public static int longToInt(long number) {
+        return (int) number;
     }
 
-    public static float longToFloat(long l) {
-        return l;
+    public static float longToFloat(long number) {
+        return number;
     }
 
-    public static double floatToDouble(float f) {
-        return f;
+    public static double floatToDouble(float number) {
+        return number;
     }
 
-    public static int floatToInt(float f) {
-        return (int) f;
+    public static int floatToInt(float number) {
+        return (int) number;
     }
 }
