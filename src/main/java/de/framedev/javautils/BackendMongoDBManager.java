@@ -105,10 +105,10 @@ public class BackendMongoDBManager {
         }
     }
 
-    public void updateAll(String where, Object data, HashMap<String, Object> newData, String collection) {
+    public void updateAll(String where, Object whereData, HashMap<String, Object> newData, String collection) {
         if (existsCollection(collection)) {
             MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
-            Document document = collections.find(new Document(where, data)).first();
+            Document document = collections.find(new Document(where, whereData)).first();
             if (document != null) {
                 if(document.get(where) != null) {
                     Document doc = Document.parse(new Gson().toJson(newData));
