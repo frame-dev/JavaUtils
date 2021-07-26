@@ -464,4 +464,101 @@ public class SpigotAPI implements APIs {
         }
     }
 
+    public static class InventoryManager {
+        private String title;
+        private int size;
+        private Inventory inventory;
+
+        public InventoryManager() {
+
+        }
+
+        public InventoryManager(String title, int size) {
+            this.title = title;
+            this.size = size;
+        }
+
+        public InventoryManager(String title) {
+            this.title = title;
+            this.size = 9;
+        }
+
+        public Inventory getInventory() {
+            return inventory;
+        }
+
+        public InventoryManager setInventory(Inventory inventory) {
+            this.inventory = inventory;
+            return this;
+        }
+
+        public InventoryManager setTitle(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public InventoryManager setSize(int size) {
+            this.size = size * 9;
+            return this;
+        }
+
+        public int getSize() {
+            return size;
+        }
+
+        public InventoryManager setItem(int index, ItemStack itemStack) {
+            if (inventory == null) throw new NullPointerException("The Inventory is Null, please create it first!");
+            inventory.setItem(index, itemStack);
+            return this;
+        }
+
+        public InventoryManager setItem(int index, Material material) {
+            if (inventory == null) throw new NullPointerException("The Inventory is Null, please create it first!");
+            inventory.setItem(index, new ItemStack(material));
+            return this;
+        }
+
+        public InventoryManager addItem(ItemStack itemStack) {
+            inventoryNull();
+            inventory.addItem(itemStack);
+            return this;
+        }
+
+        public InventoryManager addItem(ItemStack... itemStack) {
+            inventoryNull();
+            inventory.addItem(itemStack);
+            return this;
+        }
+
+        public ItemStack getItem(int index) {
+            inventoryNull();
+            return inventory.getItem(index);
+        }
+
+        private void inventoryNull() {
+            if (inventory == null) throw new NullPointerException("The Inventory is Null, please create it first!");
+        }
+
+        public InventoryManager create() {
+            if (title == null) throw new NullPointerException("Inventory Title is null");
+            if (size == 0) size = 9;
+            inventory = Bukkit.createInventory(null, size, title);
+            return this;
+        }
+
+        public InventoryManager fillNulls() {
+            inventoryNull();
+            int size = getSize();
+            for (int i = 0; i < size; i++) {
+                if (getItem(i) == null)
+                    inventory.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayName(" ").build());
+            }
+            return this;
+        }
+    }
+
 }
