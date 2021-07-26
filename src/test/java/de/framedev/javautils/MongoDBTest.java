@@ -35,10 +35,11 @@ public class MongoDBTest {
             e.printStackTrace();
         }
         data.put("ram", "Free Memory : " + systemMemory.getAllocatedFree() / mb + " mb");
+        data.put("ramAllocated", "Allocated Memory : " + systemMemory.getAllocatedTotal());
+        data.put("ramTotal","Total Memory : " + systemMemory.getTotal());
         data.put("hostname", hostName);
         data.put("ip", ip);
         data.put("totaldiskspace", new SystemUtils().getTotalDiskSpace());
-        data.put("data","name");
         backendManager.createData("hostname", hostName, data, "JavaUtils");
         backendManager.updateAll("hostname", hostName, data, "JavaUtils");
     }
