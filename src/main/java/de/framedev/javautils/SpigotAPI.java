@@ -57,6 +57,11 @@ public class SpigotAPI implements APIs {
         return null;
     }
 
+    /**
+     * Decode an Object from Base64
+     * @param base the encoded Base64 String
+     * @return return the Object of Base64
+     */
     public Object objectFromBase64(String base) {
         try {
             ByteArrayInputStream is = new ByteArrayInputStream(Base64Coder.decodeLines(base));
@@ -91,7 +96,7 @@ public class SpigotAPI implements APIs {
     }
 
     /**
-     * Remove form an ItemStack the Recipe
+     * Remove form an ItemStack the Recipe's
      *
      * @param itemStack the ItemStack to remove there Recipe
      */
