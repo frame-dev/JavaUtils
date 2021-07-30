@@ -577,6 +577,10 @@ public class SpigotAPI implements APIs {
             return this;
         }
 
+        /**
+         * Show inv
+         * @param player Player
+         */
         public void show(Player player) {
             inventoryNull();
             player.openInventory(inventory);
