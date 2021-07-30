@@ -59,6 +59,7 @@ public class SpigotAPI implements APIs {
 
     /**
      * Decode an Object from Base64
+     *
      * @param base the encoded Base64 String
      * @return return the Object of Base64
      */
@@ -376,7 +377,7 @@ public class SpigotAPI implements APIs {
                 this.itemMeta.setLore(lore);
             } else {
                 List<String> lore = this.itemMeta.getLore();
-                if (this.itemMeta.getLore() != null) {
+                if (this.itemMeta.getLore() != null && lore != null) {
                     lore.add(str);
                     this.itemMeta.setLore(lore);
                 } else {
@@ -474,8 +475,8 @@ public class SpigotAPI implements APIs {
         private int size;
         private Inventory inventory;
 
-        public InventoryManager() {
-
+        public InventoryManager(Inventory inventory) {
+            this.inventory = inventory;
         }
 
         public InventoryManager(String title, int size) {
@@ -545,7 +546,7 @@ public class SpigotAPI implements APIs {
         }
 
         private void inventoryNull() {
-            if (inventory == null) throw new NullPointerException("The Inventory is Null, please create it first!");
+            if (inventory == null) throw new NullPointerException("The Inventory is Null. Please create it first!");
         }
 
         public InventoryManager create() {
@@ -563,6 +564,22 @@ public class SpigotAPI implements APIs {
                     inventory.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayName(" ").build());
             }
             return this;
+        }
+
+        public ItemStack[] getContent() {
+            inventoryNull();
+            return inventory.getContents();
+        }
+
+        public InventoryManager setContent(ItemStack[] content) {
+            inventoryNull();
+            inventory.setContents(content);
+            return this;
+        }
+
+        public void show(Player player) {
+            inventoryNull();
+            player.openInventory(inventory);
         }
     }
 
