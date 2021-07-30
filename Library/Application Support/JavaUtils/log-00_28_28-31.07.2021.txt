@@ -1,4 +1,0 @@
-Mac OS X : 10.16
-Used-Memory: 32Mb
-Available Processors : 8
-4.60595703125
