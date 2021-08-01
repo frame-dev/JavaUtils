@@ -37,13 +37,6 @@ public class Utils {
     private final Logger logger = createEmptyLogger("Utils", true);
 
     /**
-     * Init of this Class run this as First
-     */
-    public Utils() {
-        getLogger().log(Level.INFO, getClass().getSimpleName() + " Loaded");
-    }
-
-    /**
      * @return the Logger for this Class (Project)
      */
     public Logger getLogger() {
@@ -432,12 +425,7 @@ public class Utils {
      * @return returns the encoded Base64 Byte Array
      * @throws NotSerializableException error
      */
-    public String objectToBase64(Object object) throws NotSerializableException {
-        for (Class<?> anInterface : object.getClass().getInterfaces()) {
-            if (!anInterface.getName().equalsIgnoreCase("Serializable")) {
-                throw new NotSerializableException("Need to Serializable");
-            }
-        }
+    public String objectToBase64(Object object) {
         try {
             ByteArrayOutputStream is = new ByteArrayOutputStream();
             ObjectOutputStream os = new ObjectOutputStream(is);
@@ -657,7 +645,7 @@ public class Utils {
         String os = System.getProperty("os.name").toLowerCase();
         String userDir = "";
         if (os.contains("mac")) {
-            userDir = System.getProperty("user.dir") + "/Library/Application Support/";
+            userDir = System.getProperty("user.dir") + "/";
         } else if (os.contains("windows")) {
             userDir = System.getProperty("user.dir") + "/";
         } else {
@@ -667,7 +655,26 @@ public class Utils {
     }
 
     /**
-     * Return the Operation System Name
+     * Get the user Applications Store Folder
+     *
+     * @return return the Applications Store Folder
+     */
+    public String getUserAppData() {
+        String os = getOs();
+        String userData = "";
+        if (os.contains("mac")) {
+            userData = System.getProperty("user.home") + "/Library/Application Support/";
+        } else if (os.contains("windows")) {
+            userData = System.getProperty("%APPDATA%") + "/";
+        } else {
+            userData = System.getProperty("user.home") + "/";
+        }
+        return userData;
+    }
+
+    /**
+     * Return the Operating System Name
+     *
      * @return return the Os Name
      **/
     public String getOs() {

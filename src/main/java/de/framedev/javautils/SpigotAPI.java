@@ -18,9 +18,11 @@ import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.jetbrains.annotations.NotNull;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
-import java.util.logging.Level;
 
 /**
  * This Plugin was Created by FrameDev
@@ -33,17 +35,13 @@ import java.util.logging.Level;
 
 public class SpigotAPI implements APIs {
 
-    public SpigotAPI() {
-        utils.createEmptyLogger(SpigotAPI.class.getName(), false).log(Level.INFO, "Loaded");
-    }
-
-    public String objectToBase64(Object object) throws NotSerializableException {
-        for (Class<?> anInterface : object.getClass().getInterfaces()) {
-            if (!anInterface.getName().equalsIgnoreCase("Serializable")) {
-                throw new NotSerializableException("Need to Serializable");
-            }
-        }
-
+    /**
+     * Serialize a Bukkit Object to Base64
+     *
+     * @param object the Object for Serialization
+     * @return return the Serialized Object
+     */
+    public String objectToBase64(Object object) {
         try {
             ByteArrayOutputStream is = new ByteArrayOutputStream();
             BukkitObjectOutputStream os = new BukkitObjectOutputStream(is);
@@ -58,7 +56,7 @@ public class SpigotAPI implements APIs {
     }
 
     /**
-     * Decode an Object from Base64
+     * Decode a Bukkit Object from Base64 String
      *
      * @param base the encoded Base64 String
      * @return return the Object of Base64
@@ -471,12 +469,14 @@ public class SpigotAPI implements APIs {
     }
 
     public static class InventoryManager {
+
         private String title;
         private int size;
         private Inventory inventory;
 
         public InventoryManager(Inventory inventory) {
             this.inventory = inventory;
+            this.size = inventory.getSize();
         }
 
         public InventoryManager(String title, int size) {
@@ -489,6 +489,12 @@ public class SpigotAPI implements APIs {
             this.size = 9;
         }
 
+        /**
+         * Return the Created Inventory
+         * It can return null if the Inventory wasn't Created
+         *
+         * @return return the Created Inventory
+         */
         public Inventory getInventory() {
             return inventory;
         }
@@ -498,20 +504,42 @@ public class SpigotAPI implements APIs {
             return this;
         }
 
+        /**
+         * Set the Title of the Inventory
+         *
+         * @param title the Title for the Inventory
+         * @return return this Class
+         */
         public InventoryManager setTitle(String title) {
             this.title = title;
             return this;
         }
 
+        /**
+         * Return the Title from the Inventory
+         *
+         * @return return the Title from the Inventory
+         */
         public String getTitle() {
             return title;
         }
 
+        /**
+         * Set the Inventory size. Like (inventoryManager.setSize(1);) This means that the Inventory will have 9 Slots.
+         *
+         * @param size the Size for the Inventory
+         * @return return this Class back
+         */
         public InventoryManager setSize(int size) {
             this.size = size * 9;
             return this;
         }
 
+        /**
+         * Return the Size of the Inventory
+         *
+         * @return return the Size of the Inventory
+         */
         public int getSize() {
             return size;
         }
@@ -556,6 +584,11 @@ public class SpigotAPI implements APIs {
             return this;
         }
 
+        /**
+         * Fill all empty Spaces with Black Stained Glass Pane
+         *
+         * @return return this Class back
+         */
         public InventoryManager fillNulls() {
             inventoryNull();
             int size = getSize();
@@ -578,7 +611,8 @@ public class SpigotAPI implements APIs {
         }
 
         /**
-         * Show inv
+         * Show inventory at Player
+         *
          * @param player Player
          */
         public void show(Player player) {

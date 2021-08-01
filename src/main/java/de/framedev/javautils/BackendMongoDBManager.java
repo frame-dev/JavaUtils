@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class BackendMongoDBManager {
 
@@ -149,7 +150,7 @@ public class BackendMongoDBManager {
         ArrayList<Object> players = new ArrayList<>();
         if (existsCollection(collection)) {
             MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
-            collections.find(new Document(where,data)).forEach((Block<? super Document>) document -> {
+            collections.find(new Document(where,data)).forEach((Consumer<? super Document>) document -> {
                 if (document != null) {
                     players.add(document.get(selected));
                 }
