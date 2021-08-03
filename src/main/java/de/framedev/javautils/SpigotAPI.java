@@ -262,12 +262,34 @@ public class SpigotAPI implements APIs {
             cfg.set("chunk." + name + ".world", chunk.getWorld().getName());
             cfg.set("chunk." + name + ".x", chunk.getX());
             cfg.set("chunk." + name + ".z", chunk.getZ());
+            cfg.set("chunk." + name + ".loaded", true);
             chunk.setForceLoaded(true);
             try {
                 cfg.save(file);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        public static void setLoaded(File file, String name, boolean loaded) {
+            FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+            if (cfg.contains("chunk." + name))
+                cfg.set("chunk." + name + ".loaded", loaded);
+            if (loaded) {
+                Objects.requireNonNull(getChunk(file, name)).setForceLoaded(true);
+            }
+            try {
+                cfg.save(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public static boolean isChunkEnabled(File file, String name) {
+            FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+            if (cfg.contains("chunk." + name + ".loaded"))
+                return cfg.getBoolean("chunk." + name + ".loaded");
+            return false;
         }
 
         public static Chunk getChunk(File file, String name) {
@@ -279,6 +301,11 @@ public class SpigotAPI implements APIs {
             return world != null ? world.getChunkAt(x, z) : null;
         }
 
+        /**
+         * Force Loading Chunks from files
+         *
+         * @param file the Chunk File where all Chunks are saved
+         */
         public static void forceLoad(File file) {
             FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
             if (cfg.getConfigurationSection("chunk") == null) return;
@@ -286,7 +313,8 @@ public class SpigotAPI implements APIs {
                 if (getChunk(file, s) == null) continue;
                 Chunk chunk = getChunk(file, s);
                 if (chunk == null) continue;
-                chunk.setForceLoaded(true);
+                if (isChunkEnabled(file, s))
+                    chunk.setForceLoaded(true);
             }
         }
     }
@@ -427,7 +455,7 @@ public class SpigotAPI implements APIs {
             }
 
             @Override
-            public String getName() {
+            public @NotNull String getName() {
                 return "Data";
             }
 
@@ -442,7 +470,7 @@ public class SpigotAPI implements APIs {
             }
 
             @Override
-            public EnchantmentTarget getItemTarget() {
+            public @NotNull EnchantmentTarget getItemTarget() {
                 return EnchantmentTarget.TOOL;
             }
 

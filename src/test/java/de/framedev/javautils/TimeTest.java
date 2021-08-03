@@ -13,7 +13,6 @@ import junit.framework.TestCase;
 public class TimeTest extends TestCase {
 
     public void testName() {
-        double min = (long) Time.secToTime(320,Time.MINUTES);
-        System.out.println(min);
+
     }
 }

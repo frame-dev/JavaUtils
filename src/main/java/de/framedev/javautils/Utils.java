@@ -1,5 +1,6 @@
 package de.framedev.javautils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.gson.Gson;
@@ -89,6 +90,76 @@ public class Utils {
         }
     }
 
+    public String objectToJsonString(Object object) {
+        return new Gson().toJson(object);
+    }
+
+    public Object objectFromJsonString(String json) {
+        return new Gson().fromJson(json, Object.class);
+    }
+
+    public <T> T classFromJsonString(String json, Class<T> class_) {
+        return new Gson().fromJson(json, class_);
+    }
+
+    public String objectToYamlString(Object object) {
+        try {
+            return new YAMLMapper().writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Object objectFromYamlString(String yaml) {
+        try {
+            return new YAMLMapper().readValue(yaml, Object.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public <T> T classFromYamlString(String yaml, Class<T> class_) {
+        try {
+            return new YAMLMapper().readValue(yaml, class_);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String objectToXmlString(Object object) {
+        Serializer serializer = new Persister();
+        StringWriter writer = new StringWriter();
+        try {
+            serializer.write(object, writer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return writer.toString();
+    }
+
+    public Object objectFromXmlString(String xml) {
+        Serializer serializer = new Persister();
+        try {
+            return serializer.read(Object.class, xml);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public <T> T classFromXmlString(String xml, Class<T> class_) {
+        Serializer serializer = new Persister();
+        try {
+            return serializer.read(class_,xml);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * Please add to the File the extension .yml
      *
@@ -136,6 +207,12 @@ public class Utils {
         return null;
     }
 
+    /**
+     * Return an Object from a File
+     *
+     * @param file the Selected File with the Extension .json for get the Data
+     * @return return the Object from the File
+     */
     public Object getObjectFromJsonFile(File file) {
         if (file.exists()) {
             try {
@@ -191,6 +268,12 @@ public class Utils {
         return false;
     }
 
+    /**
+     * Return an Object from a File with the extension .xml
+     *
+     * @param file the selected File for getting the Object with the extension .xml
+     * @return return the Object from the File
+     */
     public Object getObjectFromXml(File file) {
         if (file.exists()) {
             Serializer mapper = new Persister();
@@ -557,7 +640,8 @@ public class Utils {
                 e.printStackTrace();
             }
         }
-        if (new File(newLocation, fileNameWithExtensions).getParentFile() == null && !new File(newLocation, fileNameWithExtensions).getParentFile().exists())
+        if (new File(newLocation, fileNameWithExtensions).getParentFile() == null &&
+                !new File(newLocation, fileNameWithExtensions).getParentFile().exists())
             new File(newLocation, fileNameWithExtensions).getParentFile().mkdirs();
         if (!file.renameTo(new File(newLocation, fileNameWithExtensions))) {
             getLogger().log(Level.SEVERE, "File cannot be Renamed/Moved");
@@ -678,5 +762,14 @@ public class Utils {
      **/
     public String getOs() {
         return System.getProperty("os.name").toLowerCase();
+    }
+
+    /**
+     * Return Os's Version
+     *
+     * @return return the Os Version
+     */
+    public String getOsVersion() {
+        return System.getProperty("os.version").toLowerCase();
     }
 }
