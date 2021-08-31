@@ -65,6 +65,15 @@ public class Converter {
         }
     }
 
+    public boolean isByte(String number) {
+        try {
+            Byte.parseByte(number);
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
     public int stringToInteger(String number) {
         if (isInteger(number))
             return Integer.parseInt(number);

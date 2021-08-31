@@ -11,22 +11,40 @@ package de.framedev.javautils;
 
 public enum Time {
 
-    SECONDS(1),
-    MINUTES(60),
-    HOURS(3600),
-    DAYS(86400),
-    WEEKS(604800),
-    MONTHS(WEEKS.time * 4),
-    YEARS(31536000);
+    SECONDS(1, 60, 3600, 86400),
+    MINUTES(60, 1, 60, 1440),
+    HOURS(3600, 0.0166667, 60 / 60.0, 24),
+    DAYS(86400, 0.000694444, 0.0416666, 1),
+    WEEKS(604800, 0.0000992063, 0.00595238, 0.142857),
+    MONTHS(WEEKS.second * 4, 0.00002283, WEEKS.hour / 4, 0.03287671),
+    YEARS(31536000, 0.00000190259, 0.000114155, 0.00273973);
 
-    private final long time;
+    private final long second;
+    private final double minute;
+    private final double hour;
+    private final double day;
 
-    Time(long time) {
-        this.time = time;
+    Time(long second, double minute, double hour, double day) {
+        this.second = second;
+        this.minute = minute;
+        this.hour = hour;
+        this.day = day;
     }
 
-    public long getTime() {
-        return time;
+    public double getDay() {
+        return day;
+    }
+
+    public double getMinute() {
+        return minute;
+    }
+
+    public double getHour() {
+        return hour;
+    }
+
+    public long getSecond() {
+        return second;
     }
 
     public static long toSec(Time time) {
@@ -40,7 +58,7 @@ public enum Time {
             case WEEKS:
                 return 604800;
             case MONTHS:
-                return WEEKS.time * 4;
+                return WEEKS.second * 4;
             case YEARS:
                 return 31536000;
             default:
@@ -51,19 +69,19 @@ public enum Time {
     public static double minToTime(long minutes, Time time) {
         switch (time) {
             case SECONDS:
-                return (double) minutes / SECONDS.time;
+                return (double) minutes / SECONDS.second;
             case MINUTES:
-                return (double) minutes / MINUTES.time;
+                return (double) minutes / MINUTES.second;
             case HOURS:
-                return (double) minutes / HOURS.time;
+                return (double) minutes / HOURS.second;
             case DAYS:
-                return (double) minutes / DAYS.time;
+                return (double) minutes / DAYS.second;
             case WEEKS:
-                return (double) minutes / WEEKS.time;
+                return (double) minutes / WEEKS.second;
             case MONTHS:
-                return (double) minutes / MONTHS.time;
+                return (double) minutes / MONTHS.second;
             case YEARS:
-                return (double) minutes / YEARS.time;
+                return (double) minutes / YEARS.second;
             default:
                 throw new IllegalArgumentException();
         }
@@ -72,19 +90,19 @@ public enum Time {
     public static double hourToTime(long hours, Time time) {
         switch (time) {
             case SECONDS:
-                return (double) hours / SECONDS.time;
+                return (double) hours / SECONDS.second;
             case MINUTES:
-                return (double) hours / MINUTES.time;
+                return (double) hours / MINUTES.second;
             case HOURS:
-                return (double) hours / HOURS.time;
+                return (double) hours / HOURS.second;
             case DAYS:
-                return (double) hours / DAYS.time;
+                return (double) hours / DAYS.second;
             case WEEKS:
-                return (double) hours / WEEKS.time;
+                return (double) hours / WEEKS.second;
             case MONTHS:
-                return (double) hours / MONTHS.time;
+                return (double) hours / MONTHS.second;
             case YEARS:
-                return (double) hours / YEARS.time;
+                return (double) hours / YEARS.second;
             default:
                 throw new IllegalArgumentException();
         }
@@ -93,19 +111,19 @@ public enum Time {
     public static double dayToTime(long days, Time time) {
         switch (time) {
             case SECONDS:
-                return (double) days / SECONDS.time;
+                return (double) days / SECONDS.second;
             case MINUTES:
-                return (double) days / MINUTES.time;
+                return (double) days / MINUTES.second;
             case HOURS:
-                return (double) days / HOURS.time;
+                return (double) days / HOURS.second;
             case DAYS:
-                return (double) days / DAYS.time;
+                return (double) days / DAYS.second;
             case WEEKS:
-                return (double) days / WEEKS.time;
+                return (double) days / WEEKS.second;
             case MONTHS:
-                return (double) days / MONTHS.time;
+                return (double) days / MONTHS.second;
             case YEARS:
-                return (double) days / YEARS.time;
+                return (double) days / YEARS.second;
             default:
                 throw new IllegalArgumentException();
         }
@@ -114,19 +132,19 @@ public enum Time {
     public static double weeksToTime(long weeks, Time time) {
         switch (time) {
             case SECONDS:
-                return (double) weeks / SECONDS.time;
+                return (double) weeks / SECONDS.second;
             case MINUTES:
-                return (double) weeks / MINUTES.time;
+                return (double) weeks / MINUTES.second;
             case HOURS:
-                return (double) weeks / HOURS.time;
+                return (double) weeks / HOURS.second;
             case DAYS:
-                return (double) weeks / DAYS.time;
+                return (double) weeks / DAYS.second;
             case WEEKS:
-                return (double) weeks / WEEKS.time;
+                return (double) weeks / WEEKS.second;
             case MONTHS:
-                return (double) weeks / MONTHS.time;
+                return (double) weeks / MONTHS.second;
             case YEARS:
-                return (double) weeks / YEARS.time;
+                return (double) weeks / YEARS.second;
             default:
                 throw new IllegalArgumentException();
         }
@@ -135,19 +153,19 @@ public enum Time {
     public static double monthsToTime(long months, Time time) {
         switch (time) {
             case SECONDS:
-                return (double) months / SECONDS.time;
+                return (double) months / SECONDS.second;
             case MINUTES:
-                return (double) months / MINUTES.time;
+                return (double) months / MINUTES.second;
             case HOURS:
-                return (double) months / HOURS.time;
+                return (double) months / HOURS.second;
             case DAYS:
-                return (double) months / DAYS.time;
+                return (double) months / DAYS.second;
             case WEEKS:
-                return (double) months / WEEKS.time;
+                return (double) months / WEEKS.second;
             case MONTHS:
-                return (double) months / MONTHS.time;
+                return (double) months / MONTHS.second;
             case YEARS:
-                return (double) months / YEARS.time;
+                return (double) months / YEARS.second;
             default:
                 throw new IllegalArgumentException();
         }
@@ -156,19 +174,19 @@ public enum Time {
     public static double yearsToTime(long years, Time time) {
         switch (time) {
             case SECONDS:
-                return (double) years / SECONDS.time;
+                return (double) years / SECONDS.second;
             case MINUTES:
-                return (double) years / MINUTES.time;
+                return (double) years / MINUTES.second;
             case HOURS:
-                return (double) years / HOURS.time;
+                return (double) years / HOURS.second;
             case DAYS:
-                return (double) years / DAYS.time;
+                return (double) years / DAYS.second;
             case WEEKS:
-                return (double) years / WEEKS.time;
+                return (double) years / WEEKS.second;
             case MONTHS:
-                return (double) years / MONTHS.time;
+                return (double) years / MONTHS.second;
             case YEARS:
-                return (double) years / YEARS.time;
+                return (double) years / YEARS.second;
             default:
                 throw new IllegalArgumentException();
         }
@@ -177,22 +195,27 @@ public enum Time {
     public static double secToTime(long seconds, Time time) {
         switch (time) {
             case SECONDS:
-                return (double) seconds / SECONDS.time;
+                return (double) seconds / SECONDS.second;
             case MINUTES:
-                return (double) seconds / MINUTES.time;
+                return (double) seconds / MINUTES.second;
             case HOURS:
-                return (double) seconds / HOURS.time;
+                return (double) seconds / HOURS.second;
             case DAYS:
-                return (double) seconds / DAYS.time;
+                return (double) seconds / DAYS.second;
             case WEEKS:
-                return (double) seconds / WEEKS.time;
+                return (double) seconds / WEEKS.second;
             case MONTHS:
-                return (double) seconds / MONTHS.time;
+                return (double) seconds / MONTHS.second;
             case YEARS:
-                return (double) seconds / YEARS.time;
+                return (double) seconds / YEARS.second;
             default:
                 throw new IllegalArgumentException();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Time : " + this.name() + " seconds : " + second;
     }
 }
 

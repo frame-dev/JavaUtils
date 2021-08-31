@@ -13,6 +13,7 @@ import junit.framework.TestCase;
 public class TimeTest extends TestCase {
 
     public void testName() {
-
+        SystemUtils.OSType osType = new SystemUtils().getOSType();
+        System.out.println(osType);
     }
 }

@@ -6,7 +6,7 @@
 
 	<groupId>de.framedev</groupId>
 	<artifactId>JavaUtils</artifactId>
-	<version>1.6.3.2-RELEASE</version>
+	<version>1.6.5.8.1-RELEASE</version>
 
 	<properties>
 		<maven.compiler.source>8</maven.compiler.source>
@@ -94,7 +94,6 @@
 			<version>2.7</version>
 			<scope>compile</scope>
 		</dependency>
-
 	</dependencies>
 
 	<distributionManagement>
