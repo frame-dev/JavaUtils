@@ -1,6 +1,7 @@
 package de.framedev.javautils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.gson.Gson;
@@ -153,7 +154,7 @@ public class Utils {
     public <T> T classFromXmlString(String xml, Class<T> class_) {
         Serializer serializer = new Persister();
         try {
-            return serializer.read(class_,xml);
+            return serializer.read(class_, xml);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -236,6 +237,21 @@ public class Utils {
             YAMLMapper mapper = new YAMLMapper();
             try {
                 return mapper.readValue(file, class_);
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+        } else {
+            System.err.println("File doesn't exists!");
+        }
+        return null;
+    }
+
+    public <T> T getClassTypeFromYamlFile(File file, Type type) {
+        if (file.exists()) {
+            YAMLMapper mapper = new YAMLMapper();
+            JavaType javaType = mapper.constructType(type);
+            try {
+                return mapper.readValue(file, javaType);
             } catch (IOException exception) {
                 exception.printStackTrace();
             }
@@ -608,9 +624,14 @@ public class Utils {
     }
 
     public void download(String fileUrl, String location, String fileNameWithExtensions, String newLocation) {
-        File file = new File(location, fileNameWithExtensions);
-        if (!file.exists())
-            file.getParentFile().mkdirs();
+        File file = null;
+        if(location != null) {
+            file = new File(location, fileNameWithExtensions);
+            if (file.getParentFile() != null && !file.getParentFile().exists())
+                file.getParentFile().mkdirs();
+        } else {
+            file = new File(fileNameWithExtensions);
+        }
         BufferedInputStream in = null;
         FileOutputStream fout = null;
         try {
@@ -640,7 +661,7 @@ public class Utils {
                 e.printStackTrace();
             }
         }
-        if (new File(newLocation, fileNameWithExtensions).getParentFile() == null &&
+        if (new File(newLocation, fileNameWithExtensions).getParentFile() != null &&
                 !new File(newLocation, fileNameWithExtensions).getParentFile().exists())
             new File(newLocation, fileNameWithExtensions).getParentFile().mkdirs();
         if (!file.renameTo(new File(newLocation, fileNameWithExtensions))) {
@@ -649,15 +670,20 @@ public class Utils {
     }
 
     public void download(String fileUrl, String location, String fileNameWithExtensions) {
-        File file = new File(location, fileNameWithExtensions);
-        if (!file.exists())
-            file.getParentFile().mkdirs();
+        File file = null;
+        if(location != null) {
+            file = new File(location, fileNameWithExtensions);
+            if (file.getParentFile() != null && !file.getParentFile().exists())
+                file.getParentFile().mkdirs();
+        } else {
+            file = new File(fileNameWithExtensions);
+        }
         BufferedInputStream in = null;
         FileOutputStream fout = null;
         try {
             URL url = new URL(fileUrl);
             in = new BufferedInputStream(url.openStream());
-            fout = new FileOutputStream(new File(location, fileNameWithExtensions));
+            fout = new FileOutputStream(file);
             final byte[] data = new byte[4096];
             int count;
             while ((count = in.read(data, 0, 4096)) != -1) {
@@ -748,7 +774,7 @@ public class Utils {
         if (os.contains("mac")) {
             userData = System.getProperty("user.home") + "/Library/Application Support/";
         } else if (os.contains("windows")) {
-            userData = System.getProperty("%APPDATA%") + "/";
+            userData = System.getenv("APPDATA") + "/";
         } else {
             userData = System.getProperty("user.home") + "/";
         }
@@ -771,5 +797,51 @@ public class Utils {
      */
     public String getOsVersion() {
         return System.getProperty("os.version").toLowerCase();
+    }
+
+    protected File streamToFile(InputStream in) {
+        if (in == null) {
+            return null;
+        }
+
+        try {
+            File f = File.createTempFile(String.valueOf(in.hashCode()), ".tmp");
+            f.deleteOnExit();
+
+            FileOutputStream out = new FileOutputStream(f);
+            byte[] buffer = new byte[1024];
+
+            int bytesRead;
+            while ((bytesRead = in.read(buffer)) != -1) {
+                out.write(buffer, 0, bytesRead);
+            }
+
+            return f;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public File getFromResourceFile(String file) {
+        InputStream resource = this.getClass().getClassLoader().getResourceAsStream(file);
+        if (resource == null) {
+            throw new IllegalArgumentException("file not found!");
+        } else {
+            return streamToFile(resource);
+        }
+    }
+
+    public File getFromResourceFile(String file, Class<?> class_) {
+        InputStream resource = class_.getClassLoader().getResourceAsStream(file);
+        if (resource == null) {
+            throw new IllegalArgumentException("file not found!");
+        } else {
+            return streamToFile(resource);
+        }
+    }
+
+    public boolean existFile(String fileName) {
+        return new File(fileName).exists();
     }
 }

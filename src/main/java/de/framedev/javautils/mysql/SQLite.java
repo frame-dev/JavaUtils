@@ -97,13 +97,13 @@ public class SQLite {
         String builder = stringBuilder.toString();
         try {
             PreparedStatement stmt;
+            String sql;
             if (date) {
-                String sql = "CREATE TABLE IF NOT EXISTS " + tablename + " (ID INTEGER PRIMARY KEY AUTO_INCREMENT," + builder + ",created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
-                stmt = SQLite.connect().prepareStatement(sql);
+                sql = "CREATE TABLE IF NOT EXISTS " + tablename + " (ID INTEGER PRIMARY KEY AUTOINCREMENT," + builder + ",created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
             } else {
-                String sql = "CREATE TABLE IF NOT EXISTS " + tablename + " (ID INTEGER PRIMARY KEY AUTOINCREMENT," + builder + ");";
-                stmt = SQLite.connect().prepareStatement(sql);
+                sql = "CREATE TABLE IF NOT EXISTS " + tablename + " (ID INTEGER PRIMARY KEY AUTOINCREMENT," + builder + ");";
             }
+            stmt = SQLite.connect().prepareStatement(sql);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
