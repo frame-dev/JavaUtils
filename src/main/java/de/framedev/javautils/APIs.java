@@ -16,4 +16,5 @@ public interface APIs {
     Utils.CustomGenerators.DoubleRandomNumberGenerator doubleRandomGenerator = new Utils.CustomGenerators.DoubleRandomNumberGenerator();
     Converter converter = new Converter();
     ReflectionUtils reflectionUtils = new ReflectionUtils();
+    TextUtils textUtils = new TextUtils();
 }

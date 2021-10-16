@@ -519,7 +519,7 @@ public class Utils {
     }
 
     /**
-     * Create an String of an Base64 (encode)
+     * Create a String of a Base64 (encode)
      *
      * @param object the Object to ecncode to Base64
      * @return returns the encoded Base64 Byte Array
@@ -584,7 +584,7 @@ public class Utils {
     /**
      * @param text  the Text for Splitting
      * @param regex the char for splitting
-     * @return return an Array of splitted Strings
+     * @return return an Array of split Strings
      */
     public String[] stringSplitter(String text, @NotNull String regex) {
         if (text == null) return null;
@@ -593,7 +593,7 @@ public class Utils {
     }
 
     /**
-     * This Method Creates an Logger from scratch
+     * This Method Creates a Logger from scratch
      *
      * @param name       the Name of the new Logger
      * @param timeFormat if you would like an TimeStamp in logger
@@ -601,19 +601,6 @@ public class Utils {
      */
     public Logger createEmptyLogger(String name, boolean timeFormat) {
         return new MyFormatter(timeFormat).createEmptyLogger(name);
-    }
-
-    /**
-     * return if the first object is the same as the second object
-     *
-     * @param obj_1 the First Object
-     * @param obj_2 the Second Object
-     * @return return if the first object is the same as the second object
-     */
-    public boolean equals(Object obj_1, Object obj_2) {
-        if (obj_1 == null) return false;
-        if (obj_2 == null) return false;
-        return obj_1.equals(obj_2);
     }
 
     public double round(double value, int places) {
@@ -626,7 +613,7 @@ public class Utils {
 
     public void download(String fileUrl, String location, String fileNameWithExtensions, String newLocation) {
         File file = null;
-        if(location != null) {
+        if (location != null) {
             file = new File(location, fileNameWithExtensions);
             if (file.getParentFile() != null && !file.getParentFile().exists())
                 file.getParentFile().mkdirs();
@@ -672,7 +659,7 @@ public class Utils {
 
     public void download(String fileUrl, String location, String fileNameWithExtensions) {
         File file = null;
-        if(location != null) {
+        if (location != null) {
             file = new File(location, fileNameWithExtensions);
             if (file.getParentFile() != null && !file.getParentFile().exists())
                 file.getParentFile().mkdirs();
@@ -842,13 +829,27 @@ public class Utils {
         }
     }
 
+    /**
+     * Check if a File is existing
+     *
+     * @param fileName the FileName to check if it is exists or not
+     * @return return a boolean if exists or not
+     */
     public boolean existFile(String fileName) {
         return new File(fileName).exists();
     }
 
-    public HashMap<String,Object> getDefaults(String fileName, Class<?> class_) {
+    /**
+     * Get the Default Values of an Yaml File
+     *
+     * @param fileName the FileName
+     * @param class_   Main Class
+     * @return returns a HashMap
+     */
+    public HashMap<String, Object> getDefaults(String fileName, Class<?> class_) {
         File file = getFromResourceFile(fileName, class_);
-        HashMap<String,Object> data = getClassTypeFromYamlFile(file, new TypeToken<HashMap<String,Object>>(){}.getType());
+        HashMap<String, Object> data = getClassTypeFromYamlFile(file, new TypeToken<HashMap<String, Object>>() {
+        }.getType());
         try {
             saveYamlToFile(new File(fileName), data);
         } catch (IOException e) {
