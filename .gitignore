@@ -10,3 +10,6 @@ JavaUtils
 /.vscode/
 /.settings/
 /.idea/
+/JavaUtils.iml
+*.iml
+.project
