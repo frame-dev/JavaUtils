@@ -130,6 +130,17 @@ public class BackendMongoDBManager {
         return false;
     }
 
+    public boolean exists(String where, Object data, String whereSelected, Object whereData, String collection) {
+        if (existsCollection(collection)) {
+            MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
+            Document document = collections.find(new Document(where, data)).first();
+            if (document != null) {
+                return document.get(whereSelected) == whereData;
+            }
+        }
+        return false;
+    }
+
     public void insertData(String where, Object data, String newKey, Object newValue, String collection) {
         if (existsCollection(collection)) {
             MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);

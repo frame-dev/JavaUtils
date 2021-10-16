@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import org.jetbrains.annotations.NotNull;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
@@ -843,5 +844,16 @@ public class Utils {
 
     public boolean existFile(String fileName) {
         return new File(fileName).exists();
+    }
+
+    public HashMap<String,Object> getDefaults(String fileName, Class<?> class_) {
+        File file = getFromResourceFile(fileName, class_);
+        HashMap<String,Object> data = getClassTypeFromYamlFile(file, new TypeToken<HashMap<String,Object>>(){}.getType());
+        try {
+            saveYamlToFile(new File(fileName), data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 }
