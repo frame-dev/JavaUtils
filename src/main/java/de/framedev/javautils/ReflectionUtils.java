@@ -23,9 +23,49 @@ public class ReflectionUtils {
     public ReflectionUtils() {
     }
 
-    public Field getField(Object object, String fieldName) {
+    public Object getEnumValue(String className, String of) {
+        Class<?> cls = null;
         try {
-            for (Field method : object.getClass().getDeclaredFields()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        assert cls != null;
+        for (Object obj : cls.getEnumConstants()) {
+            try {
+                Method m = cls.getMethod("valueOf", String.class);
+                return m.invoke(obj, of);
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public Object[] getEnumValues(String className) {
+        Class<?> cls = null;
+        try {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        assert cls != null;
+        if(cls.isEnum()) {
+            return cls.getEnumConstants();
+        }
+        return null;
+    }
+
+    public Field getField(String className, String fieldName) {
+        Class<?> cls = null;
+        try {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Field method : cls.getDeclaredFields()) {
                 if (method.getName() == fieldName) {
                     return method;
                 }
@@ -36,9 +76,16 @@ public class ReflectionUtils {
         return null;
     }
 
-    public Field getFieldSuperClass(Object object, String fieldName) {
+    public Field getFieldSuperClass(String className, String fieldName) {
+        Class<?> cls = null;
         try {
-            for (Field method : object.getClass().getSuperclass().getDeclaredFields()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Field method : cls.getSuperclass().getDeclaredFields()) {
                 if (method.getName() == fieldName) {
                     return method;
                 }
@@ -49,9 +96,16 @@ public class ReflectionUtils {
         return null;
     }
 
-    public boolean hasFieldAnnotation(Object object, String fieldName, Class<? extends Annotation> class__) {
+    public boolean hasFieldAnnotation(String className, String fieldName, Class<? extends Annotation> class__) {
+        Class<?> cls = null;
         try {
-            for (Field field : object.getClass().getDeclaredFields()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Field field : cls.getDeclaredFields()) {
                 if (field.getName() == fieldName) {
                     return field.getAnnotation(class__) != null;
                 }
@@ -62,9 +116,16 @@ public class ReflectionUtils {
         return false;
     }
 
-    public boolean hasFieldAnnotationSuperClass(Object object, String fieldName, Class<? extends Annotation> class__) {
+    public boolean hasFieldAnnotationSuperClass(String className, String fieldName, Class<? extends Annotation> class__) {
+        Class<?> cls = null;
         try {
-            for (Field field : object.getClass().getSuperclass().getDeclaredFields()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Field field : cls.getSuperclass().getDeclaredFields()) {
                 if (field.getName() == fieldName) {
                     return field.getAnnotation(class__) != null;
                 }
@@ -75,9 +136,16 @@ public class ReflectionUtils {
         return false;
     }
 
-    public Annotation[] getFieldAnnotations(Object object, String fieldName) {
+    public Annotation[] getFieldAnnotations(String className, String fieldName) {
+        Class<?> cls = null;
         try {
-            for (Field field : object.getClass().getDeclaredFields()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Field field : cls.getDeclaredFields()) {
                 if (field.getName() == fieldName) {
                     return field.getAnnotations();
                 }
@@ -88,9 +156,16 @@ public class ReflectionUtils {
         return null;
     }
 
-    public Annotation[] getFieldAnnotationsSuperClass(Object object, String fieldName) {
+    public Annotation[] getFieldAnnotationsSuperClass(String className, String fieldName) {
+        Class<?> cls = null;
         try {
-            for (Field field : object.getClass().getSuperclass().getDeclaredFields()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Field field : cls.getSuperclass().getDeclaredFields()) {
                 if (field.getName() == fieldName) {
                     return field.getAnnotations();
                 }
@@ -101,9 +176,16 @@ public class ReflectionUtils {
         return null;
     }
 
-    public Annotation[] getMethodAnnotations(Object object, String methodName) {
+    public Annotation[] getMethodAnnotations(String className, String methodName) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return method.getAnnotations();
                 }
@@ -114,9 +196,16 @@ public class ReflectionUtils {
         return null;
     }
 
-    public Annotation[] getMethodAnnotationsSuperClass(Object object, String methodName) {
+    public Annotation[] getMethodAnnotationsSuperClass(String className, String methodName) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getSuperclass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getSuperclass().getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return method.getAnnotations();
                 }
@@ -127,9 +216,16 @@ public class ReflectionUtils {
         return null;
     }
 
-    public boolean hasAnnotation(Object object, String methodName, Class<? extends Annotation> class__) {
+    public boolean hasAnnotation(String className, String methodName, Class<? extends Annotation> class__) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     if (method.getAnnotation(class__) != null) return true;
                 }
@@ -140,9 +236,16 @@ public class ReflectionUtils {
         return false;
     }
 
-    public boolean hasAnnotationSuperClass(Object object, String methodName, Class<? extends Annotation> class__) {
+    public boolean hasAnnotationSuperClass(String className, String methodName, Class<? extends Annotation> class__) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getSuperclass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getSuperclass().getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     if (method.getAnnotation(class__) != null) return true;
                 }
@@ -153,9 +256,16 @@ public class ReflectionUtils {
         return false;
     }
 
-    public Method getMethod(Object object, String methodName) {
+    public Method getMethod(String className, String methodName) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return method;
                 }
@@ -166,9 +276,16 @@ public class ReflectionUtils {
         return null;
     }
 
-    public Method getMethodSuperClass(Object object, String methodName) {
+    public Method getMethodSuperClass(String className, String methodName) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getSuperclass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getSuperclass().getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return method;
                 }
@@ -179,9 +296,16 @@ public class ReflectionUtils {
         return null;
     }
 
-    public List<Type> getParameterTypes(Object object, String methodName) {
+    public List<Type> getParameterTypes(String className, String methodName) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return Arrays.asList(method.getParameterTypes());
                 }
@@ -192,9 +316,16 @@ public class ReflectionUtils {
         return null;
     }
 
-    public List<Type> getParameterTypesSuperClass(Object object, String methodName) {
+    public List<Type> getParameterTypesSuperClass(String className, String methodName) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getSuperclass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getSuperclass().getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return Arrays.asList(method.getParameterTypes());
                 }
@@ -205,9 +336,16 @@ public class ReflectionUtils {
         return null;
     }
 
-    public Object runMethod(Object object, String methodName, Object... args) {
+    public Object runMethod(String className, Object object, String methodName, Object... args) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return method.invoke(object, args);
                 }
@@ -218,9 +356,16 @@ public class ReflectionUtils {
         return null;
     }
 
-    public Object runMethodSupClass(Object object, String methodName, Object... args) {
+    public Object runMethodSupClass(String className, Object object, String methodName, Object... args) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getSuperclass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getSuperclass().getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return method.invoke(object, args);
                 }
@@ -231,9 +376,16 @@ public class ReflectionUtils {
         return null;
     }
 
-    public Object runMethod(Object object, String methodName) {
+    public Object runMethod(String className, Object object, String methodName) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return method.invoke(object);
                 }
@@ -244,9 +396,16 @@ public class ReflectionUtils {
         return null;
     }
 
-    public Object runMethodSuperClass(Object object, String methodName) {
+    public Object runMethodSuperClass(String className, Object object, String methodName) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getSuperclass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getSuperclass().getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return method.invoke(object);
                 }
@@ -257,9 +416,16 @@ public class ReflectionUtils {
         return null;
     }
 
-    public boolean isVoidMethod(Object object, String methodName) {
+    public boolean isVoidMethod(String className, Object object, String methodName) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return method.invoke(object) == null;
                 }
@@ -270,9 +436,16 @@ public class ReflectionUtils {
         return true;
     }
 
-    public boolean isVoidMethodSuperClass(Object object, String methodName) {
+    public boolean isVoidMethodSuperClass(String className, Object object, String methodName) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getSuperclass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getSuperclass().getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return method.invoke(object) == null;
                 }
@@ -283,9 +456,16 @@ public class ReflectionUtils {
         return true;
     }
 
-    public boolean isVoidMethod(Object object, String methodName, Object... args) {
+    public boolean isVoidMethod(String className, Object object, String methodName, Object... args) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return method.invoke(object, args) == null;
                 }
@@ -296,9 +476,16 @@ public class ReflectionUtils {
         return true;
     }
 
-    public boolean isVoidMethodSuperClass(Object object, String methodName, Object... args) {
+    public boolean isVoidMethodSuperClass(String className, Object object, String methodName, Object... args) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getSuperclass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getSuperclass().getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return method.invoke(object, args) == null;
                 }
@@ -309,9 +496,16 @@ public class ReflectionUtils {
         return true;
     }
 
-    public boolean hasMethodArguments(Object object, String methodName) {
+    public boolean hasMethodArguments(String className, String methodName) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return method.getParameterCount() > 0;
                 }
@@ -322,9 +516,16 @@ public class ReflectionUtils {
         return false;
     }
 
-    public boolean hasMethodArgumentsSuperClass(Object object, String methodName) {
+    public boolean hasMethodArgumentsSuperClass(String className, String methodName) {
+        Class<?> cls = null;
         try {
-            for (Method method : object.getClass().getSuperclass().getDeclaredMethods()) {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            assert cls != null;
+            for (Method method : cls.getSuperclass().getDeclaredMethods()) {
                 if (method.getName() == methodName) {
                     return method.getParameterCount() > 0;
                 }
@@ -335,8 +536,14 @@ public class ReflectionUtils {
         return false;
     }
 
-    public void setField(Object object, String fieldName, Object data) {
-        Field field = getField(object, fieldName);
+    public void setField(String className, Object object, String fieldName, Object data) {
+        Class<?> cls = null;
+        try {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Field field = getField(className, fieldName);
         if (field == null) {
             new Utils().getLogger().log(Level.SEVERE, "No Field Found!");
             return;
@@ -349,11 +556,17 @@ public class ReflectionUtils {
         }
     }
 
-    public void setFieldSuperClass(Object object, String fieldName, Object data) {
-        Field field = getFieldSuperClass(object, fieldName);
+    public void setFieldSuperClass(String className, Object object, String fieldName, Object data) {
+        Field field = getFieldSuperClass(className, fieldName);
         if (field == null) {
             new Utils().getLogger().log(Level.SEVERE, "No Field Found!");
             return;
+        }
+        Class<?> cls = null;
+        try {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         try {
             field.setAccessible(true);
@@ -363,11 +576,17 @@ public class ReflectionUtils {
         }
     }
 
-    public Object getFieldValue(Object object, String fieldName) {
-        Field field = getField(object, fieldName);
+    public Object getFieldValue(String className, Object object, String fieldName) {
+        Field field = getField(className, fieldName);
         if (field == null) {
             new Utils().getLogger().log(Level.SEVERE, "No Field Found!");
             return null;
+        }
+        Class<?> cls = null;
+        try {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         try {
             field.setAccessible(true);
@@ -378,11 +597,17 @@ public class ReflectionUtils {
         return null;
     }
 
-    public Object getFieldValueSuperClass(Object object, String fieldName) {
-        Field field = getFieldSuperClass(object, fieldName);
+    public Object getFieldValueSuperClass(String className, Object object, String fieldName) {
+        Field field = getFieldSuperClass(className, fieldName);
         if (field == null) {
             new Utils().getLogger().log(Level.SEVERE, "No Field Found!");
             return null;
+        }
+        Class<?> cls = null;
+        try {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         try {
             field.setAccessible(true);
@@ -393,8 +618,8 @@ public class ReflectionUtils {
         return null;
     }
 
-    public Type getFieldType(Object object, String fieldName) {
-        Field field = getField(object, fieldName);
+    public Type getFieldType(String className, String fieldName) {
+        Field field = getField(className, fieldName);
         if (field == null) {
             new Utils().getLogger().log(Level.SEVERE, "No Field Found!");
             return null;
@@ -403,8 +628,8 @@ public class ReflectionUtils {
         return field.getType();
     }
 
-    public Type getFieldTypeSuperClass(Object object, String fieldName) {
-        Field field = getFieldSuperClass(object, fieldName);
+    public Type getFieldTypeSuperClass(String className, String fieldName) {
+        Field field = getFieldSuperClass(className, fieldName);
         if (field == null) {
             new Utils().getLogger().log(Level.SEVERE, "No Field Found!");
             return null;
