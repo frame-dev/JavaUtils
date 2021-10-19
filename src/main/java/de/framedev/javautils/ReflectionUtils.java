@@ -1,10 +1,7 @@
 package de.framedev.javautils;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
@@ -50,7 +47,7 @@ public class ReflectionUtils {
             e.printStackTrace();
         }
         assert cls != null;
-        if(cls.isEnum()) {
+        if (cls.isEnum()) {
             return cls.getEnumConstants();
         }
         return null;
@@ -355,6 +352,7 @@ public class ReflectionUtils {
         }
         return null;
     }
+
     //
     public Object runMethodSupClass(String className, Object object, String methodName, Object... args) {
         Class<?> cls = null;
@@ -636,5 +634,43 @@ public class ReflectionUtils {
         }
         field.setAccessible(true);
         return field.getType();
+    }
+
+    public Object newInstance(String className, List<Object> objects, boolean accessible, Class<?>... params) {
+        Object object = null;
+        try {
+            Object[] objs = objects.toArray();
+            Class<?> cls = Class.forName(className);
+            Constructor<?> constructor = cls.getDeclaredConstructor(params);
+            constructor.setAccessible(accessible);
+            object = constructor.newInstance(objs);
+        } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+
+    public Object newInstance(String className, List<Object> objects, Class<?>... params) {
+        Object object = null;
+        try {
+            Object[] objs = objects.toArray();
+            Class<?> cls = Class.forName(className);
+            Constructor<?> constructor = cls.getDeclaredConstructor(params);
+            object = constructor.newInstance(objs);
+        } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+
+    public Constructor<?>[] getConstructors(String className) {
+        Constructor<?>[] object = null;
+        try {
+            Class<?> cls = Class.forName(className);
+            object = cls.getDeclaredConstructors();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return object;
     }
 }

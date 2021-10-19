@@ -13,3 +13,4 @@ JavaUtils
 /JavaUtils.iml
 *.iml
 .project
+.classpath

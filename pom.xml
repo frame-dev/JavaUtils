@@ -6,7 +6,7 @@
 
     <groupId>de.framedev</groupId>
     <artifactId>JavaUtils</artifactId>
-    <version>1.6.7.5-RELEASE</version>
+    <version>1.6.8.5-RELEASE</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -93,6 +93,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-configuration2</artifactId>
             <version>2.7</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.5.2</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

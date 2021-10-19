@@ -7,6 +7,11 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.CSVWriterBuilder;
+import com.opencsv.ICSVWriter;
+import com.opencsv.exceptions.CsvException;
 import org.jetbrains.annotations.NotNull;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
@@ -840,7 +845,7 @@ public class Utils {
     }
 
     /**
-     * Get the Default Values of an Yaml File
+     * Get the Default Values of a Yaml File
      *
      * @param fileName the FileName
      * @param class_   Main Class
@@ -856,5 +861,27 @@ public class Utils {
             e.printStackTrace();
         }
         return data;
+    }
+
+    public void writeCsvFile(String fileName, List<String[]> rows, List<String[]> objects) throws IOException {
+        ICSVWriter csvWriter = new CSVWriterBuilder(new FileWriter(fileName + ".csv")).withSeparator(',').build();
+        csvWriter.writeAll(rows);
+        csvWriter.writeAll(objects);
+        csvWriter.flush();
+        csvWriter.close();
+    }
+
+    public List<String[]> getDataFromCSVFile(String fileName, List<String[]> rows) throws IOException, CsvException {
+        CSVReader csvReader = new CSVReaderBuilder(new FileReader(fileName + ".csv")).build();
+        List<String[]> data = csvReader.readAll();
+        csvReader.close();
+        List<String[]> updated = new ArrayList<>(data);
+        for (String[] d : data) {
+            for (int i = 0; i < rows.size(); i++) {
+                if (d[i].equalsIgnoreCase(rows.get(0)[i]))
+                    updated.remove(d);
+            }
+        }
+        return updated;
     }
 }
