@@ -13,10 +13,10 @@ public class MySQL {
     public static String database;
     public static String port;
     public static Connection con;
-    private JsonConnection jsonConnection;
+    private static JsonConnection jsonConnection;
 
-    public void setJsonConnection(JsonConnection jsonConnection) {
-        this.jsonConnection = jsonConnection;
+    public static void setJsonConnection(JsonConnection jsonConnection) {
+        MySQL.jsonConnection = jsonConnection;
     }
 
     public JsonConnection getJsonConnection() {
@@ -24,7 +24,7 @@ public class MySQL {
     }
 
     public MySQL(JsonConnection jsonConnection) {
-        this.jsonConnection = jsonConnection;
+        MySQL.jsonConnection = jsonConnection;
         host = jsonConnection.getHost();
         user = jsonConnection.getUser();
         password = jsonConnection.getPassword();

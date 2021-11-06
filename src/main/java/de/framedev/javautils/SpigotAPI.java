@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.jetbrains.annotations.NotNull;
@@ -109,12 +110,12 @@ public class SpigotAPI implements APIs {
         }
     }
 
-    public ShapedRecipe createShapedRecipe(ItemStack result) {
-        return new ShapedRecipe(NamespacedKey.minecraft(result.getType().name().toLowerCase()), result);
+    public ShapedRecipe createShapedRecipe(JavaPlugin plugin, String nameSpace, ItemStack result) {
+        return new ShapedRecipe(new NamespacedKey(plugin, nameSpace + "_" + result.getType().name().toLowerCase()), result);
     }
 
-    public ShapelessRecipe createShapelessRecipe(ItemStack result) {
-        return new ShapelessRecipe(NamespacedKey.minecraft(result.getType().name().toLowerCase()), result);
+    public ShapelessRecipe createShapelessRecipe(JavaPlugin plugin,String nameSpace, ItemStack result) {
+        return new ShapelessRecipe(new NamespacedKey(plugin, nameSpace + "_" + result.getType().name().toLowerCase()), result);
     }
 
     /**

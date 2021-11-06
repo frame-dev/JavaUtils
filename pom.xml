@@ -6,7 +6,7 @@
 
     <groupId>de.framedev</groupId>
     <artifactId>JavaUtils</artifactId>
-    <version>1.6.8.5-RELEASE</version>
+    <version>1.6.9.3-RELEASE</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -101,6 +101,19 @@
             <version>5.5.2</version>
             <scope>compile</scope>
         </dependency>
+        <!-- MySQL SQLite -->
+        <!--<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.27</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.36.0.3</version>
+            <scope>compile</scope>
+        </dependency>-->
     </dependencies>
 
     <distributionManagement>

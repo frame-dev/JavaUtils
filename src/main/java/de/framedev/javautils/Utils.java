@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 
 /**
  * Utils Class for the JavaUtils Jar
- * This Class contains much Methods
+ * This Class contains many Methods
  * This Plugin was Created by FrameDev
  * Package : de.framedev.javautils
  * ClassName Utils
@@ -290,24 +290,6 @@ public class Utils {
         return false;
     }
 
-    /**
-     * Return an Object from a File with the extension .xml
-     *
-     * @param file the selected File for getting the Object with the extension .xml
-     * @return return the Object from the File
-     */
-    public Object getObjectFromXml(File file) {
-        if (file.exists()) {
-            Serializer mapper = new Persister();
-            try {
-                return mapper.read(Object.class, file);
-            } catch (Exception ignored) {
-
-            }
-        }
-        return null;
-    }
-
     public <T> T getObjectFromClassXml(File file, Class<T> class_) {
         if (file.exists()) {
             Serializer mapper = new Persister();
@@ -529,7 +511,7 @@ public class Utils {
      * @param object the Object to ecncode to Base64
      * @return returns the encoded Base64 Byte Array
      */
-    public String objectToBase64(Object object) {
+    public <T> String objectToBase64(T object) {
         try {
             ByteArrayOutputStream is = new ByteArrayOutputStream();
             ObjectOutputStream os = new ObjectOutputStream(is);
@@ -549,11 +531,11 @@ public class Utils {
      * @param base the encoded Base64
      * @return returns the decoded Object
      */
-    public Object objectFromBase64(String base) {
+    public <T> T objectFromBase64(String base) {
         try {
             ByteArrayInputStream is = new ByteArrayInputStream(Base64.getDecoder().decode(base));
             ObjectInputStream os = new ObjectInputStream(is);
-            return os.readObject();
+            return (T) os.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -834,6 +816,8 @@ public class Utils {
         }
     }
 
+
+
     /**
      * Check if a File is existing
      *
@@ -842,6 +826,11 @@ public class Utils {
      */
     public boolean existFile(String fileName) {
         return new File(fileName).exists();
+    }
+
+    public boolean existFile(File file) {
+        if(file == null) return false;
+        return file.exists();
     }
 
     /**
@@ -863,16 +852,16 @@ public class Utils {
         return data;
     }
 
-    public void writeCsvFile(String fileName, List<String[]> rows, List<String[]> objects) throws IOException {
-        ICSVWriter csvWriter = new CSVWriterBuilder(new FileWriter(fileName + ".csv")).withSeparator(',').build();
+    public void writeCsvFile(File file, List<String[]> rows, List<String[]> objects) throws IOException {
+        ICSVWriter csvWriter = new CSVWriterBuilder(new FileWriter(file)).withSeparator(',').build();
         csvWriter.writeAll(rows);
         csvWriter.writeAll(objects);
         csvWriter.flush();
         csvWriter.close();
     }
 
-    public List<String[]> getDataFromCSVFile(String fileName, List<String[]> rows) throws IOException, CsvException {
-        CSVReader csvReader = new CSVReaderBuilder(new FileReader(fileName + ".csv")).build();
+    public List<String[]> getDataFromCSVFile(File file, List<String[]> rows) throws IOException, CsvException {
+        CSVReader csvReader = new CSVReaderBuilder(new FileReader(file)).build();
         List<String[]> data = csvReader.readAll();
         csvReader.close();
         List<String[]> updated = new ArrayList<>(data);
@@ -883,5 +872,27 @@ public class Utils {
             }
         }
         return updated;
+    }
+
+    public <T> void saveObjectToBase64File(File file, T object) {
+        try {
+            FileWriter writer = new FileWriter(file);
+            writer.write(objectToBase64(object));
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public <T> T getObjectFromBase64File(File file) {
+        T object = null;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            object = objectFromBase64(reader.readLine());
+        } catch (Exception ignored) {
+
+        }
+        return object;
     }
 }

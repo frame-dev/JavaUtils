@@ -93,6 +93,44 @@ public class ReflectionUtils {
         return null;
     }
 
+    public boolean hasConstructorAnnotation(Constructor<?> constructor, Class<? extends Annotation> class__) {
+        return constructor.getAnnotation(class__) != null;
+    }
+
+    public boolean hasClassAnnotation(String className, Class<? extends Annotation> class__) {
+        Class<?> cls = null;
+        try {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            assert cls != null;
+            return cls.getDeclaredAnnotation(class__) != null;
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean hasClassAnnotationSuperClass(String className, Class<? extends Annotation> class__) {
+        Class<?> cls = null;
+        try {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            assert cls != null;
+            return cls.getSuperclass().getDeclaredAnnotation(class__) != null;
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public boolean hasFieldAnnotation(String className, String fieldName, Class<? extends Annotation> class__) {
         Class<?> cls = null;
         try {
@@ -636,10 +674,10 @@ public class ReflectionUtils {
         return field.getType();
     }
 
-    public Object newInstance(String className, List<Object> objects, boolean accessible, Class<?>... params) {
+    public Object newInstance(String className, List<Object> paramsObjects, boolean accessible, Class<?>... params) {
         Object object = null;
         try {
-            Object[] objs = objects.toArray();
+            Object[] objs = paramsObjects.toArray();
             Class<?> cls = Class.forName(className);
             Constructor<?> constructor = cls.getDeclaredConstructor(params);
             constructor.setAccessible(accessible);
@@ -650,13 +688,25 @@ public class ReflectionUtils {
         return object;
     }
 
-    public Object newInstance(String className, List<Object> objects, Class<?>... params) {
+    public Object newInstance(String className, List<Object> paramsObjects, Class<?>... params) {
         Object object = null;
         try {
-            Object[] objs = objects.toArray();
+            Object[] objs = paramsObjects.toArray();
             Class<?> cls = Class.forName(className);
             Constructor<?> constructor = cls.getDeclaredConstructor(params);
             object = constructor.newInstance(objs);
+        } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+
+    public Object newInstance(String className) {
+        Object object = null;
+        try {
+            Class<?> cls = Class.forName(className);
+            Constructor<?> constructor = cls.getDeclaredConstructor();
+            object = constructor.newInstance();
         } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
         }
@@ -669,6 +719,28 @@ public class ReflectionUtils {
             Class<?> cls = Class.forName(className);
             object = cls.getDeclaredConstructors();
         } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+
+    public Constructor<?> getConstructor(String className, Class<?>... params) {
+        Constructor<?> object = null;
+        try {
+            Class<?> cls = Class.forName(className);
+            object = cls.getDeclaredConstructor(params);
+        } catch (ClassNotFoundException | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+
+    public Constructor<?> getConstructor(String className) {
+        Constructor<?> object = null;
+        try {
+            Class<?> cls = Class.forName(className);
+            object = cls.getDeclaredConstructor();
+        } catch (ClassNotFoundException | NoSuchMethodException e) {
             e.printStackTrace();
         }
         return object;
