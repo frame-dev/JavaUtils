@@ -1,5 +1,6 @@
 package de.framedev.javautils.mysql;
 
+import java.io.File;
 import java.sql.*;
 
 /**
@@ -17,6 +18,8 @@ public class SQLite {
     private static String path;
 
     public SQLite(String path, String fileName) {
+        if (!new File(path).exists())
+            new File(path).mkdirs();
         SQLite.fileName = fileName;
         SQLite.path = path;
     }
@@ -24,6 +27,8 @@ public class SQLite {
     public SQLite(JsonConnection connection) {
         SQLite.fileName = connection.getFileName();
         SQLite.path = connection.getPath();
+        if (!new File(SQLite.path).exists())
+            new File(SQLite.path).mkdirs();
     }
 
     public static Connection connect() {

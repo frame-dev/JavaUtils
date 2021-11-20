@@ -52,6 +52,132 @@ public class Utils {
     }
 
     /**
+     * Class for Custom Generators with other Classes
+     */
+    public static class CustomGenerators {
+
+        /**
+         * @param min the Min Value inclusive
+         * @param max the Max Value inclusive
+         * @return a Random Integer
+         */
+        public int randomInt(int min, int max) {
+            return new IntRandomNumberGenerator(min, max).nextInt();
+        }
+
+        /**
+         * @param min the Min Value inclusive
+         * @param max the Max Value inclusive
+         * @return a Random Double
+         */
+        public double randomDouble(double min, double max) {
+            return new DoubleRandomNumberGenerator(min, max).nextDouble();
+        }
+
+        public static final class IntRandomNumberGenerator {
+
+            private PrimitiveIterator.OfInt randomIterator;
+
+            private int min;
+            private int max;
+
+            public IntRandomNumberGenerator() {
+            }
+
+            public IntRandomNumberGenerator setMin(int min) {
+                this.min = min;
+                return this;
+            }
+
+            public IntRandomNumberGenerator setMax(int max) {
+                this.max = max;
+                return this;
+            }
+
+            public int getMin() {
+                return min;
+            }
+
+            public int getMax() {
+                return max;
+            }
+
+            /**
+             * Initialize a new random number generator that generates as Integer
+             * random numbers in the range [min, max]
+             *
+             * @param min - the min value (inclusive)
+             * @param max - the max value (inclusive)
+             */
+            public IntRandomNumberGenerator(int min, int max) {
+                randomIterator = new Random().ints(min, max + 1).iterator();
+            }
+
+            /**
+             * Returns a random number in the range (min, max)
+             *
+             * @return a random number in the range (min, max)
+             */
+            public int nextInt() {
+                if (randomIterator == null)
+                    randomIterator = new Random().ints(min, max + 1).iterator();
+                return randomIterator.nextInt();
+            }
+        }
+
+        public static final class DoubleRandomNumberGenerator {
+
+            private PrimitiveIterator.OfDouble randomIterator;
+
+            private double min;
+            private double max;
+
+            public DoubleRandomNumberGenerator() {
+            }
+
+            public DoubleRandomNumberGenerator setMin(double min) {
+                this.min = min;
+                return this;
+            }
+
+            public DoubleRandomNumberGenerator setMax(double max) {
+                this.max = max;
+                return this;
+            }
+
+            public double getMax() {
+                return max;
+            }
+
+            public double getMin() {
+                return min;
+            }
+
+            /**
+             * Initialize a new random number generator that generates as Double
+             * random numbers in the range [min, max]
+             *
+             * @param min - the min value (inclusive)
+             * @param max - the max value (inclusive)
+             */
+            public DoubleRandomNumberGenerator(double min, double max) {
+                randomIterator = new Random().doubles(min, max + 1).iterator();
+            }
+
+            /**
+             * Returns a random number in the range (min, max)
+             *
+             * @return a random number in the range (min, max)
+             */
+            public double nextDouble() {
+                if (randomIterator == null)
+                    randomIterator = new Random().doubles(min, max + 1).iterator();
+                return randomIterator.nextDouble();
+            }
+        }
+    }
+
+    /**
      * Generator Class for a Custom Key
      */
     public static class PasswordGenerator {
@@ -59,12 +185,13 @@ public class Utils {
         private final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
         private final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
         private final String NUMBER = "0123456789";
+
         private final String OTHER_CHAR = "!@#$%&*()_+-=[]?";
 
         private final String STRING_ALLOW_BASE = CHAR_LOWER + CHAR_UPPER + NUMBER + OTHER_CHAR;
-
         // optional, make it more random
         private final String STRING_ALLOW_BASE_SHUFFLE = shuffleString(STRING_ALLOW_BASE);
+
         private final String STRING_ALLOW = STRING_ALLOW_BASE_SHUFFLE;
 
         private static final SecureRandom random = new SecureRandom();
@@ -95,6 +222,7 @@ public class Utils {
             Collections.shuffle(letters);
             return String.join("", letters);
         }
+
     }
 
     public String objectToJsonString(Object object) {
@@ -380,138 +508,12 @@ public class Utils {
     }
 
     /**
-     * Class for Custom Generators with other Classes
-     */
-    public static class CustomGenerators {
-
-        /**
-         * @param min the Min Value inclusive
-         * @param max the Max Value inclusive
-         * @return a Random Integer
-         */
-        public int randomInt(int min, int max) {
-            return new IntRandomNumberGenerator(min, max).nextInt();
-        }
-
-        /**
-         * @param min the Min Value inclusive
-         * @param max the Max Value inclusive
-         * @return a Random Double
-         */
-        public double randomDouble(double min, double max) {
-            return new DoubleRandomNumberGenerator(min, max).nextDouble();
-        }
-
-        public static final class IntRandomNumberGenerator {
-
-            private PrimitiveIterator.OfInt randomIterator;
-
-            private int min;
-            private int max;
-
-            public IntRandomNumberGenerator() {
-            }
-
-            public IntRandomNumberGenerator setMin(int min) {
-                this.min = min;
-                return this;
-            }
-
-            public IntRandomNumberGenerator setMax(int max) {
-                this.max = max;
-                return this;
-            }
-
-            public int getMin() {
-                return min;
-            }
-
-            public int getMax() {
-                return max;
-            }
-
-            /**
-             * Initialize a new random number generator that generates as Integer
-             * random numbers in the range [min, max]
-             *
-             * @param min - the min value (inclusive)
-             * @param max - the max value (inclusive)
-             */
-            public IntRandomNumberGenerator(int min, int max) {
-                randomIterator = new Random().ints(min, max + 1).iterator();
-            }
-
-            /**
-             * Returns a random number in the range (min, max)
-             *
-             * @return a random number in the range (min, max)
-             */
-            public int nextInt() {
-                if (randomIterator == null)
-                    randomIterator = new Random().ints(min, max + 1).iterator();
-                return randomIterator.nextInt();
-            }
-        }
-
-        public static final class DoubleRandomNumberGenerator {
-
-            private PrimitiveIterator.OfDouble randomIterator;
-
-            private double min;
-            private double max;
-
-            public DoubleRandomNumberGenerator() {
-            }
-
-            public DoubleRandomNumberGenerator setMin(double min) {
-                this.min = min;
-                return this;
-            }
-
-            public DoubleRandomNumberGenerator setMax(double max) {
-                this.max = max;
-                return this;
-            }
-
-            public double getMax() {
-                return max;
-            }
-
-            public double getMin() {
-                return min;
-            }
-
-            /**
-             * Initialize a new random number generator that generates as Double
-             * random numbers in the range [min, max]
-             *
-             * @param min - the min value (inclusive)
-             * @param max - the max value (inclusive)
-             */
-            public DoubleRandomNumberGenerator(double min, double max) {
-                randomIterator = new Random().doubles(min, max + 1).iterator();
-            }
-
-            /**
-             * Returns a random number in the range (min, max)
-             *
-             * @return a random number in the range (min, max)
-             */
-            public double nextDouble() {
-                if (randomIterator == null)
-                    randomIterator = new Random().doubles(min, max + 1).iterator();
-                return randomIterator.nextDouble();
-            }
-        }
-    }
-
-    /**
      * Create a String of a Base64 (encode)
      *
      * @param object the Object to ecncode to Base64
      * @return returns the encoded Base64 Byte Array
      */
-    public <T> String objectToBase64(T object) {
+    public <T extends Serializable> String objectToBase64(T object) {
         try {
             ByteArrayOutputStream is = new ByteArrayOutputStream();
             ObjectOutputStream os = new ObjectOutputStream(is);
@@ -642,6 +644,7 @@ public class Utils {
         if (!file.renameTo(new File(newLocation, fileNameWithExtensions))) {
             getLogger().log(Level.SEVERE, "File cannot be Renamed/Moved");
         }
+        getLogger().info("File Downloaded and Moved!");
     }
 
     public void download(String fileUrl, String location, String fileNameWithExtensions) {
@@ -682,6 +685,7 @@ public class Utils {
                 e.printStackTrace();
             }
         }
+        getLogger().info("File Downloaded!");
     }
 
     /**
@@ -817,7 +821,6 @@ public class Utils {
     }
 
 
-
     /**
      * Check if a File is existing
      *
@@ -829,7 +832,7 @@ public class Utils {
     }
 
     public boolean existFile(File file) {
-        if(file == null) return false;
+        if (file == null) return false;
         return file.exists();
     }
 
@@ -874,7 +877,7 @@ public class Utils {
         return updated;
     }
 
-    public <T> void saveObjectToBase64File(File file, T object) {
+    public <T extends Serializable> void saveObjectToBase64File(File file, T object) {
         try {
             FileWriter writer = new FileWriter(file);
             writer.write(objectToBase64(object));
@@ -894,5 +897,18 @@ public class Utils {
 
         }
         return object;
+    }
+
+    public void saveHashMapToJson(File file, HashMap<String, Object> objects) throws IOException {
+        saveJsonToFile(file, objects);
+    }
+
+    public HashMap<String, Object> getHashMapFromJsonFile(File file) {
+        // Type of HashMap
+        Type type = new TypeToken<HashMap<String, Object>>() {
+        }.getType();
+
+        // Return the HashMap from the File (can return null)
+        return getClassTypeFromYamlFile(file, type);
     }
 }

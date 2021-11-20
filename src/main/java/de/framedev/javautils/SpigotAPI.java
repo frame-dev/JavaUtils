@@ -19,10 +19,7 @@ import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.jetbrains.annotations.NotNull;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -42,7 +39,7 @@ public class SpigotAPI implements APIs {
      * @param object the Object for Serialization
      * @return return the Serialized Object
      */
-    public String objectToBase64(Object object) {
+    public <T extends Serializable> String objectToBase64(T object) {
         try {
             ByteArrayOutputStream is = new ByteArrayOutputStream();
             BukkitObjectOutputStream os = new BukkitObjectOutputStream(is);
@@ -71,6 +68,28 @@ public class SpigotAPI implements APIs {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public <T extends Serializable> void saveObjectToBase64File(File file, T object) {
+        try {
+            FileWriter writer = new FileWriter(file);
+            writer.write(objectToBase64(object));
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Object getObjectFromBase64File(File file) {
+        Object object = null;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            object = objectFromBase64(reader.readLine());
+        } catch (Exception ignored) {
+
+        }
+        return object;
     }
 
     /**
