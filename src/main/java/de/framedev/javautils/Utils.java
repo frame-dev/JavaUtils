@@ -27,14 +27,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Utils Class for the JavaUtils Jar
- * This Class contains many Methods
- * This Plugin was Created by FrameDev
- * Package : de.framedev.javautils
- * ClassName Utils
- * Date: 14.04.21
- * Project: JavaUtils
- * Copyrighted by FrameDev
+ * Utils Class for the JavaUtils Jar This Class contains many Methods This
+ * Plugin was Created by FrameDev Package : de.framedev.javautils ClassName
+ * Utils Date: 14.04.21 Project: JavaUtils Copyrighted by FrameDev
  */
 
 public class Utils {
@@ -103,8 +98,8 @@ public class Utils {
             }
 
             /**
-             * Initialize a new random number generator that generates as Integer
-             * random numbers in the range [min, max]
+             * Initialize a new random number generator that generates as Integer random
+             * numbers in the range [min, max]
              *
              * @param min - the min value (inclusive)
              * @param max - the max value (inclusive)
@@ -154,8 +149,8 @@ public class Utils {
             }
 
             /**
-             * Initialize a new random number generator that generates as Double
-             * random numbers in the range [min, max]
+             * Initialize a new random number generator that generates as Double random
+             * numbers in the range [min, max]
              *
              * @param min - the min value (inclusive)
              * @param max - the max value (inclusive)
@@ -430,7 +425,6 @@ public class Utils {
         return null;
     }
 
-
     /**
      * Please add to the File the extension .json
      *
@@ -533,6 +527,7 @@ public class Utils {
      * @param base the encoded Base64
      * @return returns the decoded Object
      */
+    @SuppressWarnings("unchecked")
     public <T> T objectFromBase64(String base) {
         try {
             ByteArrayInputStream is = new ByteArrayInputStream(Base64.getDecoder().decode(base));
@@ -576,8 +571,10 @@ public class Utils {
      * @return return an Array of split Strings
      */
     public String[] stringSplitter(String text, @NotNull String regex) {
-        if (text == null) return null;
-        if (!text.contains(regex)) return null;
+        if (text == null)
+            return null;
+        if (!text.contains(regex))
+            return null;
         return text.split(regex);
     }
 
@@ -593,7 +590,8 @@ public class Utils {
     }
 
     public double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
+        if (places < 0)
+            throw new IllegalArgumentException();
 
         BigDecimal bd = BigDecimal.valueOf(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
@@ -638,8 +636,8 @@ public class Utils {
                 e.printStackTrace();
             }
         }
-        if (new File(newLocation, fileNameWithExtensions).getParentFile() != null &&
-                !new File(newLocation, fileNameWithExtensions).getParentFile().exists())
+        if (new File(newLocation, fileNameWithExtensions).getParentFile() != null
+                && !new File(newLocation, fileNameWithExtensions).getParentFile().exists())
             new File(newLocation, fileNameWithExtensions).getParentFile().mkdirs();
         if (!file.renameTo(new File(newLocation, fileNameWithExtensions))) {
             getLogger().log(Level.SEVERE, "File cannot be Renamed/Moved");
@@ -782,23 +780,29 @@ public class Utils {
         if (in == null) {
             return null;
         }
-
+        FileOutputStream out = null;
         try {
             File f = File.createTempFile(String.valueOf(in.hashCode()), ".tmp");
             f.deleteOnExit();
 
-            FileOutputStream out = new FileOutputStream(f);
+            out = new FileOutputStream(f);
             byte[] buffer = new byte[1024];
 
             int bytesRead;
             while ((bytesRead = in.read(buffer)) != -1) {
                 out.write(buffer, 0, bytesRead);
             }
-
             return f;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+        } finally {
+            if (out != null)
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
         }
     }
 
@@ -820,7 +824,6 @@ public class Utils {
         }
     }
 
-
     /**
      * Check if a File is existing
      *
@@ -832,7 +835,8 @@ public class Utils {
     }
 
     public boolean existFile(File file) {
-        if (file == null) return false;
+        if (file == null)
+            return false;
         return file.exists();
     }
 
@@ -890,11 +894,19 @@ public class Utils {
 
     public <T> T getObjectFromBase64File(File file) {
         T object = null;
+        BufferedReader reader = null;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            reader = new BufferedReader(new FileReader(file));
             object = objectFromBase64(reader.readLine());
         } catch (Exception ignored) {
 
+        } finally {
+            try {
+                if (reader != null)
+                    reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return object;
     }

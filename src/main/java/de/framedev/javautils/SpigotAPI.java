@@ -83,11 +83,20 @@ public class SpigotAPI implements APIs {
 
     public Object getObjectFromBase64File(File file) {
         Object object = null;
+        BufferedReader reader = null;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            reader = new BufferedReader(new FileReader(file));
             object = objectFromBase64(reader.readLine());
         } catch (Exception ignored) {
 
+        } finally {
+            if(reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
         return object;
     }
@@ -103,7 +112,7 @@ public class SpigotAPI implements APIs {
     }
 
     /**
-     * Get an ItemStack from an String
+     * Get an ItemStack from a String
      *
      * @param item the String Item
      * @return return the ItemStack if not Null

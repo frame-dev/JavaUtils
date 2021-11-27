@@ -109,6 +109,7 @@ public class YamlConfigurator {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     public List<String> getStringList(String path) {
         data = getConfig(file);
         if (data.containsKey(path))
@@ -117,6 +118,7 @@ public class YamlConfigurator {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     public List<Object> getList(String path) {
         data = getConfig(file);
         if (data.containsKey(path))
