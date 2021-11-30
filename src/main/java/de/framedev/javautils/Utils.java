@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -228,6 +229,15 @@ public class Utils {
         return new Gson().fromJson(json, Object.class);
     }
 
+    /**
+     * Decode a Json String to Java Object
+     * Also can you use {@link #saveJsonToFile(File, Object)}
+     *
+     * @param json   the Json String for Decoding
+     * @param class_ the Selected Class (Person.class)
+     * @param <T>    Return an Object of the Selected Class without any Casting
+     * @return reuturn an Object without any Casting but can throw an Exception take a look at {@link JsonSyntaxException}
+     */
     public <T> T classFromJsonString(String json, Class<T> class_) {
         return new Gson().fromJson(json, class_);
     }
@@ -250,6 +260,15 @@ public class Utils {
         return null;
     }
 
+    /**
+     * Decode Yaml String to JavaObject
+     * Also can you use {@link #saveYamlToFile(File, Object)}
+     *
+     * @param yaml   Yaml String
+     * @param class_ Class for Decoding (Person.class)
+     * @param <T>    Selected Class for returning as Object
+     * @return return Selected Object require no Cast
+     */
     public <T> T classFromYamlString(String yaml, Class<T> class_) {
         try {
             return new YAMLMapper().readValue(yaml, class_);
@@ -280,6 +299,16 @@ public class Utils {
         return null;
     }
 
+    /**
+     * Use this for Decoding Xml String to the Selected Java Object
+     * You can also use for save an Object {@link #saveXmlToFile(File, Object)}
+     * or for getting an Object {@link #getObjectFromClassXml(File, Class)}
+     *
+     * @param xml    Xml String for Decoding
+     * @param class_ Selected Class (Person.class)
+     * @param <T>    Require to return an Object of the Selected Class
+     * @return Return Java Object with the selected JavaObject without Casting can throw Exception {@link Serializer#read(Class, File)}
+     */
     public <T> T classFromXmlString(String xml, Class<T> class_) {
         Serializer serializer = new Persister();
         try {
@@ -729,7 +758,7 @@ public class Utils {
      */
     public String getUserDir() {
         String os = System.getProperty("os.name").toLowerCase();
-        String userDir = "";
+        String userDir;
         if (os.contains("mac")) {
             userDir = System.getProperty("user.dir") + "/";
         } else if (os.contains("windows")) {
@@ -747,7 +776,7 @@ public class Utils {
      */
     public String getUserAppData() {
         String os = getOs();
-        String userData = "";
+        String userData;
         if (os.contains("mac")) {
             userData = System.getProperty("user.home") + "/Library/Application Support/";
         } else if (os.contains("windows")) {
@@ -782,6 +811,7 @@ public class Utils {
         }
         FileOutputStream out = null;
         try {
+            // Create a Temp File
             File f = File.createTempFile(String.valueOf(in.hashCode()), ".tmp");
             f.deleteOnExit();
 
@@ -792,6 +822,7 @@ public class Utils {
             while ((bytesRead = in.read(buffer)) != -1) {
                 out.write(buffer, 0, bytesRead);
             }
+            // Return the Temp File
             return f;
         } catch (IOException e) {
             e.printStackTrace();
@@ -809,7 +840,7 @@ public class Utils {
     public File getFromResourceFile(String file) {
         InputStream resource = this.getClass().getClassLoader().getResourceAsStream(file);
         if (resource == null) {
-            throw new IllegalArgumentException("file not found!");
+            throw new IllegalArgumentException("File not found!");
         } else {
             return streamToFile(resource);
         }
@@ -818,7 +849,7 @@ public class Utils {
     public File getFromResourceFile(String file, Class<?> class_) {
         InputStream resource = class_.getClassLoader().getResourceAsStream(file);
         if (resource == null) {
-            throw new IllegalArgumentException("file not found!");
+            throw new IllegalArgumentException("File not found!");
         } else {
             return streamToFile(resource);
         }
