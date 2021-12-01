@@ -8,10 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
-import com.opencsv.CSVWriterBuilder;
-import com.opencsv.ICSVWriter;
+import com.opencsv.*;
 import com.opencsv.exceptions.CsvException;
 import org.jetbrains.annotations.NotNull;
 import org.simpleframework.xml.Serializer;
@@ -893,19 +890,56 @@ public class Utils {
     public void writeCsvFile(File file, List<String[]> rows, List<String[]> objects) throws IOException {
         ICSVWriter csvWriter = new CSVWriterBuilder(new FileWriter(file)).withSeparator(',').build();
         csvWriter.writeAll(rows);
-        csvWriter.writeAll(objects);
+        List<String[]> updated = new ArrayList<>(objects);
+        for(String[] d : objects) {
+            for (int i = 0; i < rows.size(); i++) {
+                if(d != null && d[i] != null) {
+                    if (d[i].equalsIgnoreCase(rows.get(0)[i]))
+                        updated.remove(d);
+                    if (d[i] == null)
+                        updated.remove(d);
+                    if (d[i].equalsIgnoreCase("") || d[i].isEmpty())
+                        updated.remove(d);
+                }
+            }
+        }
+        csvWriter.writeAll(updated);
         csvWriter.flush();
         csvWriter.close();
     }
 
     public List<String[]> getDataFromCSVFile(File file, List<String[]> rows) throws IOException, CsvException {
-        CSVReader csvReader = new CSVReaderBuilder(new FileReader(file)).build();
+        CSVParser parser = new CSVParserBuilder().withSeparator(',').build();
+        CSVReader csvReader = new CSVReaderBuilder(new FileReader(file)).withCSVParser(parser).build();
         List<String[]> data = csvReader.readAll();
         csvReader.close();
         List<String[]> updated = new ArrayList<>(data);
         for (String[] d : data) {
             for (int i = 0; i < rows.size(); i++) {
                 if (d[i].equalsIgnoreCase(rows.get(0)[i]))
+                    updated.remove(d);
+                if (d[i] == null)
+                    updated.remove(d);
+                if (d[i].equalsIgnoreCase("") || d[i].isEmpty())
+                    updated.remove(d);
+            }
+        }
+        return updated;
+    }
+
+    public List<String[]> getDataFromCSVFile(File file, String[] rows) throws IOException, CsvException {
+        CSVParser parser = new CSVParserBuilder().withSeparator(',').build();
+        CSVReader csvReader = new CSVReaderBuilder(new FileReader(file)).withCSVParser(parser).build();
+        List<String[]> data = csvReader.readAll();
+        csvReader.close();
+        List<String[]> updated = new ArrayList<>(data);
+        for (String[] d : data) {
+            for (int i = 0; i < rows.length; i++) {
+                if (d[i].equalsIgnoreCase(rows[i]))
+                    updated.remove(d);
+                if (d[i] == null)
+                    updated.remove(d);
+                if (d[i].equalsIgnoreCase("") || d[i].isEmpty())
                     updated.remove(d);
             }
         }
@@ -953,5 +987,9 @@ public class Utils {
 
         // Return the HashMap from the File (can return null)
         return getClassTypeFromYamlFile(file, type);
+    }
+
+    public void createCsvFile(File file, String[] rows, List<String[]> data) throws IOException {
+        writeCsvFile(file, Collections.singletonList(rows), data);
     }
 }
