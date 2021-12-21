@@ -10,7 +10,6 @@ package de.framedev.javautils;
  */
 
 import com.google.gson.Gson;
-import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.InsertOneOptions;
@@ -176,7 +175,7 @@ public class BackendMongoDBManager {
         if (existsCollection(collection)) {
             MongoCollection<Document> collections = this.mongoDBManager.getDatabase().getCollection(collection);
             FindIterable<Document> find = collections.find();
-            Iterator it = find.iterator();
+            Iterator<Document> it = find.iterator();
             while (it.hasNext()) {
                 list.add((Document) it.next());
             }

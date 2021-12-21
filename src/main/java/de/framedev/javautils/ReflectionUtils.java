@@ -573,12 +573,6 @@ public class ReflectionUtils {
     }
 
     public void setField(String className, Object object, String fieldName, Object data) {
-        Class<?> cls = null;
-        try {
-            cls = Class.forName(className);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
         Field field = getField(className, fieldName);
         if (field == null) {
             new Utils().getLogger().log(Level.SEVERE, "No Field Found!");
@@ -598,12 +592,6 @@ public class ReflectionUtils {
             new Utils().getLogger().log(Level.SEVERE, "No Field Found!");
             return;
         }
-        Class<?> cls = null;
-        try {
-            cls = Class.forName(className);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
         try {
             field.setAccessible(true);
             field.set(object, data);
@@ -617,12 +605,6 @@ public class ReflectionUtils {
         if (field == null) {
             new Utils().getLogger().log(Level.SEVERE, "No Field Found!");
             return null;
-        }
-        Class<?> cls = null;
-        try {
-            cls = Class.forName(className);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
         try {
             field.setAccessible(true);
@@ -638,12 +620,6 @@ public class ReflectionUtils {
         if (field == null) {
             new Utils().getLogger().log(Level.SEVERE, "No Field Found!");
             return null;
-        }
-        Class<?> cls = null;
-        try {
-            cls = Class.forName(className);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
         try {
             field.setAccessible(true);

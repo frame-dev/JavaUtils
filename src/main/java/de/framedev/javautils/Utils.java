@@ -19,6 +19,8 @@ import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.logging.Level;
@@ -668,7 +670,6 @@ public class Utils {
         if (!file.renameTo(new File(newLocation, fileNameWithExtensions))) {
             getLogger().log(Level.SEVERE, "File cannot be Renamed/Moved");
         }
-        getLogger().info("File Downloaded and Moved!");
     }
 
     public void download(String fileUrl, String location, String fileNameWithExtensions) {
@@ -709,7 +710,6 @@ public class Utils {
                 e.printStackTrace();
             }
         }
-        getLogger().info("File Downloaded!");
     }
 
     /**
@@ -891,9 +891,9 @@ public class Utils {
         ICSVWriter csvWriter = new CSVWriterBuilder(new FileWriter(file)).withSeparator(',').build();
         csvWriter.writeAll(rows);
         List<String[]> updated = new ArrayList<>(objects);
-        for(String[] d : objects) {
+        for (String[] d : objects) {
             for (int i = 0; i < rows.size(); i++) {
-                if(d != null && d[i] != null) {
+                if (d != null && d[i] != null) {
                     if (d[i].equalsIgnoreCase(rows.get(0)[i]))
                         updated.remove(d);
                     if (d[i] == null)
@@ -991,5 +991,13 @@ public class Utils {
 
     public void createCsvFile(File file, String[] rows, List<String[]> data) throws IOException {
         writeCsvFile(file, Collections.singletonList(rows), data);
+    }
+
+    public void copyFileTo(File source, File target) throws IOException {
+        Files.copy(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    public void moveFileTo(File source, File target) throws IOException {
+        Files.move(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 }

@@ -1,6 +1,5 @@
 package de.framedev.javautils;
 
-import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
@@ -12,7 +11,7 @@ import java.util.LinkedList;
  * / Copyrighted by FrameDev
  */
 
-public class FrameList<T> extends LinkedList<T> implements Serializable {
+public class FrameList<T> extends LinkedList<T> {
 
     /**
      * Replace Data in the List
