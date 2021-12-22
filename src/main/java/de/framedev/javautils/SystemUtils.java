@@ -94,13 +94,11 @@ public class SystemUtils {
     }
 
     public String getDriveDescription(File file) {
-        FileSystemView fsv = FileSystemView.getFileSystemView();
-        return fsv.getSystemTypeDescription(file);
+        return FileSystemView.getFileSystemView().getSystemTypeDescription(file);
     }
 
     public boolean isDrive(File file) {
-        FileSystemView fsv = FileSystemView.getFileSystemView();
-        return fsv.isDrive(file);
+        return FileSystemView.getFileSystemView().isDrive(file);
     }
 
     public double getAllTotalDiskSpace() {
