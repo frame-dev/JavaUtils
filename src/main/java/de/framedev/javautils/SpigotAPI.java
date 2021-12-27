@@ -82,8 +82,8 @@ public class SpigotAPI implements APIs {
         }
     }
 
-    public Object getObjectFromBase64File(File file) {
-        Object object = null;
+    public <T extends Serializable> T getObjectFromBase64File(File file) {
+        T object = null;
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader(file));
@@ -103,7 +103,7 @@ public class SpigotAPI implements APIs {
     }
 
     /**
-     * Convert an Material to an ItemStack
+     * Convert a Material to an ItemStack
      *
      * @param material the Material for converting to an ItemStack
      * @return returns the Converted ItemStack
@@ -214,7 +214,7 @@ public class SpigotAPI implements APIs {
          * @return return the Created BossBar
          */
         public BossBar createBossBar() {
-            BossBar bossBar = null;
+            BossBar bossBar;
             if (barFlags == null)
                 bossBar = Bukkit.createBossBar(title, barColor, barStyle);
             bossBar = Bukkit.createBossBar(title, barColor, barStyle, barFlags);
@@ -252,6 +252,7 @@ public class SpigotAPI implements APIs {
          */
         public static void removeBossBars() {
             bossBars.forEach(bossBar -> {
+                bossBar.getPlayers().clear();
                 bossBar.setVisible(false);
             });
             bossBars.clear();
