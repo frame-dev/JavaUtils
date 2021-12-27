@@ -59,11 +59,12 @@ public class SpigotAPI implements APIs {
      * @param base the encoded Base64 String
      * @return return the Object of Base64
      */
-    public Object objectFromBase64(String base) {
+    @SuppressWarnings("unchecked")
+    public <T extends Serializable> T objectFromBase64(String base) {
         try {
             ByteArrayInputStream is = new ByteArrayInputStream(Base64Coder.decodeLines(base));
             BukkitObjectInputStream os = new BukkitObjectInputStream(is);
-            return os.readObject();
+            return (T) os.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
