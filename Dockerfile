@@ -1,27 +1,28 @@
 FROM ubuntu:latest
 RUN apt update
-RUN DEBIAN_FRONTEND="noninteractive" TZ="Europe/Zurich" apt install nano wget maven git screen openssh-server -y
+RUN DEBIAN_FRONTEND="noninteractive" TZ="Europe/Zurich" apt install nano wget maven git screen openssh-server openjdk-16-jdk curl -y
 RUN echo 'root:Inside71' | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 EXPOSE 22
+ENV JAVA_HOME /usr/lib/jvm/java-16-openjdk-amd64
 CMD ["/usr/sbin/sshd", "-D"]
 RUN mkdir /javautils
 COPY . /javautils
 WORKDIR /javautils
-RUN mvn clean package
+# RUN mvn clean package
 
-CMD "java" "-jar" "/javautils/target/JavaUtils-1.6.5.8.1-RELEASE.jar"
+# CMD "java" "-jar" "/javautils/target/JavaUtils-1.8.2-RELEASE.jar"
 
-RUN mkdir Developer
-RUN mkdir minecraft
-WORKDIR /Developer
-RUN wget https://framedev.ch/downloads/bash_debian.sh
-RUN ls
-WORKDIR minecraft
-RUN mkdir Server
-WORKDIR /minecraft/Server
+RUN curl -z BuildTools.jar -o BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+RUN java -jar BuildTools.jar --rev 1.17.1
+RUN wget https://framedev.ch/downloads/EssentialsMini-Latest.jar
+
+RUN mkdir plugins
+RUN mv EssentialsMini-Latest.jar plugins/EssentialsMini.jar
+
 CMD "touch" "eula.txt"
-RUN wget --content-disposition https://papermc.io/api/v1/paper/1.16.1/latest/download
 RUN echo eula=true > eula.txt
-CMD "chmod" "a+x" "paper-1.16.1-138.jar"
-CMD "screen" "-S" "-d" "Server" "java" "-jar" "paper-1.16.1-138.jar" "nogui" "pause"
+CMD "echo ${ls}"
+CMD "chmod" "a+x" "spigot-1.17.1.jar"
+CMD ["java", "-jar", "spigot-1.17.1.jar"]
+EXPOSE 8080

@@ -25,6 +25,8 @@ import java.security.SecureRandom;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 /**
  * Utils Class for the JavaUtils Jar This Class contains many Methods This
@@ -999,5 +1001,72 @@ public class Utils {
 
     public void moveFileTo(File source, File target) throws IOException {
         Files.move(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    public File zipDirectory(File directory) throws IOException {
+        String sourceFile = directory.getName();
+        FileOutputStream fos = new FileOutputStream(sourceFile + ".zip");
+        ZipOutputStream zipOut = new ZipOutputStream(fos);
+        File fileToZip = new File(sourceFile);
+
+        zipFile(fileToZip, fileToZip.getName(), zipOut);
+        zipOut.close();
+        fos.close();
+        return new File(sourceFile + ".zip");
+    }
+
+    public File zipFiles(File zipFile, File... files) throws IOException {
+        List<String> srcFiles = new ArrayList<>();
+        for(File file : files) {
+            srcFiles.add(file.getName());
+        }
+        FileOutputStream fos = new FileOutputStream(zipFile);
+        ZipOutputStream zipOut = new ZipOutputStream(fos);
+        for (String srcFile : srcFiles) {
+            File fileToZip = new File(srcFile);
+            FileInputStream fis = new FileInputStream(fileToZip);
+            ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
+            zipOut.putNextEntry(zipEntry);
+
+            byte[] bytes = new byte[1024];
+            int length;
+            while((length = fis.read(bytes)) >= 0) {
+                zipOut.write(bytes, 0, length);
+            }
+            fis.close();
+        }
+        zipOut.close();
+        fos.close();
+
+        return zipFile;
+    }
+
+    private void zipFile(File fileToZip, String fileName, ZipOutputStream zipOut) throws IOException {
+        if (fileToZip.isHidden()) {
+            return;
+        }
+        if (fileToZip.isDirectory()) {
+            if (fileName.endsWith("/")) {
+                zipOut.putNextEntry(new ZipEntry(fileName));
+                zipOut.closeEntry();
+            } else {
+                zipOut.putNextEntry(new ZipEntry(fileName + "/"));
+                zipOut.closeEntry();
+            }
+            File[] children = fileToZip.listFiles();
+            for (File childFile : children) {
+                zipFile(childFile, fileName + "/" + childFile.getName(), zipOut);
+            }
+            return;
+        }
+        FileInputStream fis = new FileInputStream(fileToZip);
+        ZipEntry zipEntry = new ZipEntry(fileName);
+        zipOut.putNextEntry(zipEntry);
+        byte[] bytes = new byte[1024];
+        int length;
+        while ((length = fis.read(bytes)) >= 0) {
+            zipOut.write(bytes, 0, length);
+        }
+        fis.close();
     }
 }
