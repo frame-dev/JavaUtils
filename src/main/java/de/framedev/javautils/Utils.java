@@ -536,7 +536,7 @@ public class Utils {
     /**
      * Create a String of a Base64 (encode)
      *
-     * @param object the Object to ecncode to Base64
+     * @param object the Object to encode to Base64
      * @return returns the encoded Base64 Byte Array
      */
     public <T extends Serializable> String objectToBase64(T object) {
