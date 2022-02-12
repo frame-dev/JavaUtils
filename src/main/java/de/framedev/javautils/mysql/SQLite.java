@@ -303,5 +303,29 @@ public class SQLite {
         return false;
     }
 
-
+    public static Object get(String table, String selected, String column, String data) {
+        Object o = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("SELECT * FROM ")
+                .append(table)
+                .append(" WHERE " + column + " = '")
+                .append(data)
+                .append("'");
+        String sql = stringBuilder.toString();
+        try {
+            Statement statement = SQLite.connect().createStatement();
+            ResultSet res = statement.executeQuery(sql);
+            if (res.next()) {
+                o = res.getObject(selected);
+                return o;
+            }
+            return o;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            SQLite.close();
+        }
+        SQLite.close();
+        return null;
+    }
 }

@@ -18,6 +18,8 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -670,7 +672,7 @@ public class Utils {
                 && !new File(newLocation, fileNameWithExtensions).getParentFile().exists())
             new File(newLocation, fileNameWithExtensions).getParentFile().mkdirs();
         if (!file.renameTo(new File(newLocation, fileNameWithExtensions))) {
-            getLogger().log(Level.SEVERE, "File cannot be Renamed/Moved");
+            getLogger().log(Level.SEVERE, "File cannot be Renamed or Moved!");
         }
     }
 
@@ -864,6 +866,12 @@ public class Utils {
         return new File(fileName).exists();
     }
 
+    /**
+     * Check if the selected File is existing
+     *
+     * @param file the Selected File
+     * @return return if exists or not
+     */
     public boolean existFile(File file) {
         if (file == null)
             return false;
@@ -948,6 +956,13 @@ public class Utils {
         return updated;
     }
 
+    /**
+     * Save an object to a Base64 File
+     *
+     * @param file   the selected File for Save
+     * @param object the Object to Save
+     * @param <T>    need to extend Serializable
+     */
     public <T extends Serializable> void saveObjectToBase64File(File file, T object) {
         try {
             FileWriter writer = new FileWriter(file);
@@ -1017,7 +1032,7 @@ public class Utils {
 
     public File zipFiles(File zipFile, File... files) throws IOException {
         List<String> srcFiles = new ArrayList<>();
-        for(File file : files) {
+        for (File file : files) {
             srcFiles.add(file.getName());
         }
         FileOutputStream fos = new FileOutputStream(zipFile);
@@ -1030,7 +1045,7 @@ public class Utils {
 
             byte[] bytes = new byte[1024];
             int length;
-            while((length = fis.read(bytes)) >= 0) {
+            while ((length = fis.read(bytes)) >= 0) {
                 zipOut.write(bytes, 0, length);
             }
             fis.close();
@@ -1068,5 +1083,26 @@ public class Utils {
             zipOut.write(bytes, 0, length);
         }
         fis.close();
+    }
+
+    /**
+     * Check if Server with Port is Online or can connect
+     *
+     * @param server  Server Ip or HostName
+     * @param port    port as example for MySQL 3306
+     * @param timeout how long is it trying to connect
+     * @return return if is Online or not
+     */
+    public static boolean isOnline(String server, int port, int timeout) {
+        boolean b = true;
+        try {
+            InetSocketAddress sa = new InetSocketAddress(server, port);
+            Socket ss = new Socket();
+            ss.connect(sa, timeout);
+            ss.close();
+        } catch (Exception e) {
+            b = false;
+        }
+        return b;
     }
 }

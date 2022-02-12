@@ -391,5 +391,31 @@ public class MySQL {
         return false;
     }
 
+    public static Object get(String table, String selected, String column, String data) {
+        Object o;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("SELECT * FROM ")
+                .append(table)
+                .append(" WHERE " + column + " = '")
+                .append(data)
+                .append("'");
+        String sql = stringBuilder.toString();
+        try {
+            Statement statement = MySQL.getConnection().createStatement();
+            ResultSet res = statement.executeQuery(sql);
+            if (res.next()) {
+                o = res.getObject(selected);
+                return o;
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            MySQL.close();
+        }
+        MySQL.close();
+        return null;
+    }
+
 }
 
