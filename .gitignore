@@ -14,3 +14,4 @@ JavaUtils
 *.iml
 .project
 .classpath
+Dockerfile
