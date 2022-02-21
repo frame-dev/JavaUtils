@@ -13,15 +13,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.jetbrains.annotations.NotNull;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -41,7 +39,7 @@ public class SpigotAPI implements APIs {
      * @param object the Object for Serialization
      * @return return the Serialized Object
      */
-    public String objectToBase64(Object object) {
+    public <T extends Serializable> String objectToBase64(T object) {
         try {
             ByteArrayOutputStream is = new ByteArrayOutputStream();
             BukkitObjectOutputStream os = new BukkitObjectOutputStream(is);
@@ -61,19 +59,51 @@ public class SpigotAPI implements APIs {
      * @param base the encoded Base64 String
      * @return return the Object of Base64
      */
-    public Object objectFromBase64(String base) {
+    @SuppressWarnings("unchecked")
+    public <T extends Serializable> T objectFromBase64(String base) {
         try {
             ByteArrayInputStream is = new ByteArrayInputStream(Base64Coder.decodeLines(base));
             BukkitObjectInputStream os = new BukkitObjectInputStream(is);
-            return os.readObject();
+            return (T) os.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;
     }
 
+    public <T extends Serializable> void saveObjectToBase64File(File file, T object) {
+        try {
+            FileWriter writer = new FileWriter(file);
+            writer.write(objectToBase64(object));
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public <T extends Serializable> T getObjectFromBase64File(File file) {
+        T object = null;
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            object = objectFromBase64(reader.readLine());
+        } catch (Exception ignored) {
+
+        } finally {
+            if(reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return object;
+    }
+
     /**
-     * Convert an Material to an ItemStack
+     * Convert a Material to an ItemStack
      *
      * @param material the Material for converting to an ItemStack
      * @return returns the Converted ItemStack
@@ -83,7 +113,7 @@ public class SpigotAPI implements APIs {
     }
 
     /**
-     * Get an ItemStack from an String
+     * Get an ItemStack from a String
      *
      * @param item the String Item
      * @return return the ItemStack if not Null
@@ -109,12 +139,12 @@ public class SpigotAPI implements APIs {
         }
     }
 
-    public ShapedRecipe createShapedRecipe(ItemStack result) {
-        return new ShapedRecipe(NamespacedKey.minecraft(result.getType().name().toLowerCase()), result);
+    public ShapedRecipe createShapedRecipe(JavaPlugin plugin, String nameSpace, ItemStack result) {
+        return new ShapedRecipe(new NamespacedKey(plugin, nameSpace + "_" + result.getType().name().toLowerCase()), result);
     }
 
-    public ShapelessRecipe createShapelessRecipe(ItemStack result) {
-        return new ShapelessRecipe(NamespacedKey.minecraft(result.getType().name().toLowerCase()), result);
+    public ShapelessRecipe createShapelessRecipe(JavaPlugin plugin,String nameSpace, ItemStack result) {
+        return new ShapelessRecipe(new NamespacedKey(plugin, nameSpace + "_" + result.getType().name().toLowerCase()), result);
     }
 
     /**
@@ -184,7 +214,7 @@ public class SpigotAPI implements APIs {
          * @return return the Created BossBar
          */
         public BossBar createBossBar() {
-            BossBar bossBar = null;
+            BossBar bossBar;
             if (barFlags == null)
                 bossBar = Bukkit.createBossBar(title, barColor, barStyle);
             bossBar = Bukkit.createBossBar(title, barColor, barStyle, barFlags);
@@ -222,6 +252,7 @@ public class SpigotAPI implements APIs {
          */
         public static void removeBossBars() {
             bossBars.forEach(bossBar -> {
+                bossBar.getPlayers().clear();
                 bossBar.setVisible(false);
             });
             bossBars.clear();

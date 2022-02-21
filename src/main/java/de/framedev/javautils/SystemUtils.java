@@ -94,13 +94,11 @@ public class SystemUtils {
     }
 
     public String getDriveDescription(File file) {
-        FileSystemView fsv = FileSystemView.getFileSystemView();
-        return fsv.getSystemTypeDescription(file);
+        return FileSystemView.getFileSystemView().getSystemTypeDescription(file);
     }
 
     public boolean isDrive(File file) {
-        FileSystemView fsv = FileSystemView.getFileSystemView();
-        return fsv.isDrive(file);
+        return FileSystemView.getFileSystemView().isDrive(file);
     }
 
     public double getAllTotalDiskSpace() {
@@ -110,6 +108,9 @@ public class SystemUtils {
 
             try {
                 if (isDrive(root.toFile())) {
+                    FileStore store = Files.getFileStore(root);
+                    totalSpace += store.getTotalSpace() / gb;
+                } else if (getOSType() == OSType.MACOS || getOSType() == OSType.LINUX) {
                     FileStore store = Files.getFileStore(root);
                     totalSpace += store.getTotalSpace() / gb;
                 }
@@ -127,6 +128,9 @@ public class SystemUtils {
             if (isDrive(file)) {
                 FileStore store = Files.getFileStore(file.toPath());
                 totalSpace = store.getTotalSpace() / gb;
+            } else if (getOSType() == OSType.MACOS || getOSType() == OSType.LINUX) {
+                FileStore store = Files.getFileStore(file.toPath());
+                totalSpace = store.getTotalSpace() / gb;
             }
         } catch (IOException e) {
             System.out.println("error querying space: " + e.toString());
@@ -140,6 +144,10 @@ public class SystemUtils {
         long totalSpace = 0;
         try {
             if (isDrive(file)) {
+                FileStore store = Files.getFileStore(file.toPath());
+                totalSpace = store.getTotalSpace() / gb;
+                usedSpace = totalSpace - (store.getUsableSpace() / gb);
+            } else if (getOSType() == OSType.MACOS || getOSType() == OSType.LINUX) {
                 FileStore store = Files.getFileStore(file.toPath());
                 totalSpace = store.getTotalSpace() / gb;
                 usedSpace = totalSpace - (store.getUsableSpace() / gb);
@@ -160,11 +168,27 @@ public class SystemUtils {
                     FileStore store = Files.getFileStore(root);
                     totalSpace += store.getTotalSpace() / gb;
                     usedSpace += totalSpace - (store.getUsableSpace() / gb);
+                } else if (getOSType() == OSType.MACOS || getOSType() == OSType.LINUX) {
+                    FileStore store = Files.getFileStore(root);
+                    totalSpace += store.getTotalSpace() / gb;
+                    usedSpace += totalSpace - (store.getUsableSpace() / gb);
                 }
             } catch (IOException e) {
                 System.out.println("error querying space: " + e.toString());
             }
         }
         return usedSpace;
+    }
+
+    public double getAllFreeDiskSpace() {
+        double used = getAllUsedDiskSpace();
+        double total = getAllTotalDiskSpace();
+        return total - used;
+    }
+
+    public double getFreeDiskSpace(File file) {
+        double used = getUsedDiskSpace(file);
+        double total = getTotalDiskSpace(file);
+        return total - used;
     }
 }

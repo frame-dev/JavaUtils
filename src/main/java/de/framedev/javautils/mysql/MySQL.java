@@ -13,10 +13,10 @@ public class MySQL {
     public static String database;
     public static String port;
     public static Connection con;
-    private JsonConnection jsonConnection;
+    private static JsonConnection jsonConnection;
 
-    public void setJsonConnection(JsonConnection jsonConnection) {
-        this.jsonConnection = jsonConnection;
+    public static void setJsonConnection(JsonConnection jsonConnection) {
+        MySQL.jsonConnection = jsonConnection;
     }
 
     public JsonConnection getJsonConnection() {
@@ -24,7 +24,7 @@ public class MySQL {
     }
 
     public MySQL(JsonConnection jsonConnection) {
-        this.jsonConnection = jsonConnection;
+        MySQL.jsonConnection = jsonConnection;
         host = jsonConnection.getHost();
         user = jsonConnection.getUser();
         password = jsonConnection.getPassword();
@@ -392,66 +392,30 @@ public class MySQL {
     }
 
     public static Object get(String table, String selected, String column, String data) {
+        Object o;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("SELECT * FROM ")
                 .append(table)
-                .append(" WHERE ")
-                .append(column)
-                .append(" = '" + data + "';");
-
+                .append(" WHERE " + column + " = '")
+                .append(data)
+                .append("'");
+        String sql = stringBuilder.toString();
         try {
             Statement statement = MySQL.getConnection().createStatement();
-            String sql = stringBuilder.toString();
             ResultSet res = statement.executeQuery(sql);
             if (res.next()) {
-                if (res.getString(column) != null && res.getString(column).equalsIgnoreCase(data)) {
-                    return res.getObject(selected);
-                }
+                o = res.getObject(selected);
+                return o;
             }
             return null;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (MySQL.con != null) {
-                MySQL.close();
-            }
-        }
-        if (MySQL.con != null) {
             MySQL.close();
         }
+        MySQL.close();
         return null;
     }
-
-    public static Object get(String table, String selected, String column, String data, String and) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("SELECT * FROM ")
-                .append(table)
-                .append(" WHERE ")
-                .append(column).append(" = '").append(data).append("' AND ").append(and).append(";");
-
-        try {
-            Statement statement = MySQL.getConnection().createStatement();
-            String sql = stringBuilder.toString();
-            ResultSet res = statement.executeQuery(sql);
-            if (res.next()) {
-                if (res.getString(column) != null && res.getString(column).equalsIgnoreCase(data)) {
-                    return res.getObject(selected);
-                }
-            }
-            return null;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (MySQL.con != null) {
-                MySQL.close();
-            }
-        }
-        if (MySQL.con != null) {
-            MySQL.close();
-        }
-        return null;
-    }
-
 
 }
 

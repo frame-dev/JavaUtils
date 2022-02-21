@@ -1,5 +1,6 @@
 package de.framedev.javautils.mysql;
 
+import java.io.File;
 import java.sql.*;
 
 /**
@@ -17,6 +18,8 @@ public class SQLite {
     private static String path;
 
     public SQLite(String path, String fileName) {
+        if (!new File(path).exists())
+            new File(path).mkdirs();
         SQLite.fileName = fileName;
         SQLite.path = path;
     }
@@ -24,6 +27,8 @@ public class SQLite {
     public SQLite(JsonConnection connection) {
         SQLite.fileName = connection.getFileName();
         SQLite.path = connection.getPath();
+        if (!new File(SQLite.path).exists())
+            new File(SQLite.path).mkdirs();
     }
 
     public static Connection connect() {
@@ -299,66 +304,28 @@ public class SQLite {
     }
 
     public static Object get(String table, String selected, String column, String data) {
+        Object o = null;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("SELECT * FROM ")
                 .append(table)
-                .append(" WHERE ")
-                .append(column)
-                .append(" = '" + data + "';");
-
+                .append(" WHERE " + column + " = '")
+                .append(data)
+                .append("'");
+        String sql = stringBuilder.toString();
         try {
             Statement statement = SQLite.connect().createStatement();
-            String sql = stringBuilder.toString();
             ResultSet res = statement.executeQuery(sql);
             if (res.next()) {
-                if (res.getString(column) != null && res.getString(column).equalsIgnoreCase(data)) {
-                    return res.getObject(selected);
-                }
+                o = res.getObject(selected);
+                return o;
             }
-            return null;
+            return o;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (SQLite.connection != null) {
-                SQLite.close();
-            }
-        }
-        if (SQLite.connection != null) {
             SQLite.close();
         }
+        SQLite.close();
         return null;
     }
-
-    public static Object get(String table, String selected, String column, String data, String and) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("SELECT * FROM ")
-                .append(table)
-                .append(" WHERE ")
-                .append(column)
-                .append(" = '" + data + "' AND " + and + ";");
-
-        try {
-            Statement statement = SQLite.connect().createStatement();
-            String sql = stringBuilder.toString();
-            ResultSet res = statement.executeQuery(sql);
-            if (res.next()) {
-                if (res.getString(column) != null && res.getString(column).equalsIgnoreCase(data)) {
-                    return res.getObject(column);
-                }
-            }
-            return null;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (SQLite.connection != null) {
-                SQLite.close();
-            }
-        }
-        if (SQLite.connection != null) {
-            SQLite.close();
-        }
-        return null;
-    }
-
-
 }

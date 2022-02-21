@@ -6,6 +6,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+import com.opencsv.*;
+import com.opencsv.exceptions.CsvException;
 import org.jetbrains.annotations.NotNull;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
@@ -14,21 +18,22 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 /**
- * Utils Class for the JavaUtils Jar
- * This Class contains many Methods
- * This Plugin was Created by FrameDev
- * Package : de.framedev.javautils
- * ClassName Utils
- * Date: 14.04.21
- * Project: JavaUtils
- * Copyrighted by FrameDev
+ * Utils Class for the JavaUtils Jar This Class contains many Methods This
+ * Plugin was Created by FrameDev Package : de.framedev.javautils ClassName
+ * Utils Date: 14.04.21 Project: JavaUtils Copyrighted by FrameDev
  */
 
 public class Utils {
@@ -46,6 +51,132 @@ public class Utils {
     }
 
     /**
+     * Class for Custom Generators with other Classes
+     */
+    public static class CustomGenerators {
+
+        /**
+         * @param min the Min Value inclusive
+         * @param max the Max Value inclusive
+         * @return a Random Integer
+         */
+        public int randomInt(int min, int max) {
+            return new IntRandomNumberGenerator(min, max).nextInt();
+        }
+
+        /**
+         * @param min the Min Value inclusive
+         * @param max the Max Value inclusive
+         * @return a Random Double
+         */
+        public double randomDouble(double min, double max) {
+            return new DoubleRandomNumberGenerator(min, max).nextDouble();
+        }
+
+        public static final class IntRandomNumberGenerator {
+
+            private PrimitiveIterator.OfInt randomIterator;
+
+            private int min;
+            private int max;
+
+            public IntRandomNumberGenerator() {
+            }
+
+            public IntRandomNumberGenerator setMin(int min) {
+                this.min = min;
+                return this;
+            }
+
+            public IntRandomNumberGenerator setMax(int max) {
+                this.max = max;
+                return this;
+            }
+
+            public int getMin() {
+                return min;
+            }
+
+            public int getMax() {
+                return max;
+            }
+
+            /**
+             * Initialize a new random number generator that generates as Integer random
+             * numbers in the range [min, max]
+             *
+             * @param min - the min value (inclusive)
+             * @param max - the max value (inclusive)
+             */
+            public IntRandomNumberGenerator(int min, int max) {
+                randomIterator = new Random().ints(min, max + 1).iterator();
+            }
+
+            /**
+             * Returns a random number in the range (min, max)
+             *
+             * @return a random number in the range (min, max)
+             */
+            public int nextInt() {
+                if (randomIterator == null)
+                    randomIterator = new Random().ints(min, max + 1).iterator();
+                return randomIterator.nextInt();
+            }
+        }
+
+        public static final class DoubleRandomNumberGenerator {
+
+            private PrimitiveIterator.OfDouble randomIterator;
+
+            private double min;
+            private double max;
+
+            public DoubleRandomNumberGenerator() {
+            }
+
+            public DoubleRandomNumberGenerator setMin(double min) {
+                this.min = min;
+                return this;
+            }
+
+            public DoubleRandomNumberGenerator setMax(double max) {
+                this.max = max;
+                return this;
+            }
+
+            public double getMax() {
+                return max;
+            }
+
+            public double getMin() {
+                return min;
+            }
+
+            /**
+             * Initialize a new random number generator that generates as Double random
+             * numbers in the range [min, max]
+             *
+             * @param min - the min value (inclusive)
+             * @param max - the max value (inclusive)
+             */
+            public DoubleRandomNumberGenerator(double min, double max) {
+                randomIterator = new Random().doubles(min, max + 1).iterator();
+            }
+
+            /**
+             * Returns a random number in the range (min, max)
+             *
+             * @return a random number in the range (min, max)
+             */
+            public double nextDouble() {
+                if (randomIterator == null)
+                    randomIterator = new Random().doubles(min, max + 1).iterator();
+                return randomIterator.nextDouble();
+            }
+        }
+    }
+
+    /**
      * Generator Class for a Custom Key
      */
     public static class PasswordGenerator {
@@ -53,12 +184,13 @@ public class Utils {
         private final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
         private final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
         private final String NUMBER = "0123456789";
+
         private final String OTHER_CHAR = "!@#$%&*()_+-=[]?";
 
         private final String STRING_ALLOW_BASE = CHAR_LOWER + CHAR_UPPER + NUMBER + OTHER_CHAR;
-
         // optional, make it more random
         private final String STRING_ALLOW_BASE_SHUFFLE = shuffleString(STRING_ALLOW_BASE);
+
         private final String STRING_ALLOW = STRING_ALLOW_BASE_SHUFFLE;
 
         private static final SecureRandom random = new SecureRandom();
@@ -89,6 +221,7 @@ public class Utils {
             Collections.shuffle(letters);
             return String.join("", letters);
         }
+
     }
 
     public String objectToJsonString(Object object) {
@@ -99,6 +232,15 @@ public class Utils {
         return new Gson().fromJson(json, Object.class);
     }
 
+    /**
+     * Decode a Json String to Java Object
+     * Also can you use {@link #saveJsonToFile(File, Object)}
+     *
+     * @param json   the Json String for Decoding
+     * @param class_ the Selected Class (Person.class)
+     * @param <T>    Return an Object of the Selected Class without any Casting
+     * @return reuturn an Object without any Casting but can throw an Exception take a look at {@link JsonSyntaxException}
+     */
     public <T> T classFromJsonString(String json, Class<T> class_) {
         return new Gson().fromJson(json, class_);
     }
@@ -121,6 +263,15 @@ public class Utils {
         return null;
     }
 
+    /**
+     * Decode Yaml String to JavaObject
+     * Also can you use {@link #saveYamlToFile(File, Object)}
+     *
+     * @param yaml   Yaml String
+     * @param class_ Class for Decoding (Person.class)
+     * @param <T>    Selected Class for returning as Object
+     * @return return Selected Object require no Cast
+     */
     public <T> T classFromYamlString(String yaml, Class<T> class_) {
         try {
             return new YAMLMapper().readValue(yaml, class_);
@@ -151,6 +302,16 @@ public class Utils {
         return null;
     }
 
+    /**
+     * Use this for Decoding Xml String to the Selected Java Object
+     * You can also use for save an Object {@link #saveXmlToFile(File, Object)}
+     * or for getting an Object {@link #getObjectFromClassXml(File, Class)}
+     *
+     * @param xml    Xml String for Decoding
+     * @param class_ Selected Class (Person.class)
+     * @param <T>    Require to return an Object of the Selected Class
+     * @return Return Java Object with the selected JavaObject without Casting can throw Exception {@link Serializer#read(Class, File)}
+     */
     public <T> T classFromXmlString(String xml, Class<T> class_) {
         Serializer serializer = new Persister();
         try {
@@ -284,24 +445,6 @@ public class Utils {
         return false;
     }
 
-    /**
-     * Return an Object from a File with the extension .xml
-     *
-     * @param file the selected File for getting the Object with the extension .xml
-     * @return return the Object from the File
-     */
-    public Object getObjectFromXml(File file) {
-        if (file.exists()) {
-            Serializer mapper = new Persister();
-            try {
-                return mapper.read(Object.class, file);
-            } catch (Exception ignored) {
-
-            }
-        }
-        return null;
-    }
-
     public <T> T getObjectFromClassXml(File file, Class<T> class_) {
         if (file.exists()) {
             Serializer mapper = new Persister();
@@ -314,11 +457,10 @@ public class Utils {
         return null;
     }
 
-
     /**
      * Please add to the File the extension .json
      *
-     * @param file the Location File where it needs to be saved
+     * @param file the Location File where it need to be saved
      * @param o    the Object do you want to save
      * @return if it was success or not
      * @throws IOException throws an error(IOException) when File cannot be created
@@ -392,138 +534,12 @@ public class Utils {
     }
 
     /**
-     * Class for Custom Generators with other Classes
-     */
-    public static class CustomGenerators {
-
-        /**
-         * @param min the Min Value inclusive
-         * @param max the Max Value inclusive
-         * @return a Random Integer
-         */
-        public int randomInt(int min, int max) {
-            return new IntRandomNumberGenerator(min, max).nextInt();
-        }
-
-        /**
-         * @param min the Min Value inclusive
-         * @param max the Max Value inclusive
-         * @return a Random Double
-         */
-        public double randomDouble(double min, double max) {
-            return new DoubleRandomNumberGenerator(min, max).nextDouble();
-        }
-
-        public static final class IntRandomNumberGenerator {
-
-            private PrimitiveIterator.OfInt randomIterator;
-
-            private int min;
-            private int max;
-
-            public IntRandomNumberGenerator() {
-            }
-
-            public IntRandomNumberGenerator setMin(int min) {
-                this.min = min;
-                return this;
-            }
-
-            public IntRandomNumberGenerator setMax(int max) {
-                this.max = max;
-                return this;
-            }
-
-            public int getMin() {
-                return min;
-            }
-
-            public int getMax() {
-                return max;
-            }
-
-            /**
-             * Initialize a new random number generator that generates as Integer
-             * random numbers in the range [min, max]
-             *
-             * @param min - the min value (inclusive)
-             * @param max - the max value (inclusive)
-             */
-            public IntRandomNumberGenerator(int min, int max) {
-                randomIterator = new Random().ints(min, max + 1).iterator();
-            }
-
-            /**
-             * Returns a random number in the range (min, max)
-             *
-             * @return a random number in the range (min, max)
-             */
-            public int nextInt() {
-                if (randomIterator == null)
-                    randomIterator = new Random().ints(min, max + 1).iterator();
-                return randomIterator.nextInt();
-            }
-        }
-
-        public static final class DoubleRandomNumberGenerator {
-
-            private PrimitiveIterator.OfDouble randomIterator;
-
-            private double min;
-            private double max;
-
-            public DoubleRandomNumberGenerator() {
-            }
-
-            public DoubleRandomNumberGenerator setMin(double min) {
-                this.min = min;
-                return this;
-            }
-
-            public DoubleRandomNumberGenerator setMax(double max) {
-                this.max = max;
-                return this;
-            }
-
-            public double getMax() {
-                return max;
-            }
-
-            public double getMin() {
-                return min;
-            }
-
-            /**
-             * Initialize a new random number generator that generates as Double
-             * random numbers in the range [min, max]
-             *
-             * @param min - the min value (inclusive)
-             * @param max - the max value (inclusive)
-             */
-            public DoubleRandomNumberGenerator(double min, double max) {
-                randomIterator = new Random().doubles(min, max + 1).iterator();
-            }
-
-            /**
-             * Returns a random number in the range (min, max)
-             *
-             * @return a random number in the range (min, max)
-             */
-            public double nextDouble() {
-                if (randomIterator == null)
-                    randomIterator = new Random().doubles(min, max + 1).iterator();
-                return randomIterator.nextDouble();
-            }
-        }
-    }
-
-    /**
      * Create a String of a Base64 (encode)
      *
-     * @param object the Object to ecncode to Base64
+     * @param object the Object to encode to Base64
      * @return returns the encoded Base64 Byte Array
      */
-    public String objectToBase64(Object object) {
+    public <T extends Serializable> String objectToBase64(T object) {
         try {
             ByteArrayOutputStream is = new ByteArrayOutputStream();
             ObjectOutputStream os = new ObjectOutputStream(is);
@@ -543,11 +559,12 @@ public class Utils {
      * @param base the encoded Base64
      * @return returns the decoded Object
      */
-    public Object objectFromBase64(String base) {
+    @SuppressWarnings("unchecked")
+    public <T> T objectFromBase64(String base) {
         try {
             ByteArrayInputStream is = new ByteArrayInputStream(Base64.getDecoder().decode(base));
             ObjectInputStream os = new ObjectInputStream(is);
-            return os.readObject();
+            return (T) os.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -583,16 +600,18 @@ public class Utils {
     /**
      * @param text  the Text for Splitting
      * @param regex the char for splitting
-     * @return return an Array of splitted Strings
+     * @return return an Array of split Strings
      */
     public String[] stringSplitter(String text, @NotNull String regex) {
-        if (text == null) return null;
-        if (!text.contains(regex)) return null;
+        if (text == null)
+            return null;
+        if (!text.contains(regex))
+            return null;
         return text.split(regex);
     }
 
     /**
-     * This Method Creates an Logger from scratch
+     * This Method Creates a Logger from scratch
      *
      * @param name       the Name of the new Logger
      * @param timeFormat if you would like an TimeStamp in logger
@@ -602,21 +621,9 @@ public class Utils {
         return new MyFormatter(timeFormat).createEmptyLogger(name);
     }
 
-    /**
-     * return if the first object is the same as the second object
-     *
-     * @param obj_1 the First Object
-     * @param obj_2 the Second Object
-     * @return return if the first object is the same as the second object
-     */
-    public boolean equals(Object obj_1, Object obj_2) {
-        if (obj_1 == null) return false;
-        if (obj_2 == null) return false;
-        return obj_1.equals(obj_2);
-    }
-
     public double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
+        if (places < 0)
+            throw new IllegalArgumentException();
 
         BigDecimal bd = BigDecimal.valueOf(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
@@ -661,11 +668,11 @@ public class Utils {
                 e.printStackTrace();
             }
         }
-        if (new File(newLocation, fileNameWithExtensions).getParentFile() != null &&
-                !new File(newLocation, fileNameWithExtensions).getParentFile().exists())
+        if (new File(newLocation, fileNameWithExtensions).getParentFile() != null
+                && !new File(newLocation, fileNameWithExtensions).getParentFile().exists())
             new File(newLocation, fileNameWithExtensions).getParentFile().mkdirs();
         if (!file.renameTo(new File(newLocation, fileNameWithExtensions))) {
-            getLogger().log(Level.SEVERE, "File cannot be Renamed/Moved");
+            getLogger().log(Level.SEVERE, "File cannot be Renamed or Moved!");
         }
     }
 
@@ -752,7 +759,7 @@ public class Utils {
      */
     public String getUserDir() {
         String os = System.getProperty("os.name").toLowerCase();
-        String userDir = "";
+        String userDir;
         if (os.contains("mac")) {
             userDir = System.getProperty("user.dir") + "/";
         } else if (os.contains("windows")) {
@@ -770,7 +777,7 @@ public class Utils {
      */
     public String getUserAppData() {
         String os = getOs();
-        String userData = "";
+        String userData;
         if (os.contains("mac")) {
             userData = System.getProperty("user.home") + "/Library/Application Support/";
         } else if (os.contains("windows")) {
@@ -803,30 +810,38 @@ public class Utils {
         if (in == null) {
             return null;
         }
-
+        FileOutputStream out = null;
         try {
+            // Create a Temp File
             File f = File.createTempFile(String.valueOf(in.hashCode()), ".tmp");
             f.deleteOnExit();
 
-            FileOutputStream out = new FileOutputStream(f);
+            out = new FileOutputStream(f);
             byte[] buffer = new byte[1024];
 
             int bytesRead;
             while ((bytesRead = in.read(buffer)) != -1) {
                 out.write(buffer, 0, bytesRead);
             }
-
+            // Return the Temp File
             return f;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+        } finally {
+            if (out != null)
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
         }
     }
 
     public File getFromResourceFile(String file) {
         InputStream resource = this.getClass().getClassLoader().getResourceAsStream(file);
         if (resource == null) {
-            throw new IllegalArgumentException("file not found!");
+            throw new IllegalArgumentException("File not found!");
         } else {
             return streamToFile(resource);
         }
@@ -835,22 +850,259 @@ public class Utils {
     public File getFromResourceFile(String file, Class<?> class_) {
         InputStream resource = class_.getClassLoader().getResourceAsStream(file);
         if (resource == null) {
-            throw new IllegalArgumentException("file not found!");
+            throw new IllegalArgumentException("File not found!");
         } else {
             return streamToFile(resource);
         }
     }
 
+    /**
+     * Check if a File is existing
+     *
+     * @param fileName the FileName to check if it is exists or not
+     * @return return a boolean if exists or not
+     */
     public boolean existFile(String fileName) {
         return new File(fileName).exists();
     }
 
     /**
-     * see {@link SystemUtils.OSType}
+     * Check if the selected File is existing
      *
-     * @return return the OsType see {@link SystemUtils.OSType}
+     * @param file the Selected File
+     * @return return if exists or not
      */
-    public SystemUtils.OSType getOsType() {
-        return new SystemUtils().getOSType();
+    public boolean existFile(File file) {
+        if (file == null)
+            return false;
+        return file.exists();
+    }
+
+    /**
+     * Get the Default Values of a Yaml File
+     *
+     * @param fileName the FileName
+     * @param class_   Main Class
+     * @return returns a HashMap
+     */
+    public HashMap<String, Object> getDefaults(String fileName, Class<?> class_) {
+        File file = getFromResourceFile(fileName, class_);
+        HashMap<String, Object> data = getClassTypeFromYamlFile(file, new TypeToken<HashMap<String, Object>>() {
+        }.getType());
+        try {
+            saveYamlToFile(new File(fileName), data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    public void writeCsvFile(File file, List<String[]> rows, List<String[]> objects) throws IOException {
+        ICSVWriter csvWriter = new CSVWriterBuilder(new FileWriter(file)).withSeparator(',').build();
+        csvWriter.writeAll(rows);
+        List<String[]> updated = new ArrayList<>(objects);
+        for (String[] d : objects) {
+            for (int i = 0; i < rows.size(); i++) {
+                if (d != null && d[i] != null) {
+                    if (d[i].equalsIgnoreCase(rows.get(0)[i]))
+                        updated.remove(d);
+                    if (d[i] == null)
+                        updated.remove(d);
+                    if (d[i].equalsIgnoreCase("") || d[i].isEmpty())
+                        updated.remove(d);
+                }
+            }
+        }
+        csvWriter.writeAll(updated);
+        csvWriter.flush();
+        csvWriter.close();
+    }
+
+    public List<String[]> getDataFromCSVFile(File file, List<String[]> rows) throws IOException, CsvException {
+        CSVParser parser = new CSVParserBuilder().withSeparator(',').build();
+        CSVReader csvReader = new CSVReaderBuilder(new FileReader(file)).withCSVParser(parser).build();
+        List<String[]> data = csvReader.readAll();
+        csvReader.close();
+        List<String[]> updated = new ArrayList<>(data);
+        for (String[] d : data) {
+            for (int i = 0; i < rows.size(); i++) {
+                if (d[i].equalsIgnoreCase(rows.get(0)[i]))
+                    updated.remove(d);
+                if (d[i] == null)
+                    updated.remove(d);
+                if (d[i].equalsIgnoreCase("") || d[i].isEmpty())
+                    updated.remove(d);
+            }
+        }
+        return updated;
+    }
+
+    public List<String[]> getDataFromCSVFile(File file, String[] rows) throws IOException, CsvException {
+        CSVParser parser = new CSVParserBuilder().withSeparator(',').build();
+        CSVReader csvReader = new CSVReaderBuilder(new FileReader(file)).withCSVParser(parser).build();
+        List<String[]> data = csvReader.readAll();
+        csvReader.close();
+        List<String[]> updated = new ArrayList<>(data);
+        for (String[] d : data) {
+            for (int i = 0; i < rows.length; i++) {
+                if (d[i].equalsIgnoreCase(rows[i]))
+                    updated.remove(d);
+                if (d[i] == null)
+                    updated.remove(d);
+                if (d[i].equalsIgnoreCase("") || d[i].isEmpty())
+                    updated.remove(d);
+            }
+        }
+        return updated;
+    }
+
+    /**
+     * Save an object to a Base64 File
+     *
+     * @param file   the selected File for Save
+     * @param object the Object to Save
+     * @param <T>    need to extend Serializable
+     */
+    public <T extends Serializable> void saveObjectToBase64File(File file, T object) {
+        try {
+            FileWriter writer = new FileWriter(file);
+            writer.write(objectToBase64(object));
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public <T> T getObjectFromBase64File(File file) {
+        T object = null;
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            object = objectFromBase64(reader.readLine());
+        } catch (Exception ignored) {
+
+        } finally {
+            try {
+                if (reader != null)
+                    reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return object;
+    }
+
+    public void saveHashMapToJson(File file, HashMap<String, Object> objects) throws IOException {
+        saveJsonToFile(file, objects);
+    }
+
+    public HashMap<String, Object> getHashMapFromJsonFile(File file) {
+        // Type of HashMap
+        Type type = new TypeToken<HashMap<String, Object>>() {
+        }.getType();
+
+        // Return the HashMap from the File (can return null)
+        return getClassTypeFromYamlFile(file, type);
+    }
+
+    public void createCsvFile(File file, String[] rows, List<String[]> data) throws IOException {
+        writeCsvFile(file, Collections.singletonList(rows), data);
+    }
+
+    public void copyFileTo(File source, File target) throws IOException {
+        Files.copy(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    public void moveFileTo(File source, File target) throws IOException {
+        Files.move(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    }
+
+    public File zipDirectory(File directory) throws IOException {
+        String sourceFile = directory.getName();
+        FileOutputStream fos = new FileOutputStream(sourceFile + ".zip");
+        ZipOutputStream zipOut = new ZipOutputStream(fos);
+        File fileToZip = new File(sourceFile);
+
+        zipFile(fileToZip, fileToZip.getName(), zipOut);
+        zipOut.close();
+        fos.close();
+        return new File(sourceFile + ".zip");
+    }
+
+    public File zipFiles(File zipFile, File... files) throws IOException {
+        List<String> srcFiles = new ArrayList<>();
+        for (File file : files) {
+            srcFiles.add(file.getName());
+        }
+        FileOutputStream fos = new FileOutputStream(zipFile);
+        ZipOutputStream zipOut = new ZipOutputStream(fos);
+        for (String srcFile : srcFiles) {
+            File fileToZip = new File(srcFile);
+            FileInputStream fis = new FileInputStream(fileToZip);
+            ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
+            zipOut.putNextEntry(zipEntry);
+
+            byte[] bytes = new byte[1024];
+            int length;
+            while ((length = fis.read(bytes)) >= 0) {
+                zipOut.write(bytes, 0, length);
+            }
+            fis.close();
+        }
+        zipOut.close();
+        fos.close();
+
+        return zipFile;
+    }
+
+    private void zipFile(File fileToZip, String fileName, ZipOutputStream zipOut) throws IOException {
+        if (fileToZip.isHidden()) {
+            return;
+        }
+        if (fileToZip.isDirectory()) {
+            if (fileName.endsWith("/")) {
+                zipOut.putNextEntry(new ZipEntry(fileName));
+                zipOut.closeEntry();
+            } else {
+                zipOut.putNextEntry(new ZipEntry(fileName + "/"));
+                zipOut.closeEntry();
+            }
+            File[] children = fileToZip.listFiles();
+            for (File childFile : children) {
+                zipFile(childFile, fileName + "/" + childFile.getName(), zipOut);
+            }
+            return;
+        }
+        FileInputStream fis = new FileInputStream(fileToZip);
+        ZipEntry zipEntry = new ZipEntry(fileName);
+        zipOut.putNextEntry(zipEntry);
+        byte[] bytes = new byte[1024];
+        int length;
+        while ((length = fis.read(bytes)) >= 0) {
+            zipOut.write(bytes, 0, length);
+        }
+        fis.close();
+    }
+
+    /**
+     * Check if Server with Port is Online or can connect
+     *
+     * @param server  Server Ip or HostName
+     * @param port    port as example for MySQL 3306
+     * @param timeout how long is it trying to connect
+     * @return return if is Online or not
+     */
+    public static boolean isOnline(String server, int port, int timeout) {
+        boolean b = true;
+        try {
+            InetSocketAddress sa = new InetSocketAddress(server, port);
+            Socket ss = new Socket();
+            ss.connect(sa, timeout);
+            ss.close();
+        } catch (Exception e) {
+            b = false;
+        }
+        return b;
     }
 }

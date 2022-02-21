@@ -8,7 +8,6 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.logging.Level;
 
