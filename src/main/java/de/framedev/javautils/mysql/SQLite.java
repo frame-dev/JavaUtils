@@ -298,5 +298,67 @@ public class SQLite {
         return false;
     }
 
+    public static Object get(String table, String selected, String column, String data) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("SELECT * FROM ")
+                .append(table)
+                .append(" WHERE ")
+                .append(column)
+                .append(" = '" + data + "';");
+
+        try {
+            Statement statement = SQLite.connect().createStatement();
+            String sql = stringBuilder.toString();
+            ResultSet res = statement.executeQuery(sql);
+            if (res.next()) {
+                if (res.getString(column) != null && res.getString(column).equalsIgnoreCase(data)) {
+                    return res.getObject(selected);
+                }
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (SQLite.connection != null) {
+                SQLite.close();
+            }
+        }
+        if (SQLite.connection != null) {
+            SQLite.close();
+        }
+        return null;
+    }
+
+    public static Object get(String table, String selected, String column, String data, String and) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("SELECT * FROM ")
+                .append(table)
+                .append(" WHERE ")
+                .append(column)
+                .append(" = '" + data + "' AND " + and + ";");
+
+        try {
+            Statement statement = SQLite.connect().createStatement();
+            String sql = stringBuilder.toString();
+            ResultSet res = statement.executeQuery(sql);
+            if (res.next()) {
+                if (res.getString(column) != null && res.getString(column).equalsIgnoreCase(data)) {
+                    return res.getObject(column);
+                }
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (SQLite.connection != null) {
+                SQLite.close();
+            }
+        }
+        if (SQLite.connection != null) {
+            SQLite.close();
+        }
+        return null;
+    }
+
 
 }

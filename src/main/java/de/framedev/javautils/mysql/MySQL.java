@@ -391,5 +391,67 @@ public class MySQL {
         return false;
     }
 
+    public static Object get(String table, String selected, String column, String data) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("SELECT * FROM ")
+                .append(table)
+                .append(" WHERE ")
+                .append(column)
+                .append(" = '" + data + "';");
+
+        try {
+            Statement statement = MySQL.getConnection().createStatement();
+            String sql = stringBuilder.toString();
+            ResultSet res = statement.executeQuery(sql);
+            if (res.next()) {
+                if (res.getString(column) != null && res.getString(column).equalsIgnoreCase(data)) {
+                    return res.getObject(selected);
+                }
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (MySQL.con != null) {
+                MySQL.close();
+            }
+        }
+        if (MySQL.con != null) {
+            MySQL.close();
+        }
+        return null;
+    }
+
+    public static Object get(String table, String selected, String column, String data, String and) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("SELECT * FROM ")
+                .append(table)
+                .append(" WHERE ")
+                .append(column).append(" = '").append(data).append("' AND ").append(and).append(";");
+
+        try {
+            Statement statement = MySQL.getConnection().createStatement();
+            String sql = stringBuilder.toString();
+            ResultSet res = statement.executeQuery(sql);
+            if (res.next()) {
+                if (res.getString(column) != null && res.getString(column).equalsIgnoreCase(data)) {
+                    return res.getObject(selected);
+                }
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (MySQL.con != null) {
+                MySQL.close();
+            }
+        }
+        if (MySQL.con != null) {
+            MySQL.close();
+        }
+        return null;
+    }
+
+
 }
 
