@@ -118,8 +118,7 @@ public class Utils {
              * @return a random number in the range (min, max)
              */
             public int nextInt() {
-                if (randomIterator == null)
-                    randomIterator = new Random().ints(min, max + 1).iterator();
+                if (randomIterator == null) randomIterator = new Random().ints(min, max + 1).iterator();
                 return randomIterator.nextInt();
             }
         }
@@ -169,8 +168,7 @@ public class Utils {
              * @return a random number in the range (min, max)
              */
             public double nextDouble() {
-                if (randomIterator == null)
-                    randomIterator = new Random().doubles(min, max + 1).iterator();
+                if (randomIterator == null) randomIterator = new Random().doubles(min, max + 1).iterator();
                 return randomIterator.nextDouble();
             }
         }
@@ -202,8 +200,7 @@ public class Utils {
          * @return returns the Key
          */
         public String generatorKey(int length) {
-            if (length < 1)
-                throw new IllegalArgumentException();
+            if (length < 1) throw new IllegalArgumentException();
 
             StringBuilder sb = new StringBuilder(length);
             for (int i = 0; i < length; i++) {
@@ -336,8 +333,7 @@ public class Utils {
                 file.getParentFile().mkdirs();
             }
             try {
-                if (!file.createNewFile())
-                    return false;
+                if (!file.createNewFile()) return false;
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
@@ -428,8 +424,7 @@ public class Utils {
                 file.getParentFile().mkdirs();
             }
             try {
-                if (!file.createNewFile())
-                    return false;
+                if (!file.createNewFile()) return false;
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
@@ -471,8 +466,7 @@ public class Utils {
                 file.getParentFile().mkdirs();
             }
             try {
-                if (!file.createNewFile())
-                    return false;
+                if (!file.createNewFile()) return false;
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
@@ -603,10 +597,8 @@ public class Utils {
      * @return return an Array of split Strings
      */
     public String[] stringSplitter(String text, @NotNull String regex) {
-        if (text == null)
-            return null;
-        if (!text.contains(regex))
-            return null;
+        if (text == null) return null;
+        if (!text.contains(regex)) return null;
         return text.split(regex);
     }
 
@@ -622,8 +614,7 @@ public class Utils {
     }
 
     public double round(double value, int places) {
-        if (places < 0)
-            throw new IllegalArgumentException();
+        if (places < 0) throw new IllegalArgumentException();
 
         BigDecimal bd = BigDecimal.valueOf(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
@@ -634,8 +625,7 @@ public class Utils {
         File file = null;
         if (location != null) {
             file = new File(location, fileNameWithExtensions);
-            if (file.getParentFile() != null && !file.getParentFile().exists())
-                file.getParentFile().mkdirs();
+            if (file.getParentFile() != null && !file.getParentFile().exists()) file.getParentFile().mkdirs();
         } else {
             file = new File(fileNameWithExtensions);
         }
@@ -668,8 +658,7 @@ public class Utils {
                 e.printStackTrace();
             }
         }
-        if (new File(newLocation, fileNameWithExtensions).getParentFile() != null
-                && !new File(newLocation, fileNameWithExtensions).getParentFile().exists())
+        if (new File(newLocation, fileNameWithExtensions).getParentFile() != null && !new File(newLocation, fileNameWithExtensions).getParentFile().exists())
             new File(newLocation, fileNameWithExtensions).getParentFile().mkdirs();
         if (!file.renameTo(new File(newLocation, fileNameWithExtensions))) {
             getLogger().log(Level.SEVERE, "File cannot be Renamed or Moved!");
@@ -680,8 +669,7 @@ public class Utils {
         File file = null;
         if (location != null) {
             file = new File(location, fileNameWithExtensions);
-            if (file.getParentFile() != null && !file.getParentFile().exists())
-                file.getParentFile().mkdirs();
+            if (file.getParentFile() != null && !file.getParentFile().exists()) file.getParentFile().mkdirs();
         } else {
             file = new File(fileNameWithExtensions);
         }
@@ -829,12 +817,11 @@ public class Utils {
             e.printStackTrace();
             return null;
         } finally {
-            if (out != null)
-                try {
-                    out.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            if (out != null) try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -873,8 +860,7 @@ public class Utils {
      * @return return if exists or not
      */
     public boolean existFile(File file) {
-        if (file == null)
-            return false;
+        if (file == null) return false;
         return file.exists();
     }
 
@@ -904,12 +890,9 @@ public class Utils {
         for (String[] d : objects) {
             for (int i = 0; i < rows.size(); i++) {
                 if (d != null && d[i] != null) {
-                    if (d[i].equalsIgnoreCase(rows.get(0)[i]))
-                        updated.remove(d);
-                    if (d[i] == null)
-                        updated.remove(d);
-                    if (d[i].equalsIgnoreCase("") || d[i].isEmpty())
-                        updated.remove(d);
+                    if (d[i].equalsIgnoreCase(rows.get(0)[i])) updated.remove(d);
+                    if (d[i] == null) updated.remove(d);
+                    if (d[i].equalsIgnoreCase("") || d[i].isEmpty()) updated.remove(d);
                 }
             }
         }
@@ -926,12 +909,9 @@ public class Utils {
         List<String[]> updated = new ArrayList<>(data);
         for (String[] d : data) {
             for (int i = 0; i < rows.size(); i++) {
-                if (d[i].equalsIgnoreCase(rows.get(0)[i]))
-                    updated.remove(d);
-                if (d[i] == null)
-                    updated.remove(d);
-                if (d[i].equalsIgnoreCase("") || d[i].isEmpty())
-                    updated.remove(d);
+                if (d[i].equalsIgnoreCase(rows.get(0)[i])) updated.remove(d);
+                if (d[i] == null) updated.remove(d);
+                if (d[i].equalsIgnoreCase("") || d[i].isEmpty()) updated.remove(d);
             }
         }
         return updated;
@@ -945,12 +925,9 @@ public class Utils {
         List<String[]> updated = new ArrayList<>(data);
         for (String[] d : data) {
             for (int i = 0; i < rows.length; i++) {
-                if (d[i].equalsIgnoreCase(rows[i]))
-                    updated.remove(d);
-                if (d[i] == null)
-                    updated.remove(d);
-                if (d[i].equalsIgnoreCase("") || d[i].isEmpty())
-                    updated.remove(d);
+                if (d[i].equalsIgnoreCase(rows[i])) updated.remove(d);
+                if (d[i] == null) updated.remove(d);
+                if (d[i].equalsIgnoreCase("") || d[i].isEmpty()) updated.remove(d);
             }
         }
         return updated;
@@ -974,6 +951,13 @@ public class Utils {
         }
     }
 
+    /**
+     * Return an Object as <T> from a File
+     *
+     * @param file the Selected File where the Base64 File is stored
+     * @param <T>  the Object
+     * @return return an Object from a Base64 String File
+     */
     public <T> T getObjectFromBase64File(File file) {
         T object = null;
         BufferedReader reader = null;
@@ -984,8 +968,7 @@ public class Utils {
 
         } finally {
             try {
-                if (reader != null)
-                    reader.close();
+                if (reader != null) reader.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -993,6 +976,13 @@ public class Utils {
         return object;
     }
 
+    /**
+     * Save a HashMap to a File with .json extension (Json Formatted)
+     *
+     * @param file    the Selected File where the Data will be stored need .json as extension
+     * @param objects the Selected HashMap for saving in the File
+     * @throws IOException throw an IOException if an error occurred
+     */
     public void saveHashMapToJson(File file, HashMap<String, Object> objects) throws IOException {
         saveJsonToFile(file, objects);
     }
@@ -1010,14 +1000,35 @@ public class Utils {
         writeCsvFile(file, Collections.singletonList(rows), data);
     }
 
+    /**
+     * Copy a File to a new Location
+     *
+     * @param source the Selected File to Copy
+     * @param target the Selected File where the File will be copied
+     * @throws IOException throw an IOException if an error occurred
+     */
     public void copyFileTo(File source, File target) throws IOException {
         Files.copy(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
+    /**
+     * Move a File to the new Location
+     *
+     * @param source the File to Move
+     * @param target the File where the File will be moved
+     * @throws IOException throw an IOException if an error occurred
+     */
     public void moveFileTo(File source, File target) throws IOException {
         Files.move(source.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
+    /**
+     * Zipping a Complete Directory
+     *
+     * @param directory the Selected Directory for zipping
+     * @return return the Zipped Directory as .zip
+     * @throws IOException throw an IOException if an Error occurred
+     */
     public File zipDirectory(File directory) throws IOException {
         String sourceFile = directory.getName();
         FileOutputStream fos = new FileOutputStream(sourceFile + ".zip");

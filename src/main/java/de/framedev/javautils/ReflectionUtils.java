@@ -20,6 +20,15 @@ public class ReflectionUtils {
     public ReflectionUtils() {
     }
 
+    /**
+     * Return the ClassName
+     * @param class_ the Class
+     * @return return the ClassName (Package and Name as example [de.framedev.javaproject.main.Main])
+     */
+    public String getClassName(Class<?> class_) {
+        return class_.getPackage().getName() + "." + class_.getSimpleName();
+    }
+
     public Object getEnumValue(String className, String of) {
         Class<?> cls = null;
         try {
@@ -63,7 +72,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Field method : cls.getDeclaredFields()) {
-                if (method.getName() == fieldName) {
+                if (method.getName().equalsIgnoreCase(fieldName)) {
                     return method;
                 }
             }
@@ -83,7 +92,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Field method : cls.getSuperclass().getDeclaredFields()) {
-                if (method.getName() == fieldName) {
+                if (method.getName().equals(fieldName)) {
                     return method;
                 }
             }
@@ -141,7 +150,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Field field : cls.getDeclaredFields()) {
-                if (field.getName() == fieldName) {
+                if (field.getName().equals(fieldName)) {
                     return field.getAnnotation(class__) != null;
                 }
             }
@@ -161,7 +170,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Field field : cls.getSuperclass().getDeclaredFields()) {
-                if (field.getName() == fieldName) {
+                if (field.getName().equals(fieldName)) {
                     return field.getAnnotation(class__) != null;
                 }
             }
@@ -201,7 +210,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Field field : cls.getSuperclass().getDeclaredFields()) {
-                if (field.getName() == fieldName) {
+                if (field.getName().equals(fieldName)) {
                     return field.getAnnotations();
                 }
             }
@@ -221,7 +230,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equals(methodName)) {
                     return method.getAnnotations();
                 }
             }
@@ -241,7 +250,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getSuperclass().getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equals(methodName)) {
                     return method.getAnnotations();
                 }
             }
