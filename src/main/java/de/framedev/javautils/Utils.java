@@ -952,10 +952,10 @@ public class Utils {
     }
 
     /**
-     * Return an Object as <T> from a File
+     * Return an Object as (T) from a File
      *
      * @param file the Selected File where the Base64 File is stored
-     * @param <T>  the Object
+     * @param <T> the Object
      * @return return an Object from a Base64 String File
      */
     public <T> T getObjectFromBase64File(File file) {

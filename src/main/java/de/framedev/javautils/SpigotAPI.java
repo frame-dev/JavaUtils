@@ -344,16 +344,23 @@ public class SpigotAPI implements APIs {
                 if (getChunk(file, s) == null) continue;
                 Chunk chunk = getChunk(file, s);
                 if (chunk == null) continue;
-                if (isChunkEnabled(file, s))
+                if (isChunkEnabled(file, s)) {
                     chunk.setForceLoaded(true);
+                } else {
+                    chunk.setForceLoaded(false);
+                }
             }
         }
     }
 
     public static class ItemBuilder {
 
-        private final ItemStack itemStack;
-        private final ItemMeta itemMeta;
+        private ItemStack itemStack;
+        private ItemMeta itemMeta;
+
+        public ItemBuilder() {
+
+        }
 
         public ItemBuilder(ItemStack itemStack) {
             this.itemStack = itemStack;
@@ -362,6 +369,15 @@ public class SpigotAPI implements APIs {
 
         public ItemBuilder(Material material) {
             this.itemStack = new ItemStack(material);
+            this.itemMeta = itemStack.getItemMeta();
+        }
+
+        public void setItemMeta(ItemMeta itemMeta) {
+            this.itemMeta = itemMeta;
+        }
+
+        public void setItemStack(ItemStack itemStack) {
+            this.itemStack = itemStack;
             this.itemMeta = itemStack.getItemMeta();
         }
 

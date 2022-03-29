@@ -55,7 +55,7 @@ public class CustomListTest extends TestCase {
         list.add(System.getProperty("os.name") + " : " + System.getProperty("os.version"));
         list.add("Used-Memory: " + used + "Mb");
         list.add("Available Processors : " + Runtime.getRuntime().availableProcessors());
-        list.add(load);
+        list.add("CPU: " + (float) (load * 100) + "%");
 
         System.out.println(list);
 
