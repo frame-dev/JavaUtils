@@ -10,6 +10,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.opencsv.*;
 import com.opencsv.exceptions.CsvException;
+import org.apache.commons.io.IOUtils;
 import org.jetbrains.annotations.NotNull;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
@@ -506,6 +507,17 @@ public class Utils {
             FileReader reader = new FileReader(file);
             return new Gson().fromJson(reader, class_);
         } catch (Exception ignored) {
+        }
+        return null;
+    }
+
+    public <T> T getTypeFromJsonFile(InputStream inputStream, Type class_) {
+        try {
+            StringWriter writer = new StringWriter();
+            IOUtils.copy(inputStream, writer, "UTF-8");
+            String theString = writer.toString();
+            return new Gson().fromJson(theString, class_);
+        } catch (Exception ignored) {
 
         }
         return null;
@@ -955,7 +967,7 @@ public class Utils {
      * Return an Object as (T) from a File
      *
      * @param file the Selected File where the Base64 File is stored
-     * @param <T> the Object
+     * @param <T>  the Object
      * @return return an Object from a Base64 String File
      */
     public <T> T getObjectFromBase64File(File file) {
@@ -992,8 +1004,19 @@ public class Utils {
         Type type = new TypeToken<HashMap<String, Object>>() {
         }.getType();
 
+        // Return the HashMap from the File
+        if (getTypeFromJsonFile(file, type) == null)
+            return new HashMap<>();
+        return getTypeFromJsonFile(file, type);
+    }
+
+    public HashMap<String, Object> getHashMapFromJsonFile(InputStream inputStream) {
+        // Type of HashMap
+        Type type = new TypeToken<HashMap<String, Object>>() {
+        }.getType();
+
         // Return the HashMap from the File (can return null)
-        return getClassTypeFromYamlFile(file, type);
+        return getTypeFromJsonFile(inputStream, type);
     }
 
     public void createCsvFile(File file, String[] rows, List<String[]> data) throws IOException {

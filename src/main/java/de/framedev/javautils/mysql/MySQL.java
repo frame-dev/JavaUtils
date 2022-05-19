@@ -1,12 +1,14 @@
 package de.framedev.javautils.mysql;
 
-import java.io.Serializable;
 import java.sql.*;
 
 
+/**
+ * This Class is in use for MySQL Database Stuff
+ * Please only use this class if you can.
+ */
 public class MySQL {
 
-    public static String MySQLPrefix = "§a[§bMySQL§a]";
     public static String host;
     public static String user;
     public static String password;
@@ -117,92 +119,6 @@ public class MySQL {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    public static class MySQLConnection implements Serializable {
-
-        private String host;
-        private String user;
-        private String password;
-        private String database;
-        private String port;
-
-        public MySQLConnection(String host, String user, String password, String database, String port) {
-            this.host = host;
-            this.user = user;
-            this.password = password;
-            this.database = database;
-            this.port = port;
-        }
-
-        @Override
-        public String toString() {
-            return "MySQLConnection{" +
-                    "host=" + host +
-                    ",user=" + user +
-                    ",password=" + password +
-                    ",database=" + database +
-                    ",port=" + port +
-                    "}";
-        }
-
-        public static MySQLConnection getFromString(String text) {
-            text = text.replace("{", "");
-            text = text.replace("}", "");
-            text = text.replace("MySQLConnection", "");
-            String[] a = text.split(",");
-            String host = a[0].replace("host=", "");
-            String user = a[1].replace("user=", "");
-            String password = a[2].replace("password=", "");
-            String database = a[3].replace("database=", "");
-            String port = a[4].replace("port=", "");
-            MySQL.setHost(host);
-            MySQL.setUser(user);
-            MySQL.setPassword(password);
-            MySQL.setDatabase(database);
-            MySQL.setPort(port);
-            return new MySQLConnection(host, user, password, database, port);
-        }
-
-        public String getHost() {
-            return host;
-        }
-
-        public void setHost(String host) {
-            this.host = host;
-        }
-
-        public String getUser() {
-            return user;
-        }
-
-        public void setUser(String user) {
-            this.user = user;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getDatabase() {
-            return database;
-        }
-
-        public void setDatabase(String database) {
-            this.database = database;
-        }
-
-        public String getPort() {
-            return port;
-        }
-
-        public void setPort(String port) {
-            this.port = port;
         }
     }
 
