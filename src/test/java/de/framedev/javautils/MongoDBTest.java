@@ -22,7 +22,7 @@ public class MongoDBTest {
 
     @Test
     public void testMongoDB() {
-        MongoDBManager mongoDBManager = new MongoDBManager("framedev.ch", "server", "Inside71", "server");
+        MongoDBManager mongoDBManager = new MongoDBManager("framedev.ch", "server", "ej'gYn&]]EuHw7J[", "server");
         mongoDBManager.connect();
         BackendMongoDBManager backendManager = new BackendMongoDBManager(mongoDBManager);
         HashMap<String, Object> data = new HashMap<>();
