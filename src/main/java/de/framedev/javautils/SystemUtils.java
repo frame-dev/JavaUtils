@@ -26,6 +26,10 @@ public class SystemUtils {
         WINDOWS, MACOS, LINUX, OTHER;
     }
 
+    /**
+     * Return the OsType from the Operating System
+     * @return Return the OsType from the Operating System
+     */
     public OSType getOSType() {
         String OS = System.getProperty("os.name", "generic").toLowerCase();
         if (OS.contains("win")) {
@@ -72,6 +76,10 @@ public class SystemUtils {
         }
     }
 
+    /**
+     * This Method returns the LocalAddress
+     * @return return the LocalAddress
+     */
     public String getLocalAddress() {
         String ip = "";
         try {
@@ -83,6 +91,10 @@ public class SystemUtils {
         return ip;
     }
 
+    /**
+     * This Method returns the Local Hostname
+     * @return return the Local Hostname
+     */
     public String getLocalHostName() {
         String hostName = "";
         try {

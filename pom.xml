@@ -6,7 +6,7 @@
 
     <groupId>de.framedev</groupId>
     <artifactId>JavaUtils</artifactId>
-    <version>1.9.1.1-DATABASE-RELEASE</version>
+    <version>1.9.1.2-RELEASE</version>
 
     <licenses>
         <license>
@@ -57,13 +57,13 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.13.2.2</version>
+            <version>2.13.3</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
-            <version>2.13.2</version>
+            <version>2.13.3</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -115,7 +115,7 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- MySQL SQLite -->
+        <!-- MySQL SQLite
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -127,7 +127,7 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.36.0.3</version>
             <scope>compile</scope>
-        </dependency>
+        </dependency> -->
     </dependencies>
 
     <distributionManagement>

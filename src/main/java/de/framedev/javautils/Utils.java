@@ -625,6 +625,13 @@ public class Utils {
         return new MyFormatter(timeFormat).createEmptyLogger(name);
     }
 
+    /**
+     * Round a double value to the giving Places
+     *
+     * @param value  The Value to Round
+     * @param places the Places where the Comma will bee
+     * @return return the Rounden Value of the giving Value to the Places
+     */
     public double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 
@@ -1010,6 +1017,12 @@ public class Utils {
         return getTypeFromJsonFile(file, type);
     }
 
+    /**
+     * This Method creates a HashMap<String, Object> from the giving InputStream File
+     *
+     * @param inputStream the InputStream
+     * @return return a HashMap from the Giving InputStream
+     */
     public HashMap<String, Object> getHashMapFromJsonFile(InputStream inputStream) {
         // Type of HashMap
         Type type = new TypeToken<HashMap<String, Object>>() {
@@ -1064,6 +1077,14 @@ public class Utils {
         return new File(sourceFile + ".zip");
     }
 
+    /**
+     * Create a Zip Archive where the Files contains
+     *
+     * @param zipFile the Zip file where all Files contains
+     * @param files   the Selected Files for Zipping
+     * @return return the Zipped File
+     * @throws IOException throw when unsuccessful
+     */
     public File zipFiles(File zipFile, File... files) throws IOException {
         List<String> srcFiles = new ArrayList<>();
         for (File file : files) {
@@ -1138,5 +1159,17 @@ public class Utils {
             b = false;
         }
         return b;
+    }
+
+    /**
+     * Check if Server with Port is Online or can Connect
+     * Timeout default is 2500 Milliseconds
+     *
+     * @param server Server Ip or HostName
+     * @param port   port as example for MySQL 3306
+     * @return return if is Online or not
+     */
+    public boolean isOnline(String server, int port) {
+        return isOnline(server, port, 2500);
     }
 }
