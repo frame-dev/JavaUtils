@@ -37,7 +37,12 @@ public class JsonConfigurator {
         getConfig();
     }
 
-    protected HashMap<String, Object> getData() {
+    public void setFile(File file) {
+        this.file = file;
+        getConfig();
+    }
+
+    public HashMap<String, Object> getData() {
         return data;
     }
 

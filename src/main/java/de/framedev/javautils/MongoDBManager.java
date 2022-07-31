@@ -88,7 +88,6 @@ public class MongoDBManager {
                                 builder.hosts(Collections.singletonList(new ServerAddress(hostname, port))))
                         .build());
         this.database = this.client.getDatabase(dataBaseString);
-        APIs.utils.getLogger().log(Level.INFO,"Connected via LocalHost");
     }
 
     public void connect() {
@@ -100,7 +99,6 @@ public class MongoDBManager {
                                 builder.hosts(Collections.singletonList(new ServerAddress(hostname, port))))
                         .build());
         this.database = this.client.getDatabase(dataBaseString);
-        APIs.utils.getLogger().log(Level.INFO,"Connected");
     }
 
 

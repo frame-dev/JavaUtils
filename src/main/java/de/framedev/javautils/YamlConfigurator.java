@@ -18,14 +18,6 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * This Plugin was Created by FrameDev
- * Package : de.framedev.javautils
- * Date: 04.02.21
- * Project: EssentialsMini
- * Copyrighted by FrameDev
- */
-
 public class YamlConfigurator {
 
     private HashMap<String, Object> data;
@@ -36,7 +28,11 @@ public class YamlConfigurator {
         this.file = file;
     }
 
-    protected HashMap<String, Object> getData() {
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    public HashMap<String, Object> getData() {
         return data;
     }
 
@@ -46,7 +42,8 @@ public class YamlConfigurator {
         try {
             MapType type = TypeFactory.defaultInstance().constructMapType(HashMap.class, String.class, Object.class);
             hash = mapper.readValue(new FileReader(file), type);
-        } catch (Exception ignored) {
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return hash;
     }

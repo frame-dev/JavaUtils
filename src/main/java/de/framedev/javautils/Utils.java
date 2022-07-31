@@ -488,7 +488,7 @@ public class Utils {
      * Please add to the File the extension .json
      *
      * @param file   the File where al is Located
-     * @param class_ the Class form the Class Objectg
+     * @param class_ the Class form the Class Object
      * @param <T>    the Class
      * @return the Class Object from File
      */
@@ -502,6 +502,14 @@ public class Utils {
         return null;
     }
 
+    /**
+     * Please add to the File the extension .json
+     *
+     * @param file   the File where al is Located
+     * @param type the Type form the Class Object
+     * @param <T>    the Class
+     * @return the Class Object from File
+     */
     public <T> T getTypeFromJsonFile(File file, Type class_) {
         try {
             FileReader reader = new FileReader(file);
@@ -511,7 +519,15 @@ public class Utils {
         return null;
     }
 
-    public <T> T getTypeFromJsonFile(InputStream inputStream, Type class_) {
+
+    /**
+     *
+     * @param inputStream the InputStream
+     * @param class_ the Class
+     * @return return the Selected Class Object from the InputStream
+     * @param <T> T Class
+     */
+    public <T> T getTypeFromJsonInputStream(InputStream inputStream, Type class_) {
         try {
             StringWriter writer = new StringWriter();
             IOUtils.copy(inputStream, writer, "UTF-8");
@@ -640,6 +656,14 @@ public class Utils {
         return bd.doubleValue();
     }
 
+    /**
+     * Download a File from an Url and copying it to a new Folder
+     *
+     * @param fileUrl the Download Url
+     * @param location the Location where the Downloaded file will be added
+     * @param fileNameWithExtensions the FileName with the extension
+     * @param newLocation the new Location where the File will be
+     */
     public void download(String fileUrl, String location, String fileNameWithExtensions, String newLocation) {
         File file = null;
         if (location != null) {
@@ -684,6 +708,13 @@ public class Utils {
         }
     }
 
+    /**
+     * Download a File from an Url
+     *
+     * @param fileUrl Download Url for File to Download
+     * @param location the new Location of the Download
+     * @param fileNameWithExtensions the FileName with the new extension
+     */
     public void download(String fileUrl, String location, String fileNameWithExtensions) {
         File file = null;
         if (location != null) {
@@ -813,6 +844,11 @@ public class Utils {
         return System.getProperty("os.version").toLowerCase();
     }
 
+    /**
+     *
+     * @param in InputStream
+     * @return the File from the InputStream
+     */
     protected File streamToFile(InputStream in) {
         if (in == null) {
             return null;
@@ -1006,6 +1042,11 @@ public class Utils {
         saveJsonToFile(file, objects);
     }
 
+    /**
+     * This Method will get you a HashMap from the File
+     * @param file the File
+     * @return return a HashMap from the File
+     */
     public HashMap<String, Object> getHashMapFromJsonFile(File file) {
         // Type of HashMap
         Type type = new TypeToken<HashMap<String, Object>>() {
@@ -1018,7 +1059,7 @@ public class Utils {
     }
 
     /**
-     * This Method creates a HashMap<String, Object> from the giving InputStream File
+     * This Method creates a HashMap String, Object from the giving InputStream File
      *
      * @param inputStream the InputStream
      * @return return a HashMap from the Giving InputStream
@@ -1029,7 +1070,7 @@ public class Utils {
         }.getType();
 
         // Return the HashMap from the File (can return null)
-        return getTypeFromJsonFile(inputStream, type);
+        return getTypeFromJsonInputStream(inputStream, type);
     }
 
     public void createCsvFile(File file, String[] rows, List<String[]> data) throws IOException {

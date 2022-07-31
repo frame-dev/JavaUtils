@@ -730,4 +730,22 @@ public class ReflectionUtils {
         }
         return object;
     }
+
+    public Field[] getFields(String className) {
+        try {
+            Class<?> cls = Class.forName(className);
+            return cls.getFields();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Field[] getFieldsSuperClass(String className) {
+        try {
+            Class<?> cls = Class.forName(className);
+            return cls.getSuperclass().getFields();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
