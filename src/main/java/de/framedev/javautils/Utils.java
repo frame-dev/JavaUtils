@@ -506,7 +506,7 @@ public class Utils {
      * Please add to the File the extension .json
      *
      * @param file   the File where al is Located
-     * @param type the Type form the Class Object
+     * @param class_ the Type form the Class Object
      * @param <T>    the Class
      * @return the Class Object from File
      */
@@ -521,11 +521,10 @@ public class Utils {
 
 
     /**
-     *
      * @param inputStream the InputStream
-     * @param class_ the Class
+     * @param class_      the Class
+     * @param <T>         T Class
      * @return return the Selected Class Object from the InputStream
-     * @param <T> T Class
      */
     public <T> T getTypeFromJsonInputStream(InputStream inputStream, Type class_) {
         try {
@@ -659,10 +658,10 @@ public class Utils {
     /**
      * Download a File from an Url and copying it to a new Folder
      *
-     * @param fileUrl the Download Url
-     * @param location the Location where the Downloaded file will be added
+     * @param fileUrl                the Download Url
+     * @param location               the Location where the Downloaded file will be added
      * @param fileNameWithExtensions the FileName with the extension
-     * @param newLocation the new Location where the File will be
+     * @param newLocation            the new Location where the File will be
      */
     public void download(String fileUrl, String location, String fileNameWithExtensions, String newLocation) {
         File file = null;
@@ -711,8 +710,8 @@ public class Utils {
     /**
      * Download a File from an Url
      *
-     * @param fileUrl Download Url for File to Download
-     * @param location the new Location of the Download
+     * @param fileUrl                Download Url for File to Download
+     * @param location               the new Location of the Download
      * @param fileNameWithExtensions the FileName with the new extension
      */
     public void download(String fileUrl, String location, String fileNameWithExtensions) {
@@ -845,7 +844,6 @@ public class Utils {
     }
 
     /**
-     *
      * @param in InputStream
      * @return the File from the InputStream
      */
@@ -1044,6 +1042,7 @@ public class Utils {
 
     /**
      * This Method will get you a HashMap from the File
+     *
      * @param file the File
      * @return return a HashMap from the File
      */
@@ -1212,5 +1211,9 @@ public class Utils {
      */
     public boolean isOnline(String server, int port) {
         return isOnline(server, port, 2500);
+    }
+
+    public boolean saveXmlObjectList(File file, XMLList<?> list) {
+        return saveXmlToFile(file, list);
     }
 }

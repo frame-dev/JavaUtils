@@ -20,6 +20,8 @@ import org.jetbrains.annotations.NotNull;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.*;
 
 /**
@@ -32,6 +34,25 @@ import java.util.*;
  */
 
 public class SpigotAPI implements APIs {
+
+    public Version getVersion() {
+        String version = Bukkit.getBukkitVersion();
+        if (version.contains("1.19"))
+            return Version.VERSION_1_19;
+        if (version.contains("1.18"))
+            return Version.VERSION_1_18;
+        if (version.contains("1_17"))
+            return Version.VERSION_1_17;
+        if (version.contains("1.16"))
+            return Version.VERSION_1_16;
+        if (version.contains("1.15"))
+            return Version.VERSION_1_15;
+        if (version.contains("1.14"))
+            return Version.VERSION_1_14;
+        if (version.contains("1.13"))
+            return Version.VERSION_1_13;
+        return Version.NONE;
+    }
 
     /**
      * Serialize a Bukkit Object to Base64
@@ -91,7 +112,7 @@ public class SpigotAPI implements APIs {
         } catch (Exception ignored) {
 
         } finally {
-            if(reader != null) {
+            if (reader != null) {
                 try {
                     reader.close();
                 } catch (IOException ex) {
@@ -143,8 +164,152 @@ public class SpigotAPI implements APIs {
         return new ShapedRecipe(new NamespacedKey(plugin, nameSpace + "_" + result.getType().name().toLowerCase()), result);
     }
 
-    public ShapelessRecipe createShapelessRecipe(JavaPlugin plugin,String nameSpace, ItemStack result) {
+    public ShapelessRecipe createShapelessRecipe(JavaPlugin plugin, String nameSpace, ItemStack result) {
         return new ShapelessRecipe(new NamespacedKey(plugin, nameSpace + "_" + result.getType().name().toLowerCase()), result);
+    }
+
+    public HashMap<String, Object> getLatestUpdateSpigot(String resourceId) {
+        try {
+            URL url = new URL("https://api.spiget.org/v2/resources/" + resourceId + "/updates/latest");
+            URLConnection connection = url.openConnection();
+            InputStream in = connection.getInputStream();
+            File file = File.createTempFile("latest-update", ".json");
+            FileOutputStream fos = new FileOutputStream(file);
+            byte[] buf = new byte[512];
+            while (true) {
+                int len = in.read(buf);
+                if (len == -1) {
+                    break;
+                }
+                fos.write(buf, 0, len);
+            }
+            in.close();
+            fos.flush();
+            fos.close();
+            HashMap<String, Object> data = new Utils().getHashMapFromJsonFile(file);
+            return data;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public HashMap<String, Object> getLatestVersionSpigot(String resourceId) {
+        try {
+            URL url = new URL("https://api.spiget.org/v2/resources/" + resourceId + "/versions/latest");
+            URLConnection connection = url.openConnection();
+            InputStream in = connection.getInputStream();
+            File file = File.createTempFile("latest-update", ".json");
+            FileOutputStream fos = new FileOutputStream(file);
+            byte[] buf = new byte[512];
+            while (true) {
+                int len = in.read(buf);
+                if (len == -1) {
+                    break;
+                }
+                fos.write(buf, 0, len);
+            }
+            in.close();
+            fos.flush();
+            fos.close();
+            HashMap<String, Object> data = new Utils().getHashMapFromJsonFile(file);
+            return data;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public HashMap<String, Object> getAllUpdatesSpigot(String resourceId, int size) {
+        String urlString = "https://api.spiget.org/v2/resources/" + resourceId + "/updates?size=" + size;
+        try {
+            URL url = new URL(urlString);
+            URLConnection connection = url.openConnection();
+            InputStream in = connection.getInputStream();
+            File file = File.createTempFile("latest-update", ".json");
+            FileOutputStream fos = new FileOutputStream(file);
+            byte[] buf = new byte[512];
+            while (true) {
+                int len = in.read(buf);
+                if (len == -1) {
+                    break;
+                }
+                fos.write(buf, 0, len);
+            }
+            in.close();
+            fos.flush();
+            fos.close();
+            HashMap<String, Object> data = new Utils().getHashMapFromJsonFile(file);
+            return data;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public HashMap<String, Object> getResourceDetailsSpigot(String resourceId) {
+        String urlString = "https://api.spiget.org/v2/resources/" + resourceId;
+        try {
+            URL url = new URL(urlString);
+            URLConnection connection = url.openConnection();
+            InputStream in = connection.getInputStream();
+            File file = File.createTempFile("latest-update", ".json");
+            FileOutputStream fos = new FileOutputStream(file);
+            byte[] buf = new byte[512];
+            while (true) {
+                int len = in.read(buf);
+                if (len == -1) {
+                    break;
+                }
+                fos.write(buf, 0, len);
+            }
+            in.close();
+            fos.flush();
+            fos.close();
+            HashMap<String, Object> data = new Utils().getHashMapFromJsonFile(file);
+            return data;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public HashMap<String, Object> getAllReviewsSpigot(String resourceId, int size) {
+        String urlString = "https://api.spiget.org/v2/resources/" + resourceId + "/reviews?size=" + size;
+        try {
+            URL url = new URL(urlString);
+            URLConnection connection = url.openConnection();
+            InputStream in = connection.getInputStream();
+            File file = File.createTempFile("latest-update", ".json");
+            FileOutputStream fos = new FileOutputStream(file);
+            byte[] buf = new byte[512];
+            while (true) {
+                int len = in.read(buf);
+                if (len == -1) {
+                    break;
+                }
+                fos.write(buf, 0, len);
+            }
+            in.close();
+            fos.flush();
+            fos.close();
+            HashMap<String, Object> data = new Utils().getHashMapFromJsonFile(file);
+            return data;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Calculated Player Hours from Statistic
+     *
+     * @param player the Player
+     * @return return the Calculated Played Hours
+     */
+    public long calculateHours(OfflinePlayer player) {
+        if (player.hasPlayedBefore()) {
+            long played = player.getStatistic(Statistic.PLAY_ONE_MINUTE);
+            long seconds = played / 20;
+            long minutes = seconds / 60;
+            return minutes / 60;
+        }
+        return 0;
     }
 
     /**
@@ -282,17 +447,19 @@ public class SpigotAPI implements APIs {
 
         private final File file;
         private final FileConfiguration cfg;
+        private Location location;
 
-        public ChunkLoader(File file, Chunk chunk) {
+        public ChunkLoader(File file, Chunk chunk, Location location) {
             this.chunk = chunk;
             this.file = file;
             this.cfg = YamlConfiguration.loadConfiguration(file);
+            this.location = location;
         }
 
         public void saveChunk(String name) {
             cfg.set("chunk." + name + ".world", chunk.getWorld().getName());
-            cfg.set("chunk." + name + ".x", chunk.getX());
-            cfg.set("chunk." + name + ".z", chunk.getZ());
+            cfg.set("chunk." + name + ".x", location.getX());
+            cfg.set("chunk." + name + ".z", location.getZ());
             cfg.set("chunk." + name + ".loaded", true);
             chunk.setForceLoaded(true);
             try {
