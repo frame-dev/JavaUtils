@@ -9,7 +9,7 @@ package de.framedev.javautils;
  * / Copyrighted by FrameDev
  */
 
-public class Converter {
+abstract class Converter {
 
     public boolean isInteger(String number) {
         try {

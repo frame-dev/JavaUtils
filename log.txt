@@ -1,0 +1,986 @@
+Maven Clean has been Started!
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< de.framedev:JavaUtils >------------------------
+[INFO] Building JavaUtils 1.8.9-DATABASE-RELEASE
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ JavaUtils ---
+[INFO] Deleting /Users/framedev/Documents/GitHub/JavaUtils/target
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.111 s
+[INFO] Finished at: 2022-05-10T23:03:53+02:00
+[INFO] ------------------------------------------------------------------------
+Maven Clean Finished
+Maven Package Started
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< de.framedev:JavaUtils >------------------------
+[INFO] Building JavaUtils 1.8.9-DATABASE-RELEASE
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ JavaUtils ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/framedev/Documents/GitHub/JavaUtils/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ JavaUtils ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 23 source files to /Users/framedev/Documents/GitHub/JavaUtils/target/classes
+[INFO] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/SpigotAPI.java: /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/SpigotAPI.java uses or overrides a deprecated API.
+[INFO] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/SpigotAPI.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ JavaUtils ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/framedev/Documents/GitHub/JavaUtils/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ JavaUtils ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 4 source files to /Users/framedev/Documents/GitHub/JavaUtils/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ JavaUtils ---
+[INFO] Surefire report directory: /Users/framedev/Documents/GitHub/JavaUtils/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running de.framedev.javautils.MongoDBTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.731 sec
+Running de.framedev.javautils.CustomListTest
+register
+***** Heap utilization statistics [MB] *****
+
+Total Memory: 260
+Free Memory: 247
+Used Memory: 12
+Max Memory: 4096
+***** Heap utilization Ended *****
+5.71728515625
+CPU: 571.7285%
+[Mac OS X : 12.3.1, Used-Memory: 12Mb, Available Processors : 8, CPU: 571.7285%]
+/Users/framedev/Documents/GitHub/JavaUtils/Library/Application Support/JavaUtils/log-23_03_56-10.05.2022.txt
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.077 sec
+Running de.framedev.javautils.CreateFileTest
+18
+mac os x : 12.3.1
+[data, §atest, tUi&-ivksL8fcJy0Vm4Vi(6K54FMDEq5fr=&JHnHs1ojdn6r8+QzYy5CNwFcns8!n[+a#p8$tT_BTmFG1wI(xIZj*nhjMXVkvTRZYiZ0DeUG44TQh&3*Kr!4iL8A=uo)o+%cBaF8utNMqULf10f*3Hq?fKwp2!+IuiZstlpoS?lH#Gl1zJ$)0Af5Op7u5+nSMqrKl9BN]
+[new, §atest, tUi&-ivksL8fcJy0Vm4Vi(6K54FMDEq5fr=&JHnHs1ojdn6r8+QzYy5CNwFcns8!n[+a#p8$tT_BTmFG1wI(xIZj*nhjMXVkvTRZYiZ0DeUG44TQh&3*Kr!4iL8A=uo)o+%cBaF8utNMqULf10f*3Hq?fKwp2!+IuiZstlpoS?lH#Gl1zJ$)0Af5Op7u5+nSMqrKl9BN]
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec
+Running de.framedev.javautils.TimeTest
+Bye!
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.056 sec
+
+Results :
+
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:3.2.0:jar (default-jar) @ JavaUtils ---
+[INFO] Building jar: /Users/framedev/Documents/GitHub/JavaUtils/target/JavaUtils-1.8.9-DATABASE-RELEASE.jar
+[INFO] 
+[INFO] --- maven-shade-plugin:3.1.0:shade (default) @ JavaUtils ---
+[INFO] Including org.mongodb:mongodb-driver-sync:jar:4.6.0 in the shaded jar.
+[INFO] Including org.mongodb:bson:jar:4.6.0 in the shaded jar.
+[INFO] Including org.mongodb:mongodb-driver-core:jar:4.6.0 in the shaded jar.
+[INFO] Including org.mongodb:bson-record-codec:jar:4.6.0 in the shaded jar.
+[INFO] Including org.yaml:snakeyaml:jar:1.27 in the shaded jar.
+[INFO] Including com.google.code.gson:gson:jar:2.9.0 in the shaded jar.
+[INFO] Including com.fasterxml.jackson.core:jackson-databind:jar:2.13.2.2 in the shaded jar.
+[INFO] Including com.fasterxml.jackson.core:jackson-annotations:jar:2.13.2 in the shaded jar.
+[INFO] Including com.fasterxml.jackson.core:jackson-core:jar:2.13.2 in the shaded jar.
+[INFO] Including com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.13.2 in the shaded jar.
+[INFO] Including stax:stax:jar:1.2.0 in the shaded jar.
+[INFO] Including stax:stax-api:jar:1.0.1 in the shaded jar.
+[INFO] Including xpp3:xpp3:jar:1.1.4c in the shaded jar.
+[INFO] Including org.simpleframework:simple-xml:jar:2.7.1 in the shaded jar.
+[INFO] Including org.jetbrains:annotations:jar:23.0.0 in the shaded jar.
+[INFO] Including org.apache.commons:commons-configuration2:jar:2.7 in the shaded jar.
+[INFO] Including org.apache.commons:commons-lang3:jar:3.9 in the shaded jar.
+[INFO] Including org.apache.commons:commons-text:jar:1.8 in the shaded jar.
+[INFO] Including commons-logging:commons-logging:jar:1.2 in the shaded jar.
+[INFO] Including com.opencsv:opencsv:jar:5.6 in the shaded jar.
+[INFO] Including commons-beanutils:commons-beanutils:jar:1.9.4 in the shaded jar.
+[INFO] Including commons-collections:commons-collections:jar:3.2.2 in the shaded jar.
+[INFO] Including org.apache.commons:commons-collections4:jar:4.4 in the shaded jar.
+[INFO] Including commons-io:commons-io:jar:2.11.0 in the shaded jar.
+[INFO] Including mysql:mysql-connector-java:jar:8.0.29 in the shaded jar.
+[INFO] Including com.google.protobuf:protobuf-java:jar:3.19.4 in the shaded jar.
+[INFO] Including org.xerial:sqlite-jdbc:jar:3.36.0.3 in the shaded jar.
+[WARNING] Discovered module-info.class. Shading will break its strong encapsulation.
+[WARNING] xpp3-1.1.4c.jar, stax-api-1.0.1.jar define 1 overlapping classes: 
+[WARNING]   - javax.xml.namespace.QName
+[WARNING] jackson-dataformat-yaml-2.13.2.jar, annotations-23.0.0.jar, jackson-core-2.13.2.jar, gson-2.9.0.jar, jackson-databind-2.13.2.2.jar define 1 overlapping classes: 
+[WARNING]   - META-INF.versions.9.module-info
+[WARNING] maven-shade-plugin has detected that some class files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the class is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See http://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Replacing original artifact with shaded artifact.
+[INFO] Replacing /Users/framedev/Documents/GitHub/JavaUtils/target/JavaUtils-1.8.9-DATABASE-RELEASE.jar with /Users/framedev/Documents/GitHub/JavaUtils/target/JavaUtils-1.8.9-DATABASE-RELEASE-shaded.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  16.809 s
+[INFO] Finished at: 2022-05-10T23:04:10+02:00
+[INFO] ------------------------------------------------------------------------
+Maven Package Finished
+Maven Deploy Started!
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< de.framedev:JavaUtils >------------------------
+[INFO] Building JavaUtils 1.8.9-DATABASE-RELEASE
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ JavaUtils ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/framedev/Documents/GitHub/JavaUtils/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ JavaUtils ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ JavaUtils ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /Users/framedev/Documents/GitHub/JavaUtils/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ JavaUtils ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ JavaUtils ---
+[INFO] Surefire report directory: /Users/framedev/Documents/GitHub/JavaUtils/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running de.framedev.javautils.MongoDBTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.725 sec
+Running de.framedev.javautils.CustomListTest
+register
+***** Heap utilization statistics [MB] *****
+
+Total Memory: 260
+Free Memory: 246
+Used Memory: 13
+Max Memory: 4096
+***** Heap utilization Ended *****
+5.84814453125
+CPU: 584.81445%
+[Mac OS X : 12.3.1, Used-Memory: 13Mb, Available Processors : 8, CPU: 584.81445%]
+/Users/framedev/Documents/GitHub/JavaUtils/Library/Application Support/JavaUtils/log-23_04_12-10.05.2022.txt
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.111 sec
+Running de.framedev.javautils.CreateFileTest
+18
+mac os x : 12.3.1
+[data, §atest, $PiB&v3G*lHYu8k&L*v3bJqT$Y0Z-qQ!AeShrp5Zu9FGo()z?%+NJIBsU)47w(]rrRLa(kHvrBr6&2CU]OTAO(FjmW%OhPK4$fMTu&*Pnro0?JR2!rsh%#qxWNEGmjT)&%n$2z1@*pns[L!r%+u3?(g[v=K0ACfRPSx+eEG4-hpIv#GKDSo1xiNg[P%_IH$JfHH@2Xp+]
+[new, §atest, $PiB&v3G*lHYu8k&L*v3bJqT$Y0Z-qQ!AeShrp5Zu9FGo()z?%+NJIBsU)47w(]rrRLa(kHvrBr6&2CU]OTAO(FjmW%OhPK4$fMTu&*Pnro0?JR2!rsh%#qxWNEGmjT)&%n$2z1@*pns[L!r%+u3?(g[v=K0ACfRPSx+eEG4-hpIv#GKDSo1xiNg[P%_IH$JfHH@2Xp+]
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec
+Running de.framedev.javautils.TimeTest
+Bye!
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.064 sec
+
+Results :
+
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-jar-plugin:3.2.0:jar (default-jar) @ JavaUtils ---
+[INFO] 
+[INFO] --- maven-shade-plugin:3.1.0:shade (default) @ JavaUtils ---
+[INFO] Including org.mongodb:mongodb-driver-sync:jar:4.6.0 in the shaded jar.
+[INFO] Including org.mongodb:bson:jar:4.6.0 in the shaded jar.
+[INFO] Including org.mongodb:mongodb-driver-core:jar:4.6.0 in the shaded jar.
+[INFO] Including org.mongodb:bson-record-codec:jar:4.6.0 in the shaded jar.
+[INFO] Including org.yaml:snakeyaml:jar:1.27 in the shaded jar.
+[INFO] Including com.google.code.gson:gson:jar:2.9.0 in the shaded jar.
+[INFO] Including com.fasterxml.jackson.core:jackson-databind:jar:2.13.2.2 in the shaded jar.
+[INFO] Including com.fasterxml.jackson.core:jackson-annotations:jar:2.13.2 in the shaded jar.
+[INFO] Including com.fasterxml.jackson.core:jackson-core:jar:2.13.2 in the shaded jar.
+[INFO] Including com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.13.2 in the shaded jar.
+[INFO] Including stax:stax:jar:1.2.0 in the shaded jar.
+[INFO] Including stax:stax-api:jar:1.0.1 in the shaded jar.
+[INFO] Including xpp3:xpp3:jar:1.1.4c in the shaded jar.
+[INFO] Including org.simpleframework:simple-xml:jar:2.7.1 in the shaded jar.
+[INFO] Including org.jetbrains:annotations:jar:23.0.0 in the shaded jar.
+[INFO] Including org.apache.commons:commons-configuration2:jar:2.7 in the shaded jar.
+[INFO] Including org.apache.commons:commons-lang3:jar:3.9 in the shaded jar.
+[INFO] Including org.apache.commons:commons-text:jar:1.8 in the shaded jar.
+[INFO] Including commons-logging:commons-logging:jar:1.2 in the shaded jar.
+[INFO] Including com.opencsv:opencsv:jar:5.6 in the shaded jar.
+[INFO] Including commons-beanutils:commons-beanutils:jar:1.9.4 in the shaded jar.
+[INFO] Including commons-collections:commons-collections:jar:3.2.2 in the shaded jar.
+[INFO] Including org.apache.commons:commons-collections4:jar:4.4 in the shaded jar.
+[INFO] Including commons-io:commons-io:jar:2.11.0 in the shaded jar.
+[INFO] Including mysql:mysql-connector-java:jar:8.0.29 in the shaded jar.
+[INFO] Including com.google.protobuf:protobuf-java:jar:3.19.4 in the shaded jar.
+[INFO] Including org.xerial:sqlite-jdbc:jar:3.36.0.3 in the shaded jar.
+[WARNING] Discovered module-info.class. Shading will break its strong encapsulation.
+[WARNING] jackson-databind-2.13.2.2.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 706 overlapping classes: 
+[WARNING]   - com.fasterxml.jackson.databind.introspect.AnnotationCollector$NoAnnotations
+[WARNING]   - com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator$Builder
+[WARNING]   - com.fasterxml.jackson.databind.BeanDescription
+[WARNING]   - com.fasterxml.jackson.databind.deser.impl.BeanAsArrayBuilderDeserializer
+[WARNING]   - com.fasterxml.jackson.databind.introspect.AnnotatedMethodMap
+[WARNING]   - com.fasterxml.jackson.databind.SerializerProvider
+[WARNING]   - com.fasterxml.jackson.databind.introspect.AnnotationCollector$OneAnnotation
+[WARNING]   - com.fasterxml.jackson.databind.ser.std.StaticListSerializerBase
+[WARNING]   - com.fasterxml.jackson.databind.ser.std.NumberSerializers$ShortSerializer
+[WARNING]   - com.fasterxml.jackson.databind.ser.BeanSerializerFactory
+[WARNING]   - 696 more...
+[WARNING] JavaUtils-1.8.9-DATABASE-RELEASE.jar, commons-io-2.11.0.jar define 201 overlapping classes: 
+[WARNING]   - org.apache.commons.io.FileCleaningTracker
+[WARNING]   - org.apache.commons.io.comparator.SizeFileComparator
+[WARNING]   - org.apache.commons.io.file.PathFilter
+[WARNING]   - org.apache.commons.io.output.BrokenWriter
+[WARNING]   - org.apache.commons.io.ByteOrderParser
+[WARNING]   - org.apache.commons.io.filefilter.EmptyFileFilter
+[WARNING]   - org.apache.commons.io.monitor.FileEntry
+[WARNING]   - org.apache.commons.io.StreamIterator
+[WARNING]   - org.apache.commons.io.input.TailerListener
+[WARNING]   - org.apache.commons.io.IOExceptionWithCause
+[WARNING]   - 191 more...
+[WARNING] jackson-dataformat-yaml-2.13.2.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 17 overlapping classes: 
+[WARNING]   - com.fasterxml.jackson.dataformat.yaml.YAMLMapper$Builder
+[WARNING]   - com.fasterxml.jackson.dataformat.yaml.snakeyaml.error.Mark
+[WARNING]   - com.fasterxml.jackson.dataformat.yaml.YAMLGenerator
+[WARNING]   - com.fasterxml.jackson.dataformat.yaml.UTF8Reader
+[WARNING]   - com.fasterxml.jackson.dataformat.yaml.YAMLParser
+[WARNING]   - com.fasterxml.jackson.dataformat.yaml.util.StringQuotingChecker
+[WARNING]   - com.fasterxml.jackson.dataformat.yaml.YAMLGenerator$Feature
+[WARNING]   - com.fasterxml.jackson.dataformat.yaml.JacksonYAMLParseException
+[WARNING]   - com.fasterxml.jackson.dataformat.yaml.YAMLParser$Feature
+[WARNING]   - com.fasterxml.jackson.dataformat.yaml.util.StringQuotingChecker$Default
+[WARNING]   - 7 more...
+[WARNING] JavaUtils-1.8.9-DATABASE-RELEASE.jar, commons-beanutils-1.9.4.jar define 137 overlapping classes: 
+[WARNING]   - org.apache.commons.beanutils.ConvertUtilsBean
+[WARNING]   - org.apache.commons.beanutils.converters.SqlTimeConverter
+[WARNING]   - org.apache.commons.beanutils.BaseDynaBeanMapDecorator$MapEntry
+[WARNING]   - org.apache.commons.beanutils.converters.FloatArrayConverter
+[WARNING]   - org.apache.commons.beanutils.BeanMap$1
+[WARNING]   - org.apache.commons.beanutils.BeanMap$4
+[WARNING]   - org.apache.commons.beanutils.converters.LongArrayConverter
+[WARNING]   - org.apache.commons.beanutils.converters.BooleanArrayConverter
+[WARNING]   - org.apache.commons.beanutils.converters.StringConverter
+[WARNING]   - org.apache.commons.beanutils.BeanMap$12
+[WARNING]   - 127 more...
+[WARNING] commons-collections-3.2.2.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 460 overlapping classes: 
+[WARNING]   - org.apache.commons.collections.map.AbstractLinkedMap$LinkMapIterator
+[WARNING]   - org.apache.commons.collections.bidimap.TreeBidiMap$Node
+[WARNING]   - org.apache.commons.collections.comparators.TransformingComparator
+[WARNING]   - org.apache.commons.collections.iterators.AbstractListIteratorDecorator
+[WARNING]   - org.apache.commons.collections.bag.AbstractMapBag$BagIterator
+[WARNING]   - org.apache.commons.collections.map.AbstractReferenceMap$ReferenceKeySetIterator
+[WARNING]   - org.apache.commons.collections.DoubleOrderedMap$3$1
+[WARNING]   - org.apache.commons.collections.StaticBucketMap
+[WARNING]   - org.apache.commons.collections.ReferenceMap$1
+[WARNING]   - org.apache.commons.collections.comparators.ComparatorChain
+[WARNING]   - 450 more...
+[WARNING] JavaUtils-1.8.9-DATABASE-RELEASE.jar, commons-logging-1.2.jar define 28 overlapping classes: 
+[WARNING]   - org.apache.commons.logging.LogSource
+[WARNING]   - org.apache.commons.logging.impl.ServletContextCleaner
+[WARNING]   - org.apache.commons.logging.Log
+[WARNING]   - org.apache.commons.logging.LogFactory$3
+[WARNING]   - org.apache.commons.logging.impl.LogFactoryImpl$2
+[WARNING]   - org.apache.commons.logging.impl.LogKitLogger
+[WARNING]   - org.apache.commons.logging.LogConfigurationException
+[WARNING]   - org.apache.commons.logging.impl.Jdk14Logger
+[WARNING]   - org.apache.commons.logging.impl.WeakHashtable$Referenced
+[WARNING]   - org.apache.commons.logging.impl.WeakHashtable$WeakKey
+[WARNING]   - 18 more...
+[WARNING] xpp3-1.1.4c.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 55 overlapping classes: 
+[WARNING]   - org.xmlpull.v1.builder.impl.XmlElementImpl$3
+[WARNING]   - org.xmlpull.v1.builder.XmlInfosetBuilder
+[WARNING]   - org.xmlpull.v1.builder.XmlBuilderException
+[WARNING]   - org.xmlpull.mxp1.MXParser
+[WARNING]   - org.xmlpull.mxp1.MXParserCachingStrings
+[WARNING]   - org.xmlpull.v1.builder.adapter.XmlElementAdapter
+[WARNING]   - org.xmlpull.v1.builder.XmlCharacters
+[WARNING]   - org.xmlpull.v1.builder.XmlDoctype
+[WARNING]   - org.xmlpull.v1.XmlPullParserFactory
+[WARNING]   - org.xmlpull.v1.wrapper.classic.XmlSerializerDelegate
+[WARNING]   - 45 more...
+[WARNING] commons-configuration2-2.7.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 364 overlapping classes: 
+[WARNING]   - org.apache.commons.configuration2.builder.combined.FileExtensionConfigurationBuilderProvider
+[WARNING]   - org.apache.commons.configuration2.ConfigurationUtils$1
+[WARNING]   - org.apache.commons.configuration2.io.FileOptionsProvider
+[WARNING]   - org.apache.commons.configuration2.convert.DefaultConversionHandler$1
+[WARNING]   - org.apache.commons.configuration2.io.VFSFileSystem$VFSURLStreamHandler
+[WARNING]   - org.apache.commons.configuration2.DynamicCombinedConfiguration
+[WARNING]   - org.apache.commons.configuration2.YAMLConfiguration
+[WARNING]   - org.apache.commons.configuration2.sync.LockMode
+[WARNING]   - org.apache.commons.configuration2.reloading.PeriodicReloadingTrigger
+[WARNING]   - org.apache.commons.configuration2.interpol.DummyLookup
+[WARNING]   - 354 more...
+[WARNING] commons-lang3-3.9.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 281 overlapping classes: 
+[WARNING]   - org.apache.commons.lang3.time.StopWatch$State$1
+[WARNING]   - org.apache.commons.lang3.ThreadUtils$1
+[WARNING]   - org.apache.commons.lang3.ThreadUtils$ThreadGroupPredicate
+[WARNING]   - org.apache.commons.lang3.builder.MultilineRecursiveToStringStyle
+[WARNING]   - org.apache.commons.lang3.concurrent.AbstractCircuitBreaker
+[WARNING]   - org.apache.commons.lang3.SerializationUtils
+[WARNING]   - org.apache.commons.lang3.time.FastDatePrinter$TwentyFourHourField
+[WARNING]   - org.apache.commons.lang3.LocaleUtils
+[WARNING]   - org.apache.commons.lang3.concurrent.ConcurrentException
+[WARNING]   - org.apache.commons.lang3.CharRange
+[WARNING]   - 271 more...
+[WARNING] simple-xml-2.7.1.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 387 overlapping classes: 
+[WARNING]   - org.simpleframework.xml.core.Schema
+[WARNING]   - org.simpleframework.xml.core.ElementListParameter
+[WARNING]   - org.simpleframework.xml.stream.Formatter$Tag
+[WARNING]   - org.simpleframework.xml.core.Converter
+[WARNING]   - org.simpleframework.xml.stream.DocumentReader$Text
+[WARNING]   - org.simpleframework.xml.stream.PullReader$Entry
+[WARNING]   - org.simpleframework.xml.core.Caller
+[WARNING]   - org.simpleframework.xml.stream.InputNode
+[WARNING]   - org.simpleframework.xml.core.AnnotationFactory
+[WARNING]   - org.simpleframework.xml.core.Validate
+[WARNING]   - 377 more...
+[WARNING] bson-record-codec-4.6.0.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 6 overlapping classes: 
+[WARNING]   - org.bson.codecs.record.RecordCodecProvider
+[WARNING]   - org.bson.codecs.record.annotations.BsonRepresentation
+[WARNING]   - org.bson.codecs.record.annotations.BsonProperty
+[WARNING]   - org.bson.codecs.record.RecordCodec
+[WARNING]   - org.bson.codecs.record.RecordCodec$ComponentModel
+[WARNING]   - org.bson.codecs.record.annotations.BsonId
+[WARNING] snakeyaml-1.27.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 216 overlapping classes: 
+[WARNING]   - org.yaml.snakeyaml.emitter.Emitter$ExpectBlockMappingValue
+[WARNING]   - org.yaml.snakeyaml.parser.ParserImpl$ParseBlockNode
+[WARNING]   - org.yaml.snakeyaml.emitter.Emitter$ExpectBlockMappingSimpleValue
+[WARNING]   - org.yaml.snakeyaml.emitter.Emitter$ExpectDocumentEnd
+[WARNING]   - org.yaml.snakeyaml.Yaml$3
+[WARNING]   - org.yaml.snakeyaml.emitter.Emitter$ExpectBlockSequenceItem
+[WARNING]   - org.yaml.snakeyaml.parser.ParserImpl$ParseBlockSequenceEntry
+[WARNING]   - org.yaml.snakeyaml.util.ArrayUtils
+[WARNING]   - org.yaml.snakeyaml.tokens.Token$ID
+[WARNING]   - org.yaml.snakeyaml.reader.StreamReader
+[WARNING]   - 206 more...
+[WARNING] jackson-core-2.13.2.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 127 overlapping classes: 
+[WARNING]   - com.fasterxml.jackson.core.JsonGenerator$Feature
+[WARNING]   - com.fasterxml.jackson.core.json.JsonReadFeature
+[WARNING]   - com.fasterxml.jackson.core.util.ThreadLocalBufferManager$ThreadLocalBufferManagerHolder
+[WARNING]   - com.fasterxml.jackson.core.util.Separators
+[WARNING]   - com.fasterxml.jackson.core.io.SegmentedStringWriter
+[WARNING]   - com.fasterxml.jackson.core.TreeNode
+[WARNING]   - com.fasterxml.jackson.core.sym.Name
+[WARNING]   - com.fasterxml.jackson.core.util.RequestPayload
+[WARNING]   - com.fasterxml.jackson.core.util.JsonGeneratorDelegate
+[WARNING]   - com.fasterxml.jackson.core.async.NonBlockingInputFeeder
+[WARNING]   - 117 more...
+[WARNING] stax-api-1.0.1.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 39 overlapping classes: 
+[WARNING]   - javax.xml.stream.XMLEventReader
+[WARNING]   - javax.xml.stream.StreamFilter
+[WARNING]   - javax.xml.namespace.NamespaceContext
+[WARNING]   - javax.xml.stream.FactoryFinder$ClassLoaderFinderConcrete
+[WARNING]   - javax.xml.stream.util.StreamReaderDelegate
+[WARNING]   - javax.xml.stream.events.StartDocument
+[WARNING]   - javax.xml.stream.EventFilter
+[WARNING]   - javax.xml.stream.XMLEventWriter
+[WARNING]   - javax.xml.stream.XMLStreamConstants
+[WARNING]   - javax.xml.stream.events.EntityDeclaration
+[WARNING]   - 29 more...
+[WARNING] sqlite-jdbc-3.36.0.3.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 105 overlapping classes: 
+[WARNING]   - org.sqlite.ProgressHandler
+[WARNING]   - org.sqlite.date.FastDateFormat
+[WARNING]   - org.sqlite.ExtendedCommand$SQLExtension
+[WARNING]   - org.sqlite.core.CorePreparedStatement
+[WARNING]   - org.sqlite.javax.SQLitePooledConnectionHandle
+[WARNING]   - org.sqlite.date.FastDatePrinter$PaddedNumberField
+[WARNING]   - org.sqlite.jdbc4.JDBC4Connection
+[WARNING]   - org.sqlite.SQLiteJDBCLoader$1
+[WARNING]   - org.sqlite.jdbc3.JDBC3DatabaseMetaData
+[WARNING]   - org.sqlite.date.FastDatePrinter$NumberRule
+[WARNING]   - 95 more...
+[WARNING] gson-2.9.0.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 188 overlapping classes: 
+[WARNING]   - com.google.gson.internal.sql.SqlTimeTypeAdapter$1
+[WARNING]   - com.google.gson.internal.bind.JsonTreeWriter
+[WARNING]   - com.google.gson.internal.ConstructorConstructor$15
+[WARNING]   - com.google.gson.internal.bind.TreeTypeAdapter$GsonContextImpl
+[WARNING]   - com.google.gson.internal.Excluder
+[WARNING]   - com.google.gson.JsonDeserializationContext
+[WARNING]   - com.google.gson.internal.$Gson$Types
+[WARNING]   - com.google.gson.internal.LinkedTreeMap$KeySet
+[WARNING]   - com.google.gson.FieldNamingPolicy$5
+[WARNING]   - com.google.gson.internal.UnsafeAllocator$2
+[WARNING]   - 178 more...
+[WARNING] protobuf-java-3.19.4.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 675 overlapping classes: 
+[WARNING]   - com.google.protobuf.CodedOutputStream$AbstractBufferedEncoder
+[WARNING]   - com.google.protobuf.ManifestSchemaFactory$CompositeMessageInfoFactory
+[WARNING]   - com.google.protobuf.UInt32Value$Builder
+[WARNING]   - com.google.protobuf.TimestampProto
+[WARNING]   - com.google.protobuf.UnsafeUtil
+[WARNING]   - com.google.protobuf.DescriptorProtos$UninterpretedOption$NamePart$1
+[WARNING]   - com.google.protobuf.LazyStringArrayList$ByteArrayListView
+[WARNING]   - com.google.protobuf.DescriptorProtos$OneofOptions
+[WARNING]   - com.google.protobuf.DescriptorProtos$MethodDescriptorProto$Builder
+[WARNING]   - com.google.protobuf.DescriptorProtos$UninterpretedOption$NamePartOrBuilder
+[WARNING]   - 665 more...
+[WARNING] annotations-23.0.0.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 57 overlapping classes: 
+[WARNING]   - org.intellij.lang.annotations.JdkConstants$CalendarMonth
+[WARNING]   - org.intellij.lang.annotations.JdkConstants$ListSelectionMode
+[WARNING]   - org.jetbrains.annotations.MustBeInvokedByOverriders
+[WARNING]   - org.intellij.lang.annotations.JdkConstants$TitledBorderJustification
+[WARNING]   - org.intellij.lang.annotations.Pattern
+[WARNING]   - org.intellij.lang.annotations.JdkConstants$FlowLayoutAlignment
+[WARNING]   - org.intellij.lang.annotations.JdkConstants$TreeSelectionMode
+[WARNING]   - org.jetbrains.annotations.Async$Schedule
+[WARNING]   - org.jetbrains.annotations.Debug
+[WARNING]   - org.jetbrains.annotations.VisibleForTesting
+[WARNING]   - 47 more...
+[WARNING] mongodb-driver-core-4.6.0.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 1064 overlapping classes: 
+[WARNING]   - com.mongodb.internal.connection.ProtocolHelper
+[WARNING]   - com.mongodb.internal.connection.UsageTrackingInternalConnection$4
+[WARNING]   - com.mongodb.internal.connection.AwsAuthenticator
+[WARNING]   - com.mongodb.internal.operation.OperationHelper$3
+[WARNING]   - com.mongodb.ReadConcernLevel
+[WARNING]   - com.mongodb.internal.connection.IndexMap$HashBased
+[WARNING]   - com.mongodb.internal.connection.DefaultConnectionPool$OpenWithConcurrencyLimitMode
+[WARNING]   - com.mongodb.internal.connection.ConcurrentPool$ItemFactory
+[WARNING]   - com.mongodb.client.model.GraphLookupOptions
+[WARNING]   - com.mongodb.Block
+[WARNING]   - 1054 more...
+[WARNING] xpp3-1.1.4c.jar, stax-api-1.0.1.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 1 overlapping classes: 
+[WARNING]   - javax.xml.namespace.QName
+[WARNING] bson-4.6.0.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 374 overlapping classes: 
+[WARNING]   - org.bson.BSONCallbackAdapter
+[WARNING]   - org.bson.codecs.BsonDBPointerCodec
+[WARNING]   - org.bson.json.LegacyExtendedJsonDateTimeConverter
+[WARNING]   - org.bson.codecs.OverridableUuidRepresentationCodec
+[WARNING]   - org.bson.codecs.pojo.Convention
+[WARNING]   - org.bson.codecs.DocumentCodec$1
+[WARNING]   - org.bson.codecs.pojo.annotations.BsonId
+[WARNING]   - org.bson.codecs.jsr310.LocalDateCodec
+[WARNING]   - org.bson.json.ShellUndefinedConverter
+[WARNING]   - org.bson.codecs.pojo.EnumPropertyCodecProvider
+[WARNING]   - 364 more...
+[WARNING] JavaUtils-1.8.9-DATABASE-RELEASE.jar, stax-1.2.0.jar define 91 overlapping classes: 
+[WARNING]   - com.wutka.dtd.DTDPublic
+[WARNING]   - com.wutka.dtd.DTDMixed
+[WARNING]   - com.wutka.dtd.DTDEnumeration
+[WARNING]   - com.bea.xml.stream.events.ProcessingInstructionEvent
+[WARNING]   - com.wutka.dtd.DTDAttlist
+[WARNING]   - com.wutka.dtd.DTDNotationList
+[WARNING]   - com.wutka.dtd.DTDComment
+[WARNING]   - com.bea.xml.stream.ConfigurationContextBase
+[WARNING]   - com.bea.xml.stream.util.CircularQueue
+[WARNING]   - com.bea.xml.stream.StreamReaderFilter
+[WARNING]   - 81 more...
+[WARNING] mysql-connector-java-8.0.29.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 1064 overlapping classes: 
+[WARNING]   - com.mysql.cj.protocol.WriterWatcher
+[WARNING]   - com.mysql.cj.x.protobuf.MysqlxResultset$ColumnMetaData$Builder
+[WARNING]   - com.mysql.cj.protocol.a.result.ResultsetRowsStatic
+[WARNING]   - com.mysql.cj.result.SqlTimestampValueFactory
+[WARNING]   - com.mysql.cj.xdevapi.DatabaseObject$DbObjectStatus
+[WARNING]   - com.mysql.cj.jdbc.MysqlSavepoint
+[WARNING]   - com.mysql.cj.log.LoggingProfilerEventHandler
+[WARNING]   - com.mysql.cj.protocol.a.NativeSocketConnection$1
+[WARNING]   - com.mysql.cj.jdbc.NonRegisteringDriver$1
+[WARNING]   - com.mysql.cj.x.protobuf.Mysqlx$ServerMessagesOrBuilder
+[WARNING]   - 1054 more...
+[WARNING] commons-collections4-4.4.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 524 overlapping classes: 
+[WARNING]   - org.apache.commons.collections4.trie.AbstractPatriciaTrie$KeySet$KeyIterator
+[WARNING]   - org.apache.commons.collections4.map.Flat3Map$KeySet
+[WARNING]   - org.apache.commons.collections4.set.AbstractSetDecorator
+[WARNING]   - org.apache.commons.collections4.bidimap.TreeBidiMap$ViewMapIterator
+[WARNING]   - org.apache.commons.collections4.multimap.AbstractMultiValuedMapDecorator
+[WARNING]   - org.apache.commons.collections4.iterators.EntrySetMapIterator
+[WARNING]   - org.apache.commons.collections4.bidimap.AbstractDualBidiMap$View
+[WARNING]   - org.apache.commons.collections4.set.CompositeSet$SetMutator
+[WARNING]   - org.apache.commons.collections4.multiset.SynchronizedMultiSet
+[WARNING]   - org.apache.commons.collections4.functors.PrototypeFactory$PrototypeSerializationFactory
+[WARNING]   - 514 more...
+[WARNING] opencsv-5.6.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 145 overlapping classes: 
+[WARNING]   - com.opencsv.bean.exceptionhandler.ExceptionHandlerIgnore
+[WARNING]   - com.opencsv.bean.CsvRecurse
+[WARNING]   - com.opencsv.bean.CsvNumbers
+[WARNING]   - com.opencsv.bean.concurrent.ProcessCsvBean
+[WARNING]   - com.opencsv.bean.processor.StringProcessor
+[WARNING]   - com.opencsv.bean.AbstractMappingStrategy$RecursiveType
+[WARNING]   - com.opencsv.bean.CsvBindByNames
+[WARNING]   - com.opencsv.bean.exceptionhandler.ExceptionHandlerThrow
+[WARNING]   - com.opencsv.bean.ConverterNumber
+[WARNING]   - com.opencsv.exceptions.CsvConstraintViolationException
+[WARNING]   - 135 more...
+[WARNING] commons-text-1.8.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 134 overlapping classes: 
+[WARNING]   - org.apache.commons.text.StrMatcher$TrimMatcher
+[WARNING]   - org.apache.commons.text.diff.InsertCommand
+[WARNING]   - org.apache.commons.text.diff.KeepCommand
+[WARNING]   - org.apache.commons.text.lookup.Base64EncoderStringLookup
+[WARNING]   - org.apache.commons.text.similarity.LevenshteinResults
+[WARNING]   - org.apache.commons.text.translate.JavaUnicodeEscaper
+[WARNING]   - org.apache.commons.text.StrBuilder$StrBuilderTokenizer
+[WARNING]   - org.apache.commons.text.CharacterPredicates$4
+[WARNING]   - org.apache.commons.text.StrLookup$ResourceBundleLookup
+[WARNING]   - org.apache.commons.text.CharacterPredicates$1
+[WARNING]   - 124 more...
+[WARNING] jackson-dataformat-yaml-2.13.2.jar, annotations-23.0.0.jar, jackson-core-2.13.2.jar, gson-2.9.0.jar, jackson-databind-2.13.2.2.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 1 overlapping classes: 
+[WARNING]   - META-INF.versions.9.module-info
+[WARNING] jackson-annotations-2.13.2.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 71 overlapping classes: 
+[WARNING]   - com.fasterxml.jackson.annotation.JsonAutoDetect
+[WARNING]   - com.fasterxml.jackson.annotation.JsonInclude
+[WARNING]   - com.fasterxml.jackson.annotation.ObjectIdGenerators
+[WARNING]   - com.fasterxml.jackson.annotation.JsonFormat$Features
+[WARNING]   - com.fasterxml.jackson.annotation.JsonFormat$Feature
+[WARNING]   - com.fasterxml.jackson.annotation.JsonIgnore
+[WARNING]   - com.fasterxml.jackson.annotation.JsonSetter
+[WARNING]   - com.fasterxml.jackson.annotation.JsonTypeInfo$None
+[WARNING]   - com.fasterxml.jackson.annotation.JsonFormat$Shape
+[WARNING]   - com.fasterxml.jackson.annotation.JsonSubTypes
+[WARNING]   - 61 more...
+[WARNING] mongodb-driver-sync-4.6.0.jar, JavaUtils-1.8.9-DATABASE-RELEASE.jar define 78 overlapping classes: 
+[WARNING]   - com.mongodb.client.ListCollectionsIterable
+[WARNING]   - com.mongodb.client.internal.MongoMappingCursor
+[WARNING]   - com.mongodb.client.internal.MongoClientDelegate$DelegateOperationExecutor
+[WARNING]   - com.mongodb.client.internal.MappingIterable$1
+[WARNING]   - com.mongodb.client.vault.ClientEncryption
+[WARNING]   - com.mongodb.client.gridfs.package-info
+[WARNING]   - com.mongodb.client.gridfs.GridFSFindIterable
+[WARNING]   - com.mongodb.client.internal.ChangeStreamIterableImpl$1
+[WARNING]   - com.mongodb.client.AggregateIterable
+[WARNING]   - com.mongodb.client.ClientSession
+[WARNING]   - 68 more...
+[WARNING] maven-shade-plugin has detected that some class files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the class is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See http://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Replacing original artifact with shaded artifact.
+[INFO] Replacing /Users/framedev/Documents/GitHub/JavaUtils/target/JavaUtils-1.8.9-DATABASE-RELEASE.jar with /Users/framedev/Documents/GitHub/JavaUtils/target/JavaUtils-1.8.9-DATABASE-RELEASE-shaded.jar
+[INFO] 
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ JavaUtils ---
+[INFO] Installing /Users/framedev/Documents/GitHub/JavaUtils/target/JavaUtils-1.8.9-DATABASE-RELEASE.jar to /Users/framedev/.m2/repository/de/framedev/JavaUtils/1.8.9-DATABASE-RELEASE/JavaUtils-1.8.9-DATABASE-RELEASE.jar
+[INFO] Installing /Users/framedev/Documents/GitHub/JavaUtils/pom.xml to /Users/framedev/.m2/repository/de/framedev/JavaUtils/1.8.9-DATABASE-RELEASE/JavaUtils-1.8.9-DATABASE-RELEASE.pom
+[INFO] 
+[INFO] --- maven-deploy-plugin:2.8.2:deploy (default-deploy) @ JavaUtils ---
+Uploading to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/1.8.9-DATABASE-RELEASE/JavaUtils-1.8.9-DATABASE-RELEASE.jar
+Progress (1): 0.2/23 MBProgress (1): 0.5/23 MBProgress (1): 0.7/23 MBProgress (1): 0.9/23 MBProgress (1): 1.1/23 MBProgress (1): 1.4/23 MBProgress (1): 1.6/23 MBProgress (1): 1.8/23 MBProgress (1): 2.1/23 MBProgress (1): 2.3/23 MBProgress (1): 2.5/23 MBProgress (1): 2.8/23 MBProgress (1): 3.0/23 MBProgress (1): 3.2/23 MBProgress (1): 3.4/23 MBProgress (1): 3.7/23 MBProgress (1): 3.9/23 MBProgress (1): 4.1/23 MBProgress (1): 4.4/23 MBProgress (1): 4.6/23 MBProgress (1): 4.8/23 MBProgress (1): 5.0/23 MBProgress (1): 5.3/23 MBProgress (1): 5.5/23 MBProgress (1): 5.7/23 MBProgress (1): 6.0/23 MBProgress (1): 6.2/23 MBProgress (1): 6.4/23 MBProgress (1): 6.7/23 MBProgress (1): 6.9/23 MBProgress (1): 7.1/23 MBProgress (1): 7.3/23 MBProgress (1): 7.6/23 MBProgress (1): 7.8/23 MBProgress (1): 8.0/23 MBProgress (1): 8.3/23 MBProgress (1): 8.5/23 MBProgress (1): 8.7/23 MBProgress (1): 8.9/23 MBProgress (1): 9.2/23 MBProgress (1): 9.4/23 MBProgress (1): 9.6/23 MBProgress (1): 9.9/23 MBProgress (1): 10/23 MB Progress (1): 10/23 MBProgress (1): 11/23 MBProgress (1): 11/23 MBProgress (1): 11/23 MBProgress (1): 11/23 MBProgress (1): 11/23 MBProgress (1): 12/23 MBProgress (1): 12/23 MBProgress (1): 12/23 MBProgress (1): 12/23 MBProgress (1): 13/23 MBProgress (1): 13/23 MBProgress (1): 13/23 MBProgress (1): 13/23 MBProgress (1): 14/23 MBProgress (1): 14/23 MBProgress (1): 14/23 MBProgress (1): 14/23 MBProgress (1): 14/23 MBProgress (1): 15/23 MBProgress (1): 15/23 MBProgress (1): 15/23 MBProgress (1): 15/23 MBProgress (1): 16/23 MBProgress (1): 16/23 MBProgress (1): 16/23 MBProgress (1): 16/23 MBProgress (1): 17/23 MBProgress (1): 17/23 MBProgress (1): 17/23 MBProgress (1): 17/23 MBProgress (1): 17/23 MBProgress (1): 18/23 MBProgress (1): 18/23 MBProgress (1): 18/23 MBProgress (1): 18/23 MBProgress (1): 19/23 MBProgress (1): 19/23 MBProgress (1): 19/23 MBProgress (1): 19/23 MBProgress (1): 19/23 MBProgress (1): 20/23 MBProgress (1): 20/23 MBProgress (1): 20/23 MBProgress (1): 20/23 MBProgress (1): 21/23 MBProgress (1): 21/23 MBProgress (1): 21/23 MBProgress (1): 21/23 MBProgress (1): 22/23 MBProgress (1): 22/23 MBProgress (1): 22/23 MBProgress (1): 22/23 MBProgress (1): 22/23 MBProgress (1): 23/23 MBProgress (1): 23/23 MBProgress (1): 23 MB                      Uploaded to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/1.8.9-DATABASE-RELEASE/JavaUtils-1.8.9-DATABASE-RELEASE.jar (23 MB at 2.1 MB/s)
+Uploading to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/1.8.9-DATABASE-RELEASE/JavaUtils-1.8.9-DATABASE-RELEASE.pom
+Progress (1): 4.1/8.3 kBProgress (1): 8.2/8.3 kBProgress (1): 8.3 kB                        Uploaded to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/1.8.9-DATABASE-RELEASE/JavaUtils-1.8.9-DATABASE-RELEASE.pom (8.3 kB at 30 kB/s)
+Downloading from repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/maven-metadata.xml
+Progress (1): 4.1/6.0 kBProgress (1): 6.0 kB                        Downloaded from repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/maven-metadata.xml (6.0 kB at 55 kB/s)
+Uploading to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/maven-metadata.xml
+Progress (1): 4.1/6.0 kBProgress (1): 6.0 kB                        Uploaded to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/maven-metadata.xml (6.0 kB at 27 kB/s)
+[INFO] 
+[INFO] --- maven-javadoc-plugin:3.2.0:jar (attach-javadocs) @ JavaUtils ---
+[INFO] No previous run data found, generating javadoc.
+[WARNING] Javadoc Warnings
+[WARNING] Loading source files for package de.framedev.javautils...
+[WARNING] Loading source files for package de.framedev.javautils.mysql...
+[WARNING] Constructing Javadoc information...
+[WARNING] warning: The code being documented uses modules but the packages defined in https://docs.oracle.com/javase/9/docs/api/ are in the unnamed module.
+[WARNING] Building index for all the packages and classes...
+[WARNING] Standard Doclet version 18+0
+[WARNING] Building tree for all the packages and classes...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/APIs.html...
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/APIs.java:16: warning: no comment
+[WARNING] Utils.CustomGenerators.DoubleRandomNumberGenerator doubleRandomGenerator = new Utils.CustomGenerators.DoubleRandomNumberGenerator();
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/APIs.java:15: warning: no comment
+[WARNING] Utils.CustomGenerators.IntRandomNumberGenerator intRandomGenerator = new Utils.CustomGenerators.IntRandomNumberGenerator();
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/APIs.java:14: warning: no comment
+[WARNING] Utils.PasswordGenerator passwordGenerator = new Utils.PasswordGenerator();
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/APIs.java:17: warning: no comment
+[WARNING] ReflectionUtils reflectionUtils = new ReflectionUtils();
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/APIs.java:18: warning: no comment
+[WARNING] TextUtils textUtils = new TextUtils();
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/APIs.java:13: warning: no comment
+[WARNING] Utils utils = new Utils();
+[WARNING] ^
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/BackendMongoDBManager.html...
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:42: warning: no @param for data
+[WARNING] public void createData(String where, Object dataWhere, HashMap<String, Object> data, String collection) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:83: warning: no initial description
+[WARNING] * @param where      from the Database Document
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:23: warning: no comment
+[WARNING] public class BackendMongoDBManager {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:27: warning: no comment
+[WARNING] public BackendMongoDBManager(MongoDBManager mongoDBManager) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:63: warning: no comment
+[WARNING] public void createData(String where, Object dataWhere, Object object, String collection) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:163: warning: no comment
+[WARNING] public boolean exists(String where, Object data, String whereSelected, Object whereData, String collection) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:152: warning: no comment
+[WARNING] public boolean exists(String where, Object data, String whereSelected, String collection) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:185: warning: no comment
+[WARNING] public boolean existsCollection(String collection) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:204: warning: no comment
+[WARNING] public List<Document> getAllDocuments(String collection) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:190: warning: no comment
+[WARNING] public List<Object> getList(String where, Object data, String selected, String collection) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:31: warning: no comment
+[WARNING] public MongoDBManager getMongoManager() {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:216: warning: no comment
+[WARNING] public <T> T getObjectFromJson(String where, String whereData, String collection, Class<T> class__) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:174: warning: no comment
+[WARNING] public void insertData(String where, Object data, String newKey, Object newValue, String collection) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:229: warning: no comment
+[WARNING] public void removeDocument(String where, String whereData, String collection) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:139: warning: no comment
+[WARNING] public void updateAll(String where, Object whereData, Object object, String collection) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:126: warning: no comment
+[WARNING] public void updateAll(String where, Object whereData, HashMap<String, Object> newData, String collection) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/BackendMongoDBManager.java:100: warning: no comment
+[WARNING] public void updateData(String where, Object data, String selected, Object dataSelected, String collection) {
+[WARNING] ^
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/ConsoleColors.html...
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:16: warning: no comment
+[WARNING] BLACK("\033[0;30m"),    // BLACK
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:46: warning: no comment
+[WARNING] BLACK_BACKGROUND("\033[40m"),   // BLACK
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:76: warning: no comment
+[WARNING] BLACK_BACKGROUND_BRIGHT("\033[0;100m"),     // BLACK
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:26: warning: no comment
+[WARNING] BLACK_BOLD("\033[1;30m"),   // BLACK
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:66: warning: no comment
+[WARNING] BLACK_BOLD_BRIGHT("\033[1;90m"),    // BLACK
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:56: warning: no comment
+[WARNING] BLACK_BRIGHT("\033[0;90m"),     // BLACK
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:36: warning: no comment
+[WARNING] BLACK_UNDERLINED("\033[4;30m"),     // BLACK
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:20: warning: no comment
+[WARNING] BLUE("\033[0;34m"),     // BLUE
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:50: warning: no comment
+[WARNING] BLUE_BACKGROUND("\033[44m"),    // BLUE
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:80: warning: no comment
+[WARNING] BLUE_BACKGROUND_BRIGHT("\033[0;104m"),      // BLUE
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:30: warning: no comment
+[WARNING] BLUE_BOLD("\033[1;34m"),    // BLUE
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:70: warning: no comment
+[WARNING] BLUE_BOLD_BRIGHT("\033[1;94m"),     // BLUE
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:60: warning: no comment
+[WARNING] BLUE_BRIGHT("\033[0;94m"),      // BLUE
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:40: warning: no comment
+[WARNING] BLUE_UNDERLINED("\033[4;34m"),      // BLUE
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:22: warning: no comment
+[WARNING] CYAN("\033[0;36m"),     // CYAN
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:52: warning: no comment
+[WARNING] CYAN_BACKGROUND("\033[46m"),    // CYAN
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:82: warning: no comment
+[WARNING] CYAN_BACKGROUND_BRIGHT("\033[0;106m"),      // CYAN
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:32: warning: no comment
+[WARNING] CYAN_BOLD("\033[1;36m"),    // CYAN
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:72: warning: no comment
+[WARNING] CYAN_BOLD_BRIGHT("\033[1;96m"),     // CYAN
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:62: warning: no comment
+[WARNING] CYAN_BRIGHT("\033[0;96m"),      // CYAN
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:42: warning: no comment
+[WARNING] CYAN_UNDERLINED("\033[4;36m"),      // CYAN
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:18: warning: no comment
+[WARNING] GREEN("\033[0;32m"),    // GREEN
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:48: warning: no comment
+[WARNING] GREEN_BACKGROUND("\033[42m"),   // GREEN
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:78: warning: no comment
+[WARNING] GREEN_BACKGROUND_BRIGHT("\033[0;102m"),     // GREEN
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:28: warning: no comment
+[WARNING] GREEN_BOLD("\033[1;32m"),   // GREEN
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:68: warning: no comment
+[WARNING] GREEN_BOLD_BRIGHT("\033[1;92m"),    // GREEN
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:58: warning: no comment
+[WARNING] GREEN_BRIGHT("\033[0;92m"),     // GREEN
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:38: warning: no comment
+[WARNING] GREEN_UNDERLINED("\033[4;32m"),     // GREEN
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:21: warning: no comment
+[WARNING] MAGENTA("\033[0;35m"),  // MAGENTA
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:51: warning: no comment
+[WARNING] MAGENTA_BACKGROUND("\033[45m"), // MAGENTA
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:81: warning: no comment
+[WARNING] MAGENTA_BACKGROUND_BRIGHT("\033[0;105m"),   // MAGENTA
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:31: warning: no comment
+[WARNING] MAGENTA_BOLD("\033[1;35m"), // MAGENTA
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:71: warning: no comment
+[WARNING] MAGENTA_BOLD_BRIGHT("\033[1;95m"),  // MAGENTA
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:61: warning: no comment
+[WARNING] MAGENTA_BRIGHT("\033[0;95m"),   // MAGENTA
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:41: warning: no comment
+[WARNING] MAGENTA_UNDERLINED("\033[4;35m"),   // MAGENTA
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:17: warning: no comment
+[WARNING] RED("\033[0;31m"),      // RED
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:47: warning: no comment
+[WARNING] RED_BACKGROUND("\033[41m"),     // RED
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:77: warning: no comment
+[WARNING] RED_BACKGROUND_BRIGHT("\033[0;101m"),       // RED
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:27: warning: no comment
+[WARNING] RED_BOLD("\033[1;31m"),     // RED
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:67: warning: no comment
+[WARNING] RED_BOLD_BRIGHT("\033[1;91m"),      // RED
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:57: warning: no comment
+[WARNING] RED_BRIGHT("\033[0;91m"),       // RED
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:37: warning: no comment
+[WARNING] RED_UNDERLINED("\033[4;31m"),       // RED
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:13: warning: no comment
+[WARNING] RESET("\033[0m"),
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:23: warning: no comment
+[WARNING] WHITE("\033[0;37m"),    // WHITE
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:53: warning: no comment
+[WARNING] WHITE_BACKGROUND("\033[47m"),   // WHITE
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:83: warning: no comment
+[WARNING] WHITE_BACKGROUND_BRIGHT("\033[0;107m");     // WHITE
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:33: warning: no comment
+[WARNING] WHITE_BOLD("\033[1;37m"),   // WHITE
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:73: warning: no comment
+[WARNING] WHITE_BOLD_BRIGHT("\033[1;97m"),    // WHITE
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:63: warning: no comment
+[WARNING] WHITE_BRIGHT("\033[0;97m"),     // WHITE
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:43: warning: no comment
+[WARNING] WHITE_UNDERLINED("\033[4;37m"),     // WHITE
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:19: warning: no comment
+[WARNING] YELLOW("\033[0;33m"),   // YELLOW
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:49: warning: no comment
+[WARNING] YELLOW_BACKGROUND("\033[43m"),  // YELLOW
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:79: warning: no comment
+[WARNING] YELLOW_BACKGROUND_BRIGHT("\033[0;103m"),    // YELLOW
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:29: warning: no comment
+[WARNING] YELLOW_BOLD("\033[1;33m"),  // YELLOW
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:69: warning: no comment
+[WARNING] YELLOW_BOLD_BRIGHT("\033[1;93m"),   // YELLOW
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:59: warning: no comment
+[WARNING] YELLOW_BRIGHT("\033[0;93m"),    // YELLOW
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/ConsoleColors.java:39: warning: no comment
+[WARNING] YELLOW_UNDERLINED("\033[4;33m"),    // YELLOW
+[WARNING] ^
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/Cooldown.html...
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/Cooldown.java:35: warning: no comment
+[WARNING] public Cooldown() {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/Cooldown.java:29: warning: no comment
+[WARNING] public Cooldown(int id, int seconds) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/Cooldown.java:23: warning: no comment
+[WARNING] public Cooldown(int id, int seconds, long actualTime) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/Cooldown.java:61: warning: no comment
+[WARNING] public boolean check() {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/Cooldown.java:57: warning: no comment
+[WARNING] public int getId() {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/Cooldown.java:53: warning: no comment
+[WARNING] public long getMilliSeconds() {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/Cooldown.java:45: warning: no comment
+[WARNING] public long getMilliSecondsLeft() {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/Cooldown.java:49: warning: no comment
+[WARNING] public int getSeconds() {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/Cooldown.java:41: warning: no comment
+[WARNING] public long getSecondsLeft() {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/Cooldown.java:75: warning: no comment
+[WARNING] public void sendInformation() {
+[WARNING] ^
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/CooldownMilliSeconds.html...
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/CooldownMilliSeconds.java:26: warning: no comment
+[WARNING] public CooldownMilliSeconds(int id, long milliSecs) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/CooldownMilliSeconds.java:19: warning: no comment
+[WARNING] public CooldownMilliSeconds(int id, long milliSecs, long actualTime) {
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/CooldownMilliSeconds.java:37: warning: no comment
+[WARNING] public long getMilliSecs() {
+[WARNING] ^
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/FrameHashMap.html...
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/FrameHashMap.java:14: warning: use of default constructor, which does not provide a comment
+[WARNING] public class FrameHashMap<K,V> extends HashMap<K, V> {
+[WARNING] ^
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/FrameList.html...
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/FrameList.java:15: warning: use of default constructor, which does not provide a comment
+[WARNING] public class FrameList<T> extends LinkedList<T> {
+[WARNING] ^
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/JsonConfigurator.html...
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/JsonConfigurator.java:66: warning: no initial description
+[WARNING] * @param path  the Path for defaults
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/JsonConfigurator.java:76: warning: no initial description
+[WARNING] * @param path  the Path to set Value
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/JsonConfigurator.java:90: warning: no initial description
+[WARNING] * @param path the Path where the Int is located
+[WARNING] ^
+[WARNING] /Users/framedev/Documents/GitHub/JavaUtils/src/main/java/de/framedev/javautils/JsonConfigurator.java:35: warning: no comment
+[WARNING] public JsonConfigurator(File file) {
+[WARNING] ^
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/mysql/JsonConnection.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/Main.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/MongoDBManager.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/MyFormatter.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/mysql/MySQL.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/ReflectionUtils.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/SpigotAPI.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/SpigotAPI.BossBarManager.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/SpigotAPI.ChunkLoader.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/SpigotAPI.InventoryManager.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/SpigotAPI.ItemBuilder.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/SpigotAPI.ItemBuilder.TestEnchantment.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/mysql/SQLite.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/SystemMemory.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/SystemUtils.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/SystemUtils.DiskSizeType.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/SystemUtils.OSType.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/TextUtils.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/Time.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/Utils.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/Utils.CustomGenerators.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/Utils.CustomGenerators.DoubleRandomNumberGenerator.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/Utils.CustomGenerators.IntRandomNumberGenerator.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/Utils.PasswordGenerator.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/YamlConfigurator.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/package-summary.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/package-tree.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/mysql/package-summary.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/mysql/package-tree.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/serialized-form.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/ConsoleColors.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/SystemUtils.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/SystemUtils.DiskSizeType.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/SystemUtils.OSType.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/CooldownMilliSeconds.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/Cooldown.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/YamlConfigurator.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/APIs.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/FrameList.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/BackendMongoDBManager.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/Utils.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/Utils.PasswordGenerator.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/Utils.CustomGenerators.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/Utils.CustomGenerators.DoubleRandomNumberGenerator.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/Utils.CustomGenerators.IntRandomNumberGenerator.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/Time.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/FrameHashMap.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/MyFormatter.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/MongoDBManager.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/SystemMemory.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/Main.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/JsonConfigurator.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/TextUtils.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/SpigotAPI.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/SpigotAPI.InventoryManager.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/SpigotAPI.ItemBuilder.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/SpigotAPI.ItemBuilder.TestEnchantment.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/SpigotAPI.ChunkLoader.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/SpigotAPI.BossBarManager.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/class-use/ReflectionUtils.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/mysql/class-use/SQLite.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/mysql/class-use/MySQL.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/mysql/class-use/JsonConnection.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/package-use.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/de/framedev/javautils/mysql/package-use.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/overview-tree.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/deprecated-list.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/index.html...
+[WARNING] Building index for all classes...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/allclasses-index.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/allpackages-index.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/index-all.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/overview-summary.html...
+[WARNING] Generating /Users/framedev/Documents/GitHub/JavaUtils/target/apidocs/help-doc.html...
+[WARNING] 100 warnings
+[INFO] Building jar: /Users/framedev/Documents/GitHub/JavaUtils/target/JavaUtils-1.8.9-DATABASE-RELEASE-javadoc.jar
+[INFO] 
+[INFO] >>> maven-source-plugin:3.2.0:jar (attach-source) > generate-sources @ JavaUtils >>>
+[INFO] 
+[INFO] <<< maven-source-plugin:3.2.0:jar (attach-source) < generate-sources @ JavaUtils <<<
+[INFO] 
+[INFO] 
+[INFO] --- maven-source-plugin:3.2.0:jar (attach-source) @ JavaUtils ---
+[INFO] Building jar: /Users/framedev/Documents/GitHub/JavaUtils/target/JavaUtils-1.8.9-DATABASE-RELEASE-sources.jar
+[INFO] 
+[INFO] --- maven-deploy-plugin:2.8.2:deploy (repository) @ JavaUtils ---
+Uploading to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/1.8.9-DATABASE-RELEASE/JavaUtils-1.8.9-DATABASE-RELEASE.jar
+Progress (1): 0.2/23 MBProgress (1): 0.5/23 MBProgress (1): 0.7/23 MBProgress (1): 0.9/23 MBProgress (1): 1.1/23 MBProgress (1): 1.4/23 MBProgress (1): 1.6/23 MBProgress (1): 1.8/23 MBProgress (1): 2.1/23 MBProgress (1): 2.3/23 MBProgress (1): 2.5/23 MBProgress (1): 2.8/23 MBProgress (1): 3.0/23 MBProgress (1): 3.2/23 MBProgress (1): 3.4/23 MBProgress (1): 3.7/23 MBProgress (1): 3.9/23 MBProgress (1): 4.1/23 MBProgress (1): 4.4/23 MBProgress (1): 4.6/23 MBProgress (1): 4.8/23 MBProgress (1): 5.0/23 MBProgress (1): 5.3/23 MBProgress (1): 5.5/23 MBProgress (1): 5.7/23 MBProgress (1): 6.0/23 MBProgress (1): 6.2/23 MBProgress (1): 6.4/23 MBProgress (1): 6.7/23 MBProgress (1): 6.9/23 MBProgress (1): 7.1/23 MBProgress (1): 7.3/23 MBProgress (1): 7.6/23 MBProgress (1): 7.8/23 MBProgress (1): 8.0/23 MBProgress (1): 8.3/23 MBProgress (1): 8.5/23 MBProgress (1): 8.7/23 MBProgress (1): 8.9/23 MBProgress (1): 9.2/23 MBProgress (1): 9.4/23 MBProgress (1): 9.6/23 MBProgress (1): 9.9/23 MBProgress (1): 10/23 MB Progress (1): 10/23 MBProgress (1): 11/23 MBProgress (1): 11/23 MBProgress (1): 11/23 MBProgress (1): 11/23 MBProgress (1): 11/23 MBProgress (1): 12/23 MBProgress (1): 12/23 MBProgress (1): 12/23 MBProgress (1): 12/23 MBProgress (1): 13/23 MBProgress (1): 13/23 MBProgress (1): 13/23 MBProgress (1): 13/23 MBProgress (1): 14/23 MBProgress (1): 14/23 MBProgress (1): 14/23 MBProgress (1): 14/23 MBProgress (1): 14/23 MBProgress (1): 15/23 MBProgress (1): 15/23 MBProgress (1): 15/23 MBProgress (1): 15/23 MBProgress (1): 16/23 MBProgress (1): 16/23 MBProgress (1): 16/23 MBProgress (1): 16/23 MBProgress (1): 17/23 MBProgress (1): 17/23 MBProgress (1): 17/23 MBProgress (1): 17/23 MBProgress (1): 17/23 MBProgress (1): 18/23 MBProgress (1): 18/23 MBProgress (1): 18/23 MBProgress (1): 18/23 MBProgress (1): 19/23 MBProgress (1): 19/23 MBProgress (1): 19/23 MBProgress (1): 19/23 MBProgress (1): 19/23 MBProgress (1): 20/23 MBProgress (1): 20/23 MBProgress (1): 20/23 MBProgress (1): 20/23 MBProgress (1): 21/23 MBProgress (1): 21/23 MBProgress (1): 21/23 MBProgress (1): 21/23 MBProgress (1): 22/23 MBProgress (1): 22/23 MBProgress (1): 22/23 MBProgress (1): 22/23 MBProgress (1): 22/23 MBProgress (1): 23/23 MBProgress (1): 23/23 MBProgress (1): 23 MB                      Uploaded to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/1.8.9-DATABASE-RELEASE/JavaUtils-1.8.9-DATABASE-RELEASE.jar (23 MB at 5.1 MB/s)
+Uploading to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/1.8.9-DATABASE-RELEASE/JavaUtils-1.8.9-DATABASE-RELEASE.pom
+Progress (1): 4.1/8.3 kBProgress (1): 8.2/8.3 kBProgress (1): 8.3 kB                        Uploaded to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/1.8.9-DATABASE-RELEASE/JavaUtils-1.8.9-DATABASE-RELEASE.pom (8.3 kB at 31 kB/s)
+Downloading from repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/maven-metadata.xml
+Progress (1): 4.1/6.0 kBProgress (1): 6.0 kB                        Downloaded from repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/maven-metadata.xml (6.0 kB at 76 kB/s)
+Uploading to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/maven-metadata.xml
+Progress (1): 4.1/6.0 kBProgress (1): 6.0 kB                        Uploaded to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/maven-metadata.xml (6.0 kB at 24 kB/s)
+Uploading to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/1.8.9-DATABASE-RELEASE/JavaUtils-1.8.9-DATABASE-RELEASE-javadoc.jar
+Progress (1): 4.1/329 kBProgress (1): 8.2/329 kBProgress (1): 12/329 kB Progress (1): 16/329 kBProgress (1): 20/329 kBProgress (1): 25/329 kBProgress (1): 29/329 kBProgress (1): 33/329 kBProgress (1): 37/329 kBProgress (1): 41/329 kBProgress (1): 45/329 kBProgress (1): 49/329 kBProgress (1): 53/329 kBProgress (1): 57/329 kBProgress (1): 61/329 kBProgress (1): 66/329 kBProgress (1): 70/329 kBProgress (1): 74/329 kBProgress (1): 78/329 kBProgress (1): 82/329 kBProgress (1): 86/329 kBProgress (1): 90/329 kBProgress (1): 94/329 kBProgress (1): 98/329 kBProgress (1): 102/329 kBProgress (1): 106/329 kBProgress (1): 111/329 kBProgress (1): 115/329 kBProgress (1): 119/329 kBProgress (1): 123/329 kBProgress (1): 127/329 kBProgress (1): 131/329 kBProgress (1): 135/329 kBProgress (1): 139/329 kBProgress (1): 143/329 kBProgress (1): 147/329 kBProgress (1): 152/329 kBProgress (1): 156/329 kBProgress (1): 160/329 kBProgress (1): 164/329 kBProgress (1): 168/329 kBProgress (1): 172/329 kBProgress (1): 176/329 kBProgress (1): 180/329 kBProgress (1): 184/329 kBProgress (1): 188/329 kBProgress (1): 193/329 kBProgress (1): 197/329 kBProgress (1): 201/329 kBProgress (1): 205/329 kBProgress (1): 209/329 kBProgress (1): 213/329 kBProgress (1): 217/329 kBProgress (1): 221/329 kBProgress (1): 225/329 kBProgress (1): 229/329 kBProgress (1): 233/329 kBProgress (1): 238/329 kBProgress (1): 242/329 kBProgress (1): 246/329 kBProgress (1): 250/329 kBProgress (1): 254/329 kBProgress (1): 258/329 kBProgress (1): 262/329 kBProgress (1): 266/329 kBProgress (1): 270/329 kBProgress (1): 274/329 kBProgress (1): 279/329 kBProgress (1): 283/329 kBProgress (1): 287/329 kBProgress (1): 291/329 kBProgress (1): 295/329 kBProgress (1): 299/329 kBProgress (1): 303/329 kBProgress (1): 307/329 kBProgress (1): 311/329 kBProgress (1): 315/329 kBProgress (1): 319/329 kBProgress (1): 324/329 kBProgress (1): 328/329 kBProgress (1): 329 kB                        Uploaded to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/1.8.9-DATABASE-RELEASE/JavaUtils-1.8.9-DATABASE-RELEASE-javadoc.jar (329 kB at 996 kB/s)
+Uploading to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/1.8.9-DATABASE-RELEASE/JavaUtils-1.8.9-DATABASE-RELEASE-sources.jar
+Progress (1): 4.1/36 kBProgress (1): 8.2/36 kBProgress (1): 12/36 kB Progress (1): 16/36 kBProgress (1): 20/36 kBProgress (1): 25/36 kBProgress (1): 29/36 kBProgress (1): 33/36 kBProgress (1): 36 kB                      Uploaded to repository: https://framedev.ch:444/releases/de/framedev/JavaUtils/1.8.9-DATABASE-RELEASE/JavaUtils-1.8.9-DATABASE-RELEASE-sources.jar (36 kB at 148 kB/s)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  35.411 s
+[INFO] Finished at: 2022-05-10T23:04:46+02:00
+[INFO] ------------------------------------------------------------------------
+Maven Deploy Finished

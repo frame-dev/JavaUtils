@@ -7,19 +7,26 @@ public class JsonConnection {
     private String password;
     private String database;
     private int port;
-    private boolean remember;
     private String path;
     private String fileName;
     private boolean sql;
     private boolean mysql;
 
-    public JsonConnection(String host, String user, String password, String database, int port,boolean remember) {
+    public JsonConnection(String host, String user, String password, String database, int port) {
         this.host = host;
         this.user = user;
         this.password = password;
         this.database = database;
         this.port = port;
-        this.remember = remember;
+        this.mysql = true;
+    }
+
+    public JsonConnection(String host, String user, String password, String database) {
+        this.host = host;
+        this.user = user;
+        this.password = password;
+        this.database = database;
+        this.port = 3306;
         this.mysql = true;
     }
 
@@ -59,14 +66,6 @@ public class JsonConnection {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
-    }
-
-    public boolean isRemember() {
-        return remember;
-    }
-
-    public void setRemember(boolean remember) {
-        this.remember = remember;
     }
 
     public String getHost() {

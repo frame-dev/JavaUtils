@@ -14,7 +14,6 @@ public interface APIs {
     Utils.PasswordGenerator passwordGenerator = new Utils.PasswordGenerator();
     Utils.CustomGenerators.IntRandomNumberGenerator intRandomGenerator = new Utils.CustomGenerators.IntRandomNumberGenerator();
     Utils.CustomGenerators.DoubleRandomNumberGenerator doubleRandomGenerator = new Utils.CustomGenerators.DoubleRandomNumberGenerator();
-    Converter converter = new Converter();
     ReflectionUtils reflectionUtils = new ReflectionUtils();
     TextUtils textUtils = new TextUtils();
 }

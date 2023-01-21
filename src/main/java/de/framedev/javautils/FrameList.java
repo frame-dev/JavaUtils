@@ -3,6 +3,7 @@ package de.framedev.javautils;
 import java.util.LinkedList;
 
 /**
+ * This is a custom LinkedList it contains the method to Replace objects in the list
  * / This Plugin was Created by FrameDev
  * / Package : de.framedev.javautils
  * / ClassName CustomString

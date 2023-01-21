@@ -97,6 +97,17 @@ public class BackendMongoDBManager {
         return null;
     }
 
+    public Document getDocument(String where, Object data, String collection) {
+        if (existsCollection(collection)) {
+            MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
+            Document document = collections.find(new Document(where, data)).first();
+            if (document != null) {
+                return document;
+            }
+        }
+        return null;
+    }
+
     public void updateData(String where, Object data, String selected, Object dataSelected, String collection) {
         if (existsCollection(collection)) {
             MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
@@ -156,6 +167,15 @@ public class BackendMongoDBManager {
             if (document != null) {
                 return document.get(whereSelected) != null;
             }
+        }
+        return false;
+    }
+
+    public boolean exists(String where, Object data, String collection) {
+        if (existsCollection(collection)) {
+            MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
+            Document document = collections.find(new Document(where, data)).first();
+            return document != null;
         }
         return false;
     }
