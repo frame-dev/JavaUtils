@@ -1,5 +1,7 @@
 package de.framedev.javautils;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.*;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
@@ -228,7 +230,7 @@ public class SpigotAPI implements APIs {
         }
     }
 
-    public HashMap<String, Object> getAllUpdatesSpigot(String resourceId, int size) {
+    public List<String> getAllUpdatesSpigot(String resourceId, int size) {
         String urlString = "https://api.spiget.org/v2/resources/" + resourceId + "/updates?size=" + size;
         try {
             URL url = new URL(urlString);
@@ -247,13 +249,19 @@ public class SpigotAPI implements APIs {
             in.close();
             fos.flush();
             fos.close();
-            HashMap<String, Object> data = new Utils().getHashMapFromJsonFile(file);
+            List<String> data = (List<String>) new Utils().getClassFromJsonFile(file);
             return data;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * This Method returns the Details of the Resource with the giving Resource Id
+     *
+     * @param resourceId the Resource id from the Spigot Website
+     * @return returns a HashMap from the Resource
+     */
     public HashMap<String, Object> getResourceDetailsSpigot(String resourceId) {
         String urlString = "https://api.spiget.org/v2/resources/" + resourceId;
         try {
@@ -280,7 +288,14 @@ public class SpigotAPI implements APIs {
         }
     }
 
-    public HashMap<String, Object> getAllReviewsSpigot(String resourceId, int size) {
+    /**
+     * Return the Reviews, the size set how much reviews there will be in the List
+     *
+     * @param resourceId your Resource Id from the SpigotWebsite
+     * @param size       the Size of the Reviews
+     * @return return the Reviews
+     */
+    public List<String> getAllReviewsSpigot(String resourceId, int size) {
         String urlString = "https://api.spiget.org/v2/resources/" + resourceId + "/reviews?size=" + size;
         try {
             URL url = new URL(urlString);
@@ -299,7 +314,7 @@ public class SpigotAPI implements APIs {
             in.close();
             fos.flush();
             fos.close();
-            HashMap<String, Object> data = new Utils().getHashMapFromJsonFile(file);
+            List<String> data = (List<String>) new Utils().getClassFromJsonFile(file);
             return data;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -905,6 +920,105 @@ public class SpigotAPI implements APIs {
         public void show(Player player) {
             inventoryNull();
             player.openInventory(inventory);
+        }
+    }
+
+    /**
+     * Create with this Java Class a Custom Title or Actionbar
+     * This class is free to use
+     */
+    public static class DisplayTitleActionBar {
+        /**
+         * Representing the Title of the Title or the Actionbar
+         */
+        String title;
+        String description;
+
+        /**
+         *
+         */
+        int fade, stay, fadeOut;
+
+        /**
+         * This Constructor requires the method showTitle(player)
+         * @param title the Title to Display in the Title
+         * @param description the Description to Display in the Title
+         * @param fade fade is required to set the time to Display the Title
+         * @param stay stay is required to set the time to stay on the Title
+         * @param fadeOut fadeOut is required to set time to hide the Title
+         */
+        public DisplayTitleActionBar(String title, String description, int fade, int stay, int fadeOut) {
+            this.title = title;
+            this.description = description;
+            this.fade = fade;
+            this.stay = stay;
+            this.fadeOut = fadeOut;
+        }
+
+        /**
+         * This Constructor is required for the method showActionBar(player)
+         * @param title the Title is the Text to Display on the Actionbar
+         */
+        public DisplayTitleActionBar(String title) {
+            this.title = title;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public double getFade() {
+            return fade;
+        }
+
+        public void setFade(int fade) {
+            this.fade = fade;
+        }
+
+        public int getStay() {
+            return stay;
+        }
+
+        public void setStay(int stay) {
+            this.stay = stay;
+        }
+
+        public int getFadeOut() {
+            return fadeOut;
+        }
+
+        public void setFadeOut(int fadeOut) {
+            this.fadeOut = fadeOut;
+        }
+
+        /**
+         * This Method requires the Constructor of (Title, Description, fade, stay, fadeOut)
+         * This Method Displays a Title the selected Player
+         * @param player the Selected Player to Display the Title
+         */
+        public void showTitle(Player player) {
+            player.sendTitle(title, description, fade, stay, fadeOut);
+        }
+
+        /**
+         * This Method requires the Constructor of (Title)
+         * This Method Displays a ActionBar to the selected Player
+         * @param player the Selected Player to Display the ActionBar
+         */
+        public void showActionBar(Player player) {
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder(title).create());
         }
     }
 
