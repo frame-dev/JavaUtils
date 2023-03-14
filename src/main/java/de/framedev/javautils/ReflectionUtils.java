@@ -15,6 +15,7 @@ import java.util.logging.Level;
  * / Copyrighted by FrameDev
  */
 
+@SuppressWarnings({"SpellCheckingInspection","unused"})
 public class ReflectionUtils {
 
     public ReflectionUtils() {
@@ -190,7 +191,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Field field : cls.getDeclaredFields()) {
-                if (field.getName() == fieldName) {
+                if (field.getName().equalsIgnoreCase(fieldName)) {
                     return field.getAnnotations();
                 }
             }
@@ -210,7 +211,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Field field : cls.getSuperclass().getDeclaredFields()) {
-                if (field.getName().equals(fieldName)) {
+                if (field.getName().equalsIgnoreCase(fieldName)) {
                     return field.getAnnotations();
                 }
             }
@@ -230,7 +231,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getDeclaredMethods()) {
-                if (method.getName().equals(methodName)) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return method.getAnnotations();
                 }
             }
@@ -270,7 +271,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     if (method.getAnnotation(class__) != null) return true;
                 }
             }
@@ -290,7 +291,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getSuperclass().getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     if (method.getAnnotation(class__) != null) return true;
                 }
             }
@@ -310,7 +311,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return method;
                 }
             }
@@ -330,7 +331,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getSuperclass().getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return method;
                 }
             }
@@ -350,7 +351,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return Arrays.asList(method.getParameterTypes());
                 }
             }
@@ -370,7 +371,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getSuperclass().getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return Arrays.asList(method.getParameterTypes());
                 }
             }
@@ -390,7 +391,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return method.invoke(object, args);
                 }
             }
@@ -411,7 +412,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getSuperclass().getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return method.invoke(object, args);
                 }
             }
@@ -431,7 +432,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return method.invoke(object);
                 }
             }
@@ -451,7 +452,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getSuperclass().getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return method.invoke(object);
                 }
             }
@@ -471,7 +472,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return method.invoke(object) == null;
                 }
             }
@@ -491,7 +492,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getSuperclass().getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return method.invoke(object) == null;
                 }
             }
@@ -511,7 +512,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return method.invoke(object, args) == null;
                 }
             }
@@ -531,7 +532,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getSuperclass().getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return method.invoke(object, args) == null;
                 }
             }
@@ -551,7 +552,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return method.getParameterCount() > 0;
                 }
             }
@@ -571,7 +572,7 @@ public class ReflectionUtils {
         try {
             assert cls != null;
             for (Method method : cls.getSuperclass().getDeclaredMethods()) {
-                if (method.getName() == methodName) {
+                if (method.getName().equalsIgnoreCase(methodName)) {
                     return method.getParameterCount() > 0;
                 }
             }

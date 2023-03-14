@@ -7,7 +7,7 @@
 
     <groupId>de.framedev</groupId>
     <artifactId>JavaUtils</artifactId>
-    <version>1.9.2.9-RELEASE</version>
+    <version>1.9.3-RELEASE</version>
 
     <licenses>
         <license>
@@ -128,7 +128,7 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.40.0.0</version>
             <scope>compile</scope>
-        </dependency>-->
+        </dependency> -->
     </dependencies>
 
     <distributionManagement>
