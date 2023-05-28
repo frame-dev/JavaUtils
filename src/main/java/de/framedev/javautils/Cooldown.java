@@ -11,6 +11,7 @@ import java.io.Serializable;
  * / Copyrighted by FrameDev
  */
 
+@SuppressWarnings("unused")
 public class Cooldown implements Serializable {
 
     private final int id;

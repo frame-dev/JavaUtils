@@ -9,6 +9,7 @@ package de.framedev.javautils;
  * / Copyrighted by FrameDev
  */
 
+@SuppressWarnings("unused")
 public class CooldownMilliSeconds extends Cooldown {
     private final int id;
     private final long milliSecs;

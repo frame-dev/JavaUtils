@@ -9,6 +9,7 @@ package de.framedev.javautils;
  * / Copyrighted by FrameDev
  */
 
+@SuppressWarnings("unused")
 abstract class Converter {
 
     public boolean isInteger(String number) {
@@ -56,6 +57,7 @@ abstract class Converter {
         }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public boolean isBoolean(String bool) {
         try {
             Boolean.parseBoolean(bool);

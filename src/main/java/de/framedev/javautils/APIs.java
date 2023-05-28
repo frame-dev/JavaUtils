@@ -8,6 +8,7 @@ package de.framedev.javautils;
  * Project: JavaUtils
  * Copyrighted by FrameDev
  */
+@SuppressWarnings("unused")
 public interface APIs {
 
     Utils utils = new Utils();

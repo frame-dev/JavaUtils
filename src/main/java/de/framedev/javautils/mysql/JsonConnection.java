@@ -1,5 +1,6 @@
 package de.framedev.javautils.mysql;
 
+@SuppressWarnings("unused")
 public class JsonConnection {
 
     private String host;

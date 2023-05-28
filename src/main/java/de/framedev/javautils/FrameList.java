@@ -12,6 +12,7 @@ import java.util.LinkedList;
  * / Copyrighted by FrameDev
  */
 
+@SuppressWarnings("unused")
 public class FrameList<T> extends LinkedList<T> {
 
     /**

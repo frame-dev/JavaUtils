@@ -9,7 +9,6 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
 import java.util.Collections;
-import java.util.logging.Level;
 
 /**
  * / This Plugin was Created by FrameDev
@@ -19,6 +18,8 @@ import java.util.logging.Level;
  * / Project: JavaUtils
  * / Copyrighted by FrameDev
  */
+
+@SuppressWarnings("unused")
 public class MongoDBManager {
 
     private final String hostname;

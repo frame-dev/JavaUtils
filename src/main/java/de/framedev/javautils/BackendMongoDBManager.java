@@ -1,14 +1,5 @@
 package de.framedev.javautils;
 
-/**
- * / This Plugin was Created by FrameDev
- * / Package : de.framedev.javautils
- * / ClassName BackendManager
- * / Date: 06.06.21
- * / Project: JavaUtils
- * / Copyrighted by FrameDev
- */
-
 import com.google.gson.Gson;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -18,8 +9,9 @@ import org.bson.Document;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
-
+@SuppressWarnings("unused")
 public class BackendMongoDBManager {
 
     private final MongoDBManager mongoDBManager;
@@ -100,10 +92,7 @@ public class BackendMongoDBManager {
     public Document getDocument(String where, Object data, String collection) {
         if (existsCollection(collection)) {
             MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
-            Document document = collections.find(new Document(where, data)).first();
-            if (document != null) {
-                return document;
-            }
+            return collections.find(new Document(where, data)).first();
         }
         return null;
     }
@@ -119,7 +108,7 @@ public class BackendMongoDBManager {
                     collections.updateOne(document, document2);
                 } else {
                     document.put(selected, dataSelected);
-                    collections.updateOne(collections.find(new Document(where, data)).first(), document);
+                    collections.updateOne(Objects.requireNonNull(collections.find(new Document(where, data)).first()), document);
                 }
             }
         } else {
@@ -202,6 +191,7 @@ public class BackendMongoDBManager {
         }
     }
 
+    @SuppressWarnings("ConstantValue")
     public boolean existsCollection(String collection) {
         MongoCollection<Document> collections = mongoDBManager.getDatabase().getCollection(collection);
         return collections != null;

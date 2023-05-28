@@ -26,6 +26,7 @@ import java.util.List;
  * Copyrighted by FrameDev
  */
 
+@SuppressWarnings("unused")
 public class JsonConfigurator {
 
     private HashMap<String, Object> data;

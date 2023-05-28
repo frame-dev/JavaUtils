@@ -35,6 +35,8 @@ import java.util.*;
  * Copyrighted by FrameDev
  */
 
+
+@SuppressWarnings("unused")
 public class SpigotAPI implements APIs {
 
     public Version getVersion() {
@@ -198,8 +200,7 @@ public class SpigotAPI implements APIs {
             in.close();
             fos.flush();
             fos.close();
-            HashMap<String, Object> data = new Utils().getHashMapFromJsonFile(file);
-            return data;
+            return new Utils().getHashMapFromJsonFile(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -223,13 +224,13 @@ public class SpigotAPI implements APIs {
             in.close();
             fos.flush();
             fos.close();
-            HashMap<String, Object> data = new Utils().getHashMapFromJsonFile(file);
-            return data;
+            return new Utils().getHashMapFromJsonFile(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    @SuppressWarnings("unchecked")
     public List<String> getAllUpdatesSpigot(String resourceId, int size) {
         String urlString = "https://api.spiget.org/v2/resources/" + resourceId + "/updates?size=" + size;
         try {
@@ -249,8 +250,7 @@ public class SpigotAPI implements APIs {
             in.close();
             fos.flush();
             fos.close();
-            List<String> data = (List<String>) new Utils().getClassFromJsonFile(file);
-            return data;
+            return (List<String>) new Utils().getClassFromJsonFile(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -281,8 +281,7 @@ public class SpigotAPI implements APIs {
             in.close();
             fos.flush();
             fos.close();
-            HashMap<String, Object> data = new Utils().getHashMapFromJsonFile(file);
-            return data;
+            return new Utils().getHashMapFromJsonFile(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -295,6 +294,7 @@ public class SpigotAPI implements APIs {
      * @param size       the Size of the Reviews
      * @return return the Reviews
      */
+    @SuppressWarnings("unchecked")
     public List<String> getAllReviewsSpigot(String resourceId, int size) {
         String urlString = "https://api.spiget.org/v2/resources/" + resourceId + "/reviews?size=" + size;
         try {
@@ -314,8 +314,7 @@ public class SpigotAPI implements APIs {
             in.close();
             fos.flush();
             fos.close();
-            List<String> data = (List<String>) new Utils().getClassFromJsonFile(file);
-            return data;
+            return (List<String>) new Utils().getClassFromJsonFile(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -330,7 +329,7 @@ public class SpigotAPI implements APIs {
     public double calculateHours(OfflinePlayer player) {
         if (player.hasPlayedBefore()) {
             long played = player.getStatistic(Statistic.PLAY_ONE_MINUTE);
-            double seconds = played / 20;
+            double seconds = (double) played / 20;
             double minutes = seconds / 60;
             return minutes / 60;
         }
@@ -345,7 +344,7 @@ public class SpigotAPI implements APIs {
      */
     public String locationToString(Location location) {
         String locationString = "";
-        locationString += location.getWorld().getName() + ";";
+        locationString += Objects.requireNonNull(location.getWorld()).getName() + ";";
         locationString += location.getX() + ";";
         locationString += location.getY() + ";";
         locationString += location.getZ() + ";";
@@ -507,7 +506,7 @@ public class SpigotAPI implements APIs {
 
         private final File file;
         private final FileConfiguration cfg;
-        private Location location;
+        private final Location location;
 
         public ChunkLoader(File file, Chunk chunk, Location location) {
             this.chunk = chunk;
@@ -567,15 +566,11 @@ public class SpigotAPI implements APIs {
         public static void forceLoad(File file) {
             FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
             if (cfg.getConfigurationSection("chunk") == null) return;
-            for (String s : cfg.getConfigurationSection("chunk").getKeys(false)) {
+            for (String s : Objects.requireNonNull(cfg.getConfigurationSection("chunk")).getKeys(false)) {
                 if (getChunk(file, s) == null) continue;
                 Chunk chunk = getChunk(file, s);
                 if (chunk == null) continue;
-                if (isChunkEnabled(file, s)) {
-                    chunk.setForceLoaded(true);
-                } else {
-                    chunk.setForceLoaded(false);
-                }
+                chunk.setForceLoaded(isChunkEnabled(file, s));
             }
         }
     }
@@ -759,12 +754,12 @@ public class SpigotAPI implements APIs {
             }
 
             @Override
-            public boolean conflictsWith(Enchantment other) {
+            public boolean conflictsWith(@NotNull Enchantment other) {
                 return false;
             }
 
             @Override
-            public boolean canEnchantItem(ItemStack item) {
+            public boolean canEnchantItem(@NotNull ItemStack item) {
                 return true;
             }
         }

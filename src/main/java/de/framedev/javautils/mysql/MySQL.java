@@ -7,6 +7,7 @@ import java.sql.*;
  * This Class is in use for MySQL Database Stuff
  * Please only use this class if you can.
  */
+@SuppressWarnings("unused")
 public class MySQL {
 
     public static String host;
@@ -112,9 +113,6 @@ public class MySQL {
     public static void close() {
         if (con != null) {
             try {
-                if (con != null) {
-                    con.close();
-                }
                 con.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -135,7 +133,7 @@ public class MySQL {
         }
     }
 
-    public static void createTable(String tablename, String... columns) {
+    public static void createTable(String tableName, String... columns) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < columns.length; i++) {
             stringBuilder.append(columns[i]);
@@ -146,7 +144,7 @@ public class MySQL {
         String builder = stringBuilder.toString();
         try {
             PreparedStatement stmt;
-            String sql = "CREATE TABLE IF NOT EXISTS " + tablename + " (ID INT PRIMARY KEY AUTO_INCREMENT," + builder + ",created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
+            String sql = "CREATE TABLE IF NOT EXISTS " + tableName + " (ID INT PRIMARY KEY AUTO_INCREMENT," + builder + ",created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
             stmt = MySQL.getConnection().prepareStatement(sql);
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -164,10 +162,8 @@ public class MySQL {
                 newStringBuilder.append(",");
             }
         }
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("INSERT INTO " + table);
-        stringBuilder.append(" (").append(newStringBuilder.toString()).append(")").append(" VALUES ").append("(").append(data).append(")");
-        String builder2 = stringBuilder.toString();
+        String builder2 = "INSERT INTO " + table +
+                " (" + newStringBuilder + ")" + " VALUES " + "(" + data + ")";
         try {
             Statement stmt = MySQL.getConnection().createStatement();
             stmt.executeUpdate(builder2);
@@ -181,9 +177,7 @@ public class MySQL {
     }
 
     public static void updateData(String table, String selected, String data, String where) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("UPDATE " + table + " SET ").append(selected + " = " + data).append(" WHERE " + where);
-        String sql = stringBuilder.toString();
+        String sql = "UPDATE " + table + " SET " + selected + " = " + data + " WHERE " + where;
         try {
             Statement stmt = MySQL.getConnection().createStatement();
             stmt.executeUpdate(sql);
@@ -200,10 +194,8 @@ public class MySQL {
     }
 
     public static void deleteDataInTable(String table, String where) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("DELETE FROM " + table)
-                .append(" WHERE " + where);
-        String sql = sb.toString();
+        String sql = "DELETE FROM " + table +
+                " WHERE " + where;
         try {
             Statement stmt = MySQL.getConnection().createStatement();
             stmt.executeUpdate(sql);
@@ -220,11 +212,9 @@ public class MySQL {
     }
 
     public static void deleteDataInTable(String table, String where, String and) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("DELETE FROM " + table)
-                .append(" WHERE " + where)
-                .append(" AND " + and + ";");
-        String sql = sb.toString();
+        String sql = "DELETE FROM " + table +
+                " WHERE " + where +
+                " AND " + and + ";";
         try {
             Statement stmt = MySQL.getConnection().createStatement();
             stmt.executeUpdate(sql);
@@ -246,7 +236,9 @@ public class MySQL {
                 .append(table)
                 .append(" WHERE ")
                 .append(column)
-                .append(" = '" + data + "';");
+                .append(" = '")
+                .append(data)
+                .append("';");
 
         try {
             Statement statement = MySQL.getConnection().createStatement();
@@ -281,17 +273,18 @@ public class MySQL {
                 .append(table)
                 .append(" WHERE ")
                 .append(column)
-                .append(" = '" + data + "' AND " + and + ";");
+                .append(" = '")
+                .append(data)
+                .append("' AND ")
+                .append(and)
+                .append(";");
 
         try {
             Statement statement = MySQL.getConnection().createStatement();
             String sql = stringBuilder.toString();
             ResultSet res = statement.executeQuery(sql);
             if (res.next()) {
-                if (res.getString(column) == null) {
-                    return false;
-                }
-                return true;
+                return res.getString(column) != null;
             }
             return false;
         } catch (SQLException e) {
@@ -309,13 +302,11 @@ public class MySQL {
 
     public static Object get(String table, String selected, String column, String data) {
         Object o;
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("SELECT * FROM ")
-                .append(table)
-                .append(" WHERE " + column + " = '")
-                .append(data)
-                .append("'");
-        String sql = stringBuilder.toString();
+        String sql = "SELECT * FROM " +
+                table +
+                " WHERE " + column + " = '" +
+                data +
+                "'";
         try {
             Statement statement = MySQL.getConnection().createStatement();
             ResultSet res = statement.executeQuery(sql);

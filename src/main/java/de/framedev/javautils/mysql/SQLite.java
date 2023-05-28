@@ -2,6 +2,7 @@ package de.framedev.javautils.mysql;
 
 import java.io.File;
 import java.sql.*;
+import java.util.Objects;
 
 /**
  * This Plugin was Created by FrameDev
@@ -10,7 +11,7 @@ import java.sql.*;
  * Project: untitled
  * Copyrighted by FrameDev
  */
-
+@SuppressWarnings({"unused", "ResultOfMethodCallIgnored"})
 public class SQLite {
 
     public static Connection connection;
@@ -59,7 +60,7 @@ public class SQLite {
 
     public static boolean isTableExists(String table) {
         try {
-            Statement statement = SQLite.connect().createStatement();
+            Statement statement = Objects.requireNonNull(SQLite.connect()).createStatement();
             ResultSet rs = statement.executeQuery("SELECT \n" +
                     "    name\n" +
                     "FROM \n" +
@@ -79,8 +80,8 @@ public class SQLite {
         } finally {
             try {
                 SQLite.connection.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
             }
         }
     }
@@ -88,10 +89,10 @@ public class SQLite {
     /**
      * Erstelle einen Table mit einem Table Name und verschiedene Column
      *
-     * @param tablename TableName der erstellt wird
+     * @param tableName TableName der erstellt wird
      * @param columns   Kolumm die erstellt werden
      */
-    public static void createTable(String tablename, boolean date, String... columns) {
+    public static void createTable(String tableName, boolean date, String... columns) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < columns.length; i++) {
             stringBuilder.append(columns[i]);
@@ -104,25 +105,25 @@ public class SQLite {
             PreparedStatement stmt;
             String sql;
             if (date) {
-                sql = "CREATE TABLE IF NOT EXISTS " + tablename + " (ID INTEGER PRIMARY KEY AUTOINCREMENT," + builder + ",created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
+                sql = "CREATE TABLE IF NOT EXISTS " + tableName + " (ID INTEGER PRIMARY KEY AUTOINCREMENT," + builder + ",created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);";
             } else {
-                sql = "CREATE TABLE IF NOT EXISTS " + tablename + " (ID INTEGER PRIMARY KEY AUTOINCREMENT," + builder + ");";
+                sql = "CREATE TABLE IF NOT EXISTS " + tableName + " (ID INTEGER PRIMARY KEY AUTOINCREMENT," + builder + ");";
             }
-            stmt = SQLite.connect().prepareStatement(sql);
+            stmt = Objects.requireNonNull(SQLite.connect()).prepareStatement(sql);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
                 SQLite.connection.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
             }
         }
         try {
             SQLite.connection.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
     }
 
@@ -134,97 +135,93 @@ public class SQLite {
                 newStringBuilder.append(",");
             }
         }
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("INSERT INTO ").append(table);
-        stringBuilder.append(" (").append(newStringBuilder.toString()).append(")").append(" VALUES ").append("(").append(data).append(")");
-        String builder2 = stringBuilder.toString();
+        String sql = "INSERT INTO " + table +
+                " (" + newStringBuilder + ")" + " VALUES " + "(" + data + ")";
         try {
-            Statement stmt = SQLite.connect().createStatement();
-            stmt.executeUpdate(builder2);
+            Statement stmt = Objects.requireNonNull(SQLite.connect()).createStatement();
+            stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
                 SQLite.connection.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
             }
         }
         try {
             SQLite.connection.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
     }
 
     public static void updateData(String table, String selected, String data, String where) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("UPDATE ").append(table).append(" SET ").append(selected).append(" = ").append(data).append(" WHERE ").append(where);
-        String sql = stringBuilder.toString();
+        String sql = "UPDATE " + table + " SET " + selected + " = " + data + " WHERE " + where;
         try {
-            Statement stmt = SQLite.connect().createStatement();
+            Statement stmt = Objects.requireNonNull(SQLite.connect()).createStatement();
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
                 SQLite.connection.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
             }
         }
         try {
             SQLite.connection.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
     }
 
     public static void deleteDataInTable(String table, String where) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("DELETE FROM ").append(table).append(" WHERE ").append(where);
-        String sql = sb.toString();
+        String sql = "DELETE FROM " + table + " WHERE " + where;
         try {
-            Statement stmt = SQLite.connect().createStatement();
+            Statement stmt = Objects.requireNonNull(SQLite.connect()).createStatement();
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
                 SQLite.connection.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
             }
         }
         try {
             SQLite.connection.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
     }
 
     public static void deleteDataInTable(String table, String where, String and) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("DELETE FROM " + table)
-                .append(" WHERE " + where)
-                .append(" AND " + and + ";");
-        String sql = sb.toString();
+        String sql = "DELETE FROM " +
+                table +
+                " WHERE " +
+                where +
+                " AND " +
+                and +
+                ";";
         try {
-            Statement stmt = SQLite.connect().createStatement();
+            Statement stmt = Objects.requireNonNull(SQLite.connect()).createStatement();
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
                 SQLite.connection.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
             }
         }
         try {
             SQLite.connection.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
     }
 
@@ -234,10 +231,12 @@ public class SQLite {
                 .append(table)
                 .append(" WHERE ")
                 .append(column)
-                .append(" = '" + data + "';");
+                .append(" = '")
+                .append(data)
+                .append("';");
 
         try {
-            Statement statement = SQLite.connect().createStatement();
+            Statement statement = Objects.requireNonNull(SQLite.connect()).createStatement();
             String sql = stringBuilder.toString();
             ResultSet res = statement.executeQuery(sql);
             if (res.next()) {
@@ -255,14 +254,14 @@ public class SQLite {
         } finally {
             try {
                 SQLite.connection.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
             }
         }
         try {
             SQLite.connection.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
         return false;
     }
@@ -273,17 +272,18 @@ public class SQLite {
                 .append(table)
                 .append(" WHERE ")
                 .append(column)
-                .append(" = '" + data + "' AND " + and + ";");
+                .append(" = '")
+                .append(data)
+                .append("' AND ")
+                .append(and)
+                .append(";");
 
         try {
-            Statement statement = SQLite.connect().createStatement();
+            Statement statement = Objects.requireNonNull(SQLite.connect()).createStatement();
             String sql = stringBuilder.toString();
             ResultSet res = statement.executeQuery(sql);
             if (res.next()) {
-                if (res.getString(column) == null) {
-                    return false;
-                }
-                return true;
+                return res.getString(column) != null;
             }
             return false;
         } catch (SQLException e) {
@@ -291,29 +291,29 @@ public class SQLite {
         } finally {
             try {
                 SQLite.connection.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
             }
         }
         try {
             SQLite.connection.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
         return false;
     }
 
     public static Object get(String table, String selected, String column, String data) {
         Object o = null;
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("SELECT * FROM ")
-                .append(table)
-                .append(" WHERE " + column + " = '")
-                .append(data)
-                .append("'");
-        String sql = stringBuilder.toString();
+        String sql = "SELECT * FROM " +
+                table +
+                " WHERE " +
+                column +
+                " = '" +
+                data +
+                "'";
         try {
-            Statement statement = SQLite.connect().createStatement();
+            Statement statement = Objects.requireNonNull(SQLite.connect()).createStatement();
             ResultSet res = statement.executeQuery(sql);
             if (res.next()) {
                 o = res.getObject(selected);
