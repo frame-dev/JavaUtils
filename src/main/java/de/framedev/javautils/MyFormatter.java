@@ -16,7 +16,7 @@ import java.util.logging.*;
 
 public class MyFormatter extends Formatter {
     // Create a DateFormat to format the logger timestamp.
-    private static final DateFormat df = new SimpleDateFormat("dd/MM/yyyy | hh:mm:ss");
+    private static final DateFormat df = new SimpleDateFormat("dd/MM/yyyy | HH:mm:ss");
     private final boolean timeFormat;
 
     public MyFormatter(boolean timeFormat) {

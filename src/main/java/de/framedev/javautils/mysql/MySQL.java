@@ -79,7 +79,7 @@ public class MySQL {
         if (con == null) {
             close();
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
                 con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database + "?useUnicode=yes&characterEncoding=UTF-8&useSSL=false", user, password);
                 return con;
             } catch (SQLException | ClassNotFoundException ex) {
@@ -88,7 +88,7 @@ public class MySQL {
         } else {
             close();
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
                 con = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database + "?useUnicode=yes&characterEncoding=UTF-8&useSSL=false", user, password);
                 return con;
             } catch (SQLException | ClassNotFoundException ex) {

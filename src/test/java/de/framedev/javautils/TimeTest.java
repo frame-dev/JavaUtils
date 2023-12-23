@@ -4,8 +4,6 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.io.File;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * / This Plugin was Created by FrameDev
@@ -44,7 +42,7 @@ public class TimeTest extends TestCase {
 
         new Utils().getLogger().info("Bye!");**/
 
-        FrameHashMap<String, Object> map = new FrameHashMap<>();
+        FrameTreeMap<String, Object> map = new FrameTreeMap<>();
         map.put("Fuck",21);
         System.out.println(map.getKey(21));
         System.out.println("Bye!");
