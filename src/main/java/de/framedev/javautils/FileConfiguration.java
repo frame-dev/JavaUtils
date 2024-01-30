@@ -6,14 +6,11 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class FileConfiguration {
 
-    private final Map<String, Object> data = new LinkedHashMap<>();
+    private Map<String, Object> data = new LinkedHashMap<>();
     private final File file;
 
     private Representer representer;
@@ -21,19 +18,29 @@ public class FileConfiguration {
 
     public FileConfiguration(File file) {
         this.file = file;
-        DumperOptions options = new DumperOptions();
-        options.setIndent(2);
-        options.setPrettyFlow(true);
-        options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+        dumperOptions = new DumperOptions();
+        dumperOptions.setIndent(2);
+        dumperOptions.setPrettyFlow(true);
+        dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
         representer = new Representer(dumperOptions);
+    }
+
+    public FileConfiguration(File source, File file) {
+        this.file = file;
+        dumperOptions = new DumperOptions();
+        dumperOptions.setIndent(2);
+        dumperOptions.setPrettyFlow(true);
+        dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+        representer = new Representer(dumperOptions);
+        data = load(source, "");
     }
 
     public FileConfiguration() {
         this.file = null;
-        DumperOptions options = new DumperOptions();
-        options.setIndent(2);
-        options.setPrettyFlow(true);
-        options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+        dumperOptions = new DumperOptions();
+        dumperOptions.setIndent(2);
+        dumperOptions.setPrettyFlow(true);
+        dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
         representer = new Representer(dumperOptions);
     }
 
@@ -125,6 +132,23 @@ public class FileConfiguration {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public LinkedHashMap<String,Object> load(File file, String source) {
+        try (InputStream input = new FileInputStream(file)) {
+            Yaml yaml = new Yaml(representer, dumperOptions);
+            Object loadedData = yaml.load(input);
+
+            if (loadedData instanceof Map) {
+                return (LinkedHashMap<String, Object>) loadedData;
+            }
+        } catch (FileNotFoundException e) {
+            // Handle file not found, or initialize defaults if needed
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new LinkedHashMap<>();
     }
 
     public void load() {
