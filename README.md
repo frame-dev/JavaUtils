@@ -1,3 +1,0 @@
-# JavaUtils
-
-## Releases
