@@ -22,5 +22,6 @@ public class Main {
         PasswordHasher passwordHasher = new PasswordHasher();
         byte[] hash = passwordHasher.hashPassword("1234");
         System.out.println(passwordHasher.verifyPassword("1234", hash));
+        //
     }
 }
